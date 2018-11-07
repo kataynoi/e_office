@@ -1,0 +1,17 @@
+.idea
+documentation
+etc
+system
+tests
+user_guide
+application.rar
+.editorconfig
+composer.json
+application/config/database.php
+application/config/config.php
+contributing.md
+js
+dist
+data
+vendor
+*.docx
