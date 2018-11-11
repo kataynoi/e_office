@@ -45,6 +45,8 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
     }
     switch  ($pageNo){
         case 1:
+            $pdf->setXY(24, $line[0]-23);
+            $pdf->Cell(300, 20, to_thai_number_text($book_number)."/", 0, 0, 'P');
             $pdf->setXY(110, $line[0]-23);
             $pdf->Cell(300, 20, to_thai_date_full($out_site->date_permit), 0, 0, 'P');
             $pdf->setXY(50, $line[0]-23);

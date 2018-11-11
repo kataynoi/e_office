@@ -30,6 +30,7 @@ class Outsitepdf extends CI_Controller {
         //$rs->permit_position=$this->outsite->get_position($rs->permit_user);
         $rs->permit_user=$this->outsite->get_user($rs->permit_user);
         $data['member']=$this->outsite->get_permit_member($rs->id);
+        $data['book_number'] = $this->outsite->get_book_number($data['member'][0]->user_id);
         //console_log($data['member']);
         $this->load->view('outsite/pdf/'.$template,$data);
         //$this->load->view('outsite/pdf/test_view',$data);

@@ -38,7 +38,7 @@ class Outsite_model extends CI_Model
         $rs = $this->db
             ->select('a.user_id,b.name,b.position,b.driver')
             ->where('a.outsite_id', $id)
-            ->join('mas_users b','a.user_id = b.id')
+            ->join('mas_users b', 'a.user_id = b.id')
             ->order_by('order')
             ->get('outsite_member a')
             ->result_array();
@@ -130,7 +130,7 @@ class Outsite_model extends CI_Model
     {
         $user_id = $this->session->userdata('id');
         $this->db->select($this->select_column);
-        $this->db->where('permit_user',$user_id);
+        $this->db->where('permit_user', $user_id);
         $this->db->from($this->table);
         if (isset($_POST["search"]["value"])) {
             $this->db->group_start();
@@ -170,106 +170,125 @@ class Outsite_model extends CI_Model
         return $this->db->count_all_results();
     }
 
-    public function save_outsite($data){
-
+    public function save_outsite($data)
+    {
+        $this->db->trans_start();
         $rs = $this->db
             //->set('outsite_type',$data['outsite_type'])
             //->set('permit_number',$data['permit_number'])
-            ->set('date_permit',to_mysql_date($data['date_permit']))
-            ->set('invit_name',$data['invit_name'])
-            ->set('invit_number',$data['invit_number'])
-            ->set('invite',$data['invite'])
-            ->set('detail_no_invit',$data['detail_no_invit'])
-            ->set('invit_date',to_mysql_date($data['invit_date']))
-            ->set('invit_subject',$data['invit_subject'])
-            ->set('invit_type',$data['invit_type'])
-            ->set('invit_start_date',to_mysql_date($data['invit_start_date']))
-            ->set('invit_end_date',to_mysql_date($data['invit_end_date']))
-            ->set('permit_start_date',to_mysql_date($data['permit_start_date']))
-            ->set('permit_end_date',to_mysql_date($data['permit_end_date']))
-            ->set('invit_place',$data['invit_place'])
-            ->set('claim_type',$data['claim_type'])
-            ->set('permit_user',$data['permit_user'])
-            ->set('objective',$data['objective'])
-            ->set('permit_group',$data['permit_group'])
-            ->set('travel_type',$data['travel_type'])
-            ->set('license_plate',$data['license_plate'])
+            ->set('date_permit', to_mysql_date($data['date_permit']))
+            ->set('invit_name', $data['invit_name'])
+            ->set('invit_number', $data['invit_number'])
+            ->set('invite', $data['invite'])
+            ->set('detail_no_invit', $data['detail_no_invit'])
+            ->set('invit_date', to_mysql_date($data['invit_date']))
+            ->set('invit_subject', $data['invit_subject'])
+            ->set('invit_type', $data['invit_type'])
+            ->set('invit_start_date', to_mysql_date($data['invit_start_date']))
+            ->set('invit_end_date', to_mysql_date($data['invit_end_date']))
+            ->set('permit_start_date', to_mysql_date($data['permit_start_date']))
+            ->set('permit_end_date', to_mysql_date($data['permit_end_date']))
+            ->set('invit_place', $data['invit_place'])
+            ->set('claim_type', $data['claim_type'])
+            ->set('permit_user', $data['permit_user'])
+            ->set('objective', $data['objective'])
+            ->set('permit_group', $data['permit_group'])
+            ->set('travel_type', $data['travel_type'])
+            ->set('license_plate', $data['license_plate'])
             //->set('driver',$data['driver'])
             ->insert('outsite_permit');
-            $lastid = $this->db->insert_id();
-            $i=1;
-         foreach($data['users'] as $u){
-                    $this->db
-                    ->set('user_id',$u)
-                    ->set('outsite_id',$lastid)
-                    ->set('order',$i)
-                    ->insert('outsite_member');
-             //echo $u;
-             $i++;
-          }
-
-
-        return $rs;
-
-    }
-
-    public function update_outsite($data){
-        $rs = $this->db
-            ->where('id',$data['id'])
-            //->set('outsite_type',$data['outsite_type'])
-            //->set('permit_number',$data['permit_number'])
-            ->set('date_permit',to_mysql_date($data['date_permit']))
-            ->set('invit_name',$data['invit_name'])
-            ->set('invit_number',$data['invit_number'])
-            ->set('invite',$data['invite'])
-            ->set('detail_no_invit',$data['detail_no_invit'])
-            ->set('invit_date',to_mysql_date($data['invit_date']))
-            ->set('invit_subject',$data['invit_subject'])
-            ->set('invit_type',$data['invit_type'])
-            ->set('invit_start_date',to_mysql_date($data['invit_start_date']))
-            ->set('invit_end_date',to_mysql_date($data['invit_end_date']))
-            ->set('permit_start_date',to_mysql_date($data['permit_start_date']))
-            ->set('permit_end_date',to_mysql_date($data['permit_end_date']))
-            ->set('invit_place',$data['invit_place'])
-            ->set('claim_type',$data['claim_type'])
-            ->set('permit_user',$data['permit_user'])
-            ->set('objective',$data['objective'])
-            ->set('permit_group',$data['permit_group'])
-            ->set('travel_type',$data['travel_type'])
-            ->set('license_plate',$data['license_plate'])
-            //->set('driver',$data['driver'])
-            ->update('outsite_permit');
-$i=1;
-        $this->db
-            ->where('outsite_id',$data['id'])
-            ->delete('outsite_member');
-        foreach($data['users'] as $u){
+        $lastid = $this->db->insert_id();
+        $i = 1;
+        foreach ($data['users'] as $u) {
             $this->db
-                ->set('user_id',$u)
-                ->set('outsite_id',$data['id'])
-                ->set('order',$i)
+                ->set('user_id', $u)
+                ->set('outsite_id', $lastid)
+                ->set('order', $i)
                 ->insert('outsite_member');
             //echo $u;
             $i++;
         }
+
+        $this->db->trans_complete();
+        return $rs;
+
+    }
+
+    public function update_outsite($data)
+    {
+        $this->db->trans_start();
+        $rs = $this->db
+            ->where('id', $data['id'])
+            //->set('outsite_type',$data['outsite_type'])
+            //->set('permit_number',$data['permit_number'])
+            ->set('date_permit', to_mysql_date($data['date_permit']))
+            ->set('invit_name', $data['invit_name'])
+            ->set('invit_number', $data['invit_number'])
+            ->set('invite', $data['invite'])
+            ->set('detail_no_invit', $data['detail_no_invit'])
+            ->set('invit_date', to_mysql_date($data['invit_date']))
+            ->set('invit_subject', $data['invit_subject'])
+            ->set('invit_type', $data['invit_type'])
+            ->set('invit_start_date', to_mysql_date($data['invit_start_date']))
+            ->set('invit_end_date', to_mysql_date($data['invit_end_date']))
+            ->set('permit_start_date', to_mysql_date($data['permit_start_date']))
+            ->set('permit_end_date', to_mysql_date($data['permit_end_date']))
+            ->set('invit_place', $data['invit_place'])
+            ->set('claim_type', $data['claim_type'])
+            ->set('permit_user', $data['permit_user'])
+            ->set('objective', $data['objective'])
+            ->set('permit_group', $data['permit_group'])
+            ->set('travel_type', $data['travel_type'])
+            ->set('license_plate', $data['license_plate'])
+            //->set('driver',$data['driver'])
+            ->update('outsite_permit');
+        $i = 1;
+        $this->db
+            ->where('outsite_id', $data['id'])
+            ->delete('outsite_member');
+        foreach ($data['users'] as $u) {
+            $this->db
+                ->set('user_id', $u)
+                ->set('outsite_id', $data['id'])
+                ->set('order', $i)
+                ->insert('outsite_member');
+            //echo $u;
+            $i++;
+        }
+        $this->db->trans_complete();
         return $rs;
     }
-    public function del_outsite($id, $user_id){
+
+    public function del_outsite($id, $user_id)
+    {
         $rs = $this->db
-            ->where('id',$id)
-            ->where('permit_user',$user_id)
+            ->where('id', $id)
+            ->where('permit_user', $user_id)
             ->delete('outsite_permit');
         return $rs;
     }
 
-    public function get_permit_member($id){
+    public function get_permit_member($id)
+    {
         $rs = $this->db
             ->select('a.user_id,b.prename, b.name,b.position')
-            ->where('a.outsite_id',$id)
-            ->join('mas_users b','a.user_id=b.id')
+            ->where('a.outsite_id', $id)
+            ->join('mas_users b', 'a.user_id=b.id')
             ->order_by('order')
             ->get('outsite_member a')
             ->result();
         return $rs;
+    }
+
+    public function get_book_number($user_id)
+    {
+        $rs = $this->db
+            ->select('b.book_number')
+            ->where('a.id', $user_id)
+            ->join('co_workgroup b ', 'a.group = b.id')
+            ->get('mas_users a')
+            ->row();
+        return $rs ? $rs->book_number : '-';
+
     }
 }
