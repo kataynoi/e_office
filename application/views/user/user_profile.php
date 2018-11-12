@@ -104,6 +104,16 @@
                         <label for="email">E-mail</label>
                         <input type="email" class="form-control" id="email"
                                placeholder="name@example.com" value="<?php echo $user_profiles['email']?>">
+                <label for="name">ประเภทพนักงาน</label>
+                <select class="form-control" id="employee_type">
+                    <?php
+
+                    foreach($employee_type as $g){
+                        if($user_profiles['employee_type'] == $g->id){ $s ='selected';}else{$s =''; }
+                        echo "<option value='$g->id' $s >$g->name</option>";
+                    }
+                    ?>
+                </select>
                       <label for="position">ตำแหน่ง</label>
                         <input type="text" class="form-control" id="position"
                                placeholder="นักวิชาการสาธารณสุขชำนาญการ" value="<?php echo $user_profiles['position']?>">

@@ -85,6 +85,7 @@ class User extends CI_Controller
 		$rs['fullname'] = $rs['prename'] . $rs['name'];
 		$rs['hospname'] = get_hospital_name($rs['hospcode']);
 		$rs['group_name'] = get_group_name($rs['group']);
+		$data['employee_type'] = $this->basic->sl_employee_type();
 		$data['user_profiles']= $rs;
 		$this->layout->view('user/user_profile',$data);
 	}

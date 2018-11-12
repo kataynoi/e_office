@@ -165,13 +165,17 @@
                                data-rel="tooltip" data-date-format="dd/mm/yyyy"
                                value="<?php echo to_thai_date($outsite['permit_end_date']); ?>">
                     </div>
-                    <div class="form-group col-md-6">
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
                         <label>วัตถุประสงค์การไปราชการ </label>
                         <input type="text" id="objective" class="form-control " data-rel="tooltip"
                                placeholder=" เช่น เพื่อประชุมเชิงปฏิบัติการพัฒนาระบบสารสนเทศ"
                                value="<?php echo $outsite['objective']; ?>">
                     </div>
                 </div>
+
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label>เบิกค่าใช้จ่ายเดินทางไปราชการจาก </label>

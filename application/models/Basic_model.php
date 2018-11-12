@@ -22,5 +22,13 @@ class Basic_model extends CI_Model
             ->result();
         return $rs;
     }
+    public function sl_employee_type(){
+
+        $rs = $this->db
+            //->where('provcode',$id)
+            ->get('employee_type')
+            ->result();
+        return $rs;
+    }
 
 }

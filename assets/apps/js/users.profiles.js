@@ -58,6 +58,7 @@ $(document).ready(function(){
         items.cid=$('#cid').val();
         items.hospcode=$('#hospcode').val();
         items.group=$('#group').val();
+        items.employee_type=$('#employee_type').val();
         items.email=$('#email').val();
         items.user_mobile=$('#user_mobile').val();
         items.position=$('#position').val();
