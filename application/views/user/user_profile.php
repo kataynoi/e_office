@@ -8,8 +8,8 @@
             <div class="col-md-3">
 
 
-                <img class="rounded float-left" height="200px"
-                     src=<?php echo base_url('assets/images/users/') . "0.jpg" ?>>
+                <img class="rounded float-left img-thumbnail" height="200px"
+                     src=<?php echo base_url('assets/images/users/') .$user_profiles['id']. ".jpg" ?>>
 
             </div>
             <div class="col-md-8">
@@ -23,7 +23,10 @@
                             echo "<li class='list-group-item'><i class='fas fa-layer-group fa-2x' ></i> " . $user_profiles['group_name'] . "</li>";
                             echo "<li class='list-group-item'><i class='fas fa-address-book fa-2x' ></i> " . $user_profiles['position'] . "</li>";
                             echo "<li class='list-group-item'><i class='fas fa-phone fa-2x' ></i> " . $user_profiles['user_mobile'] . "</li>";
+                            if($user_profiles['id'] == $this->session->userdata('id')){
+
                             ?>
+
                             <li class="list-group-item text-center">
                                 <button class="btn btn-info" id="btn_edit_profiles" data-target="#modalEditProfiles"
                                         data-toggle="modal"><i class="fa fa-edit"></i> Edit Profiles
@@ -32,6 +35,9 @@
                                         data-toggle="modal"><i class="fa fa-user-secret"></i> Change Password
                                 </button>
                             </li>
+                            <?php
+                            }
+                            ?>
                         </ul
 
                     </div>

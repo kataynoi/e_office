@@ -77,9 +77,9 @@ class User extends CI_Controller
 
 		render_json($json);
 	}
-	public function user_profile (){
+	public function user_profile ($id){
 
-		$rs = $this->user->get_userprofile($this->user_id);
+		$rs = $this->user->get_userprofile($id);
 		$data['office'] = $this->basic->sl_hospcode($this->provcode);
 		$data['group'] = $this->basic->sl_group();
 		$rs['fullname'] = $rs['prename'] . $rs['name'];

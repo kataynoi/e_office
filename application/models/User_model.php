@@ -82,5 +82,12 @@ class User_model extends CI_Model
             ->update('mas_users');
         return $rs;
     }
+    public function get_member_name($id){
+        $rs = $this->db
+            ->where('id',$id)
+            ->get('mas_users')
+            ->result();
+        return $rs? $rs->prename.$rs->name:'-';
+    }
 
 }

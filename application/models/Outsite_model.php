@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Outsite_model extends CI_Model
 {
     var $table = "outsite_permit";
-    var $select_column = array("id", "invit_start_date", "invit_end_date", "invit_subject", "invit_place", "invit_name");
+    var $select_column = array("id", "permit_start_date", "permit_end_date", "invit_subject", "invit_place", "invit_name");
     var $order_column = array("invit_start_date");
 
 
@@ -41,6 +41,13 @@ class Outsite_model extends CI_Model
             ->join('mas_users b', 'a.user_id = b.id')
             ->order_by('order')
             ->get('outsite_member a')
+            ->result_array();
+        return $rs;
+    }
+    public function get_outsite_cars($id)
+    {
+        $rs = $this->db
+            ->get('used_car a')
             ->result_array();
         return $rs;
     }

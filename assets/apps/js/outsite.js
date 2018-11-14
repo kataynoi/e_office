@@ -1,7 +1,9 @@
 $(document).ready(function () {
     var arr = arr_member;
+    var cars=[];
     console.log(arr);
     set_arr_user();
+    //set_cars();
     function set_arr_user() {
         $('#tbl_list > tbody').empty();
         for (var i = 0; i < arr.length; i++) {
@@ -20,17 +22,37 @@ $(document).ready(function () {
             );
         }
     }
-    if(invite=='1'){
+
+    function set_cars() {
+        $('#tbl_car_list > tbody').empty();
+        for (var i = 0; i < cars.length; i++) {
+            var car = cars[i];
+            $('#tbl_car_list > tbody').append(
+                '<tr>' +
+                '<td>' + (i + 1) + '</td>' +
+                '<td>' + car["licente_plate"] + '</td>' +
+                '<td>' + car["driver"] + '</td>' +
+                '<td>' + car["user_mobile"] + '</td>' +
+                '<td>' + car["control_car"] + '</td>' +
+                '<td><div class="btn-group" role="group" aria-label="Basic example">' +
+                '<button type="button" class="btn btn-danger" data-btn="btn_del_permit_user" data-id="' + i + '"><i class="fa fa-minus-square"></i></button>' +
+                '</div></td></td>' +
+                '</tr>'
+            );
+        }
+    }
+    if(invite==1){
         $('#frm_invit1').fadeIn();
         $('#frm_invit2').hide();
-    }else if(invite=='2'){
+    }else if(invite==2){
         $('#frm_invit2').fadeIn();
         $('#frm_invit1').hide();
-    }else if(invite=='0'){
+    }else if(invite==0){
         $('#frm_invit1').hide();
         $('#frm_invit2').hide();
     }
-    $('#txt_license_plate').hide();
+    hide_frm_used_car();
+    //disable_print();
     //User namespace
     var outsite = {};
     outsite.ajax = {
@@ -67,7 +89,8 @@ $(document).ready(function () {
                     window.location = base_url+"outsite";
                 }else if(items.action == 'update'){
                     swal('แก้ไขข้อมูลเรียบร้อยแล้ว ');
-                    location.reload();
+                    enable_print();
+                    //location.reload();
                 }
 
             }
@@ -152,6 +175,7 @@ $(document).ready(function () {
         console.log(id + name + position);
         outsite.set_permit_user(id, name, position);
         $(this).parent().parent().hide();
+        disable_print();
     });
 
     $(document).on('click', 'button[data-btn="btn_del_permit_user"]', function (e) {
@@ -160,6 +184,7 @@ $(document).ready(function () {
         console.log(id)
         arr.splice(id, 1);
         set_arr_user();
+        disable_print();
     });
     $(document).on('click', 'button[data-btn="btn_down"]', function (e) {
         e.preventDefault();
@@ -177,6 +202,7 @@ $(document).ready(function () {
         arr.splice(id, 1, ori);
         arr.splice(id_original, 1, _new);
         set_arr_user();
+        disable_print();
 
     });
     $(document).on('click', 'button[data-btn="btn_up"]', function (e) {
@@ -195,9 +221,47 @@ $(document).ready(function () {
         arr.splice(id, 1, ori);
         arr.splice(id_original, 1, _new);
         set_arr_user();
+        disable_print();
 
     });
 
+
+    $('#btn_add_car').on('click', function (e) {
+        console.log('car');
+        e.preventDefault();
+        cars.push({"car_id": '', "driver": '', "control_car": ''});
+        console.log(cars);
+        var no = cars.length;
+        var option;
+        for (i = 0; i < arr.length; i++) {
+            if(i==0){option+='<option> ---  ระบุผู้ควบคุมรถ --- </option>'}
+            option+='<option value="'+arr[i]["user_id"]+'">'+arr[i]["name"]+'</option>';
+        }
+      $('#tbl_car_list').append(
+          '<tr>' +
+          '<td>'+no+'</td>' +
+          '<td></td>' +
+          '<td></td>' +
+          '<td></td>' +
+          '<td>' +
+          '<select class="form-control">' +
+          option+
+          '</select>' +
+          '</td>' +
+          '<td></td>' +
+          '</tr>'
+      )
+
+    });
+
+    $(document).on('click', 'button[data-btn="btn_del_car"]', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        console.log(id)
+        arr.splice(id, 1);
+        set_arr_user();
+        disable_print();
+    });
 
     $('#btn_save_outsite').on('click', function (e) {
         e.preventDefault();
@@ -212,9 +276,14 @@ $(document).ready(function () {
         items.detail_no_invit = $('#detail_no_invit').val();
         items.invit_type = $('#invit_type').val();
         items.invit_name = $('#invit_name').val();
-        items.invit_subject = $('#invit_subject').val();
+        if(items.invite==1){
+            items.invit_subject = $('#invit_subject').val();
+            items.invit_place = $('#invit_place').val();
+        }else if(items.invite==2){
+            items.invit_subject = $('#invit_subject2').val();
+            items.invit_place = $('#invit_place2').val();
+        }
         items.invit_date = $('#invit_date').val();
-        items.invit_place = $('#invit_place').val();
         items.date_permit = $('#date_permit').val();
         items.invit_start_date = $('#invit_start_date').val();
         items.invit_end_date = $('#invit_end_date').val();
@@ -236,6 +305,28 @@ $(document).ready(function () {
         if (!items.date_permit) {
             swal('กรุณาระบุวันที่ขออนุญาติไปราชการ');
             $('#date_permit').focus();
+        }
+        else if(items.invite==0){
+            swal('มีหนังสือเชิญประชุมหรือไม่');
+            $('#invite').focus();
+        }else if(items.invite==1 && (!items.invit_type || !items.invit_name || !items.invit_subject || !items.invit_place )){
+            swal('กรุณาระบุรายละเอียดการเชิญประชุมให้ครบถ้วน');
+        }else if(items.invite==2 && (!items.invit_subject || !items.invit_place )){
+            swal('กรุณาระบุเรื่องและสถานที่ไปราชการให้ครบถ้วน');
+        }else if(!items.objective){
+            swal('กรุณาระบุวัตถุประสงค์การไปราชการ');
+            $('#objective').focus();
+        }else if(!items.claim_type){
+            swal('กรุณาระบุประเภทการเบิกจ่ายค่าเดินทางไปราชการ');
+            $('#claim_type').focus();
+        }else if(!items.travel_type){
+            swal('กรุณาระบุประเภทการเดินทางไปราชการ');
+            $('#travel_type').focus();
+        }else if(items.travel_type==3 && !items.license_plate){
+            swal('กรุณาระบุหมายเลขทะเบียนรถยนต์ส่วนตัว');
+        }else if(user_id.length==0){
+            swal('กรุณาระบุรายชื่อผู้ขอไปราชการ');
+
         }
         else {
             outsite.save_outsite(items,action);
@@ -286,21 +377,6 @@ $(document).ready(function () {
         }else{
             day = 2;
         }
-        /*
-        if( invite==1 && person==1){
-            pdf_template = 'outsite1_pdf'
-        }else if(invite==1 && person >1 && person <=5){
-            pdf_template = 'outsite2_pdf'
-        }else if(invite==1 && person >5 ){
-            pdf_template = 'outsite3_pdf'
-        }else if(invite==2 && person ==1){
-            pdf_template = 'outsite4_pdf'
-        }else if(invite==2 && person >1 && person <=5){
-            pdf_template = 'outsite5_pdf'
-        }else if(invite==2 && person >5){
-            pdf_template = 'outsite6_pdf'
-        }
-        */
         pdf_template = 'outsite1_claim_pdf'
 
         console.log(pdf_template);
@@ -327,7 +403,38 @@ $( "#travel_type" ).change(function() {
     console.log(val);
     if(val==3){
         $('#txt_license_plate').fadeIn();
-    }else{
+        hide_frm_used_car();
+    }else if(val == 4 ) {
+        show_frm_used_car();
         $('#txt_license_plate').fadeOut();
+    } else{
+        $('#txt_license_plate').fadeOut();
+        hide_frm_used_car();
     }
 });
+
+if($('#travel_type').val() == 4 ) {
+    show_frm_used_car();
+}
+
+$(':input').change(function(){
+    disable_print();
+});
+$('select').change(function(){
+    disable_print();
+});
+$("#textarea").keypress(function(){
+    disable_print();
+})
+function disable_print(){
+    $('#btn_print_pdf').attr("disabled", "disabled");
+}
+function enable_print(){
+    $('#btn_print_pdf').removeAttr("disabled");
+}
+function show_frm_used_car(){
+    $('#frm_used_car').fadeIn();
+}
+function hide_frm_used_car(){
+    $('#frm_used_car').fadeOut();
+}

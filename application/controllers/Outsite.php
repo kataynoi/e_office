@@ -11,6 +11,8 @@ class Outsite extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if (!$this->session->userdata("online"))
+            redirect(site_url('user/login'));
         $this->layout->setLayout('default_layout');
         $this->load->model('Outsite_model', 'outsite');
         $this->user_id = $this->session->userdata('id');
@@ -33,6 +35,7 @@ class Outsite extends CI_Controller
             $data['action'] = 'insert';
         }
         $data['outsite_member'] = $this->outsite->get_outsite_member($id);
+        //$data['cars'] = $this->outsite->get_outsite_cars($id);
         $data['outsite'] = $this->outsite->get_outsite_user($id,$this->user_id);
         $data['outsite_type'] = $this->outsite->get_outsite_type();
         $data['invit_type'] = $this->outsite->getAll_invit_type();
@@ -47,7 +50,7 @@ class Outsite extends CI_Controller
         $data = array();
         foreach ($fetch_data as $row) {
             $sub_array = array();
-            $sub_array[] = to_thai_date_short($row->invit_start_date) . " - " . to_thai_date_short($row->invit_end_date);
+            $sub_array[] = to_thai_date_short($row->permit_start_date) . " - " . to_thai_date_short($row->permit_end_date);
             $sub_array[] = $row->invit_subject;
             $sub_array[] = $row->invit_place;
             $sub_array[] = $row->invit_name;

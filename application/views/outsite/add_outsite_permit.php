@@ -32,7 +32,6 @@
 
     });
 </script>
-
 <br>
 <form>
     <input type="hidden" id="id" class="form-control " placeholder="" value="<?php echo $outsite['id'] ?>">
@@ -143,6 +142,23 @@
             </form>
         </div>
         <div class="navbar navbar-default"  id="frm_invit2">
+            <div class="form-row">
+
+                <div class="form-group col-md-8">
+                    <label> เรื่อง</label>
+                    <input type="text" class="form-control" id="invit_subject2" placeholder="เรื่อง"
+                           value="<?php echo $outsite['invit_subject']; ?>">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label> สถานที่ไปราชการ</label>
+                    <input type="text" class="form-control" id="invit_place2" placeholder="ไปราชการที่"
+                           value="<?php echo $outsite['invit_place']; ?>">
+                </div>
+            </div>
+
+
+
             <div class="form-group" style="margin: 10px">
                 <label for="comment">เหตุผลที่ขอไปราชการ :</label>
                 <textarea class="form-control" rows="5" id="detail_no_invit" ><?php echo $outsite['detail_no_invit']; ?></textarea>
@@ -183,30 +199,14 @@
                                placeholder=" เช่น เบิกจากต้นสังกัด , เบิกจากผู้จัด"
                                value="<?php echo $outsite['claim_type']; ?>">
                     </div>
-                    <div class="form-group col-md-3">
-                        <label>เดินทางไปราชการโดย</label>
-                        <select id="travel_type" style="width: 250px;" class="form-control">
-                            <option value="">เดินทางไปราชการโดย</option>
-                            <?php
-                            foreach ($travel_type as $r) {
-                                if ($outsite['travel_type'] == $r->id) {
-                                    $s = 'selected';
-                                } else {
-                                    $s = '';
-                                }
-                                echo "<option value=' $r->id' $s > $r->travel_type </option>";
-                            } ?>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6" id="txt_license_plate">
-                        <label> ทะเบียนรถยนต์ (กรณีเดินทางรถยนต์ส่วนตัว) </label>
-                        <input type="text" id="license_plate" class="form-control " data-rel="tooltip"
-                               placeholder=" เช่น กง 1234 มหาสารคาม" value="<?php echo $outsite['license_plate']; ?>">
-                    </div>
                 </div>
 
             </form>
         </div>
+
+
+<!--        รายชื่อไปราชการ -->
+
         <div class="navbar navbar-default">
             <br>
 
@@ -235,15 +235,60 @@
 
         </div>
 
+        <div class="navbar navbar-default" >
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>เดินทางไปราชการโดย</label>
+                    <select id="travel_type" style="width: 300px;" class="form-control">
+                        <option value="">เดินทางไปราชการโดย</option>
+                        <?php
+                        foreach ($travel_type as $r) {
+                            if ($outsite['travel_type'] == $r->id) {
+                                $s = 'selected';
+                            } else {
+                                $s = '';
+                            }
+                            echo "<option value=' $r->id' $s > $r->travel_type </option>";
+                        } ?>
+                    </select>
+                </div>
+                <div class="form-group col-md-6" id="txt_license_plate">
+                    <label> ทะเบียนรถยนต์ (กรณีเดินทางรถยนต์ส่วนตัว) </label>
+                    <input type="text" id="license_plate" class="form-control " data-rel="tooltip"
+                           placeholder=" เช่น กง 1234 มหาสารคาม" value="<?php echo $outsite['license_plate']; ?>">
+                </div>
+            </div>
+            <div class="form-row" id="frm_used_car">
+                <div class="form-group col-md-12">
+                    <label>รถยนต์ราชการ</label>
+                    <button type="button" class="btn btn-success" id="btn_add_car">
+                        <i class="fa fa-plus-circle"></i> ขอรถยนต์ราชการ
+                    </button>
+                </div>
+                <div class="col-xl-12">
+                    <table class="table table-responsive" id="tbl_car_list">
+                        <thead>
+                        <th>#</th>
+                        <th>เลขทะเบียนรถยนต์</th>
+                        <th>พนักงานขับรถยนต์</th>
+                        <th>เบอร์โทร</th>
+                        <th>ผู้ควบคุมรถ</th>
+                        <th>การจัดการ</th>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
     </div>
     <div class="panel-footer" style="text-align: center;">
         <button type="button" class="btn btn-primary " id="btn_save_outsite"><i class="fa fa-save "></i> บันทึก</button>
-        <button type="button" class="btn btn-success" id="btn_print_pdf"><i class="fa fa-print "></i> พิมพ์เอกสาร
-        <button type="button" class="btn btn-success" id="btn_print_claim"><i class="fa fa-print "></i> พิมพ์เอกสารเบิกเงิน
-        </button>
-        <button type="button" class="btn btn-warning disabled" id="btn_edit"><i class="fa fa-edit "></i> แก้ไข</button>
-        <button type="button" class="btn btn-danger " id="btn_delete" disabled><i class="fa fa-eraser "></i> ลบ</button>
-
+        <button type="button" class="btn btn-success" id="btn_print_pdf"><i class="fa fa-print "></i> พิมพ์เอกสารขออณุญาติไปราชการ</button>
+        <button type="button" class="btn btn-info" id="btn_print_car"><i class="fa fa-print "></i> พิมพใบขอใช้รถยนต์ราชการ</button>
     </div>
 </div>
 
