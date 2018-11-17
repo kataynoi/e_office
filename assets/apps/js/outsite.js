@@ -302,7 +302,7 @@ $(document).ready(function () {
         var user_id = $(this).val();
         var id = $(this).data('id');
         console.log(id);
-       cars[id].control_car = user_id;
+            cars[id].control_car = user_id;
         console.log(cars);
     });
 
@@ -377,7 +377,7 @@ $(document).ready(function () {
         }else if(items.travel_type == 4 && cars.length == 0){
             swal('ท่านเลือกเดินทางโดยรถยนต์ทางราชการแต่ไม่ระบุรถ กรุณาเพิ่มรถยนต์และระบุคนควบคุมรถ');
 
-        }else if(!check_control_car(cars)){
+        }else if(items.travel_type == 4 && !check_control_car(cars)){
             swal('กรุณาระบุผู้ควบคุมรถ');
         }
         else {
@@ -436,7 +436,7 @@ $(document).ready(function () {
 
     });
 
-});
+
 
 $( "#invite" ).change(function() {
     var val = $(this).val();
@@ -453,13 +453,19 @@ $( "#invite" ).change(function() {
 $( "#travel_type" ).change(function() {
     var val = $(this).val();
     console.log(val);
+    if(val != 4){
+        while (cars.length) { cars.pop(); }
+        $('#tbl_car_list').empty();
+    }
     if(val==3){
         $('#txt_license_plate').fadeIn();
         hide_frm_used_car();
+        while (cars.length) { cars.pop(); }
+        $('#tbl_car_list').empty();
     }else if(val == 4 ) {
         show_frm_used_car();
         $('#txt_license_plate').fadeOut();
-    } else{
+    }else{
         $('#txt_license_plate').fadeOut();
         hide_frm_used_car();
     }
@@ -467,15 +473,13 @@ $( "#travel_type" ).change(function() {
 
 function check_control_car(cars){
     for (i = 0; i < cars.length; i++) {
-        console.log("xxx "+cars[i].control_car);
         if(cars[i].control_car === "" ||cars[i].control_car === "0" ){
             return false;
             break;
         }else{return true;};
     }
-
-
 }
+
 
 if($('#travel_type').val() == 4 ) {
     show_frm_used_car();
@@ -504,3 +508,6 @@ function hide_frm_used_car(){
     $('#frm_used_car').fadeOut();
     $('#btn_print_car').hide();
 }
+
+
+});
