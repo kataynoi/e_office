@@ -4,8 +4,11 @@
     var position = '<?php echo $user->position ?>';
     var driver = '<?php echo $user->driver ?>';
     var invite ='<?php echo $outsite['invite']?>';
+    var travel_type ='<?php echo $outsite['travel_type']?>';
     var arr_member =
-    <?php echo json_encode($outsite_member);?>
+    <?php echo json_encode($outsite_member);?>;
+    var arr_cars =
+    <?php echo json_encode($cars);?>;
     //console.log(arr_member );
 
 </script>
@@ -48,8 +51,6 @@
     <div class="panel-body">
         <div class="navbar navbar-default w3-theme-l5">
             <form action="#" class="navbar-form">
-
-
                 <label>วันที่ขออณูญาต </label>
                 <input type="text" id="date_permit" data-type="date" class="form-control datepicker"
                        data-date-language="th"

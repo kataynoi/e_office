@@ -47,6 +47,10 @@ class Outsite_model extends CI_Model
     public function get_outsite_cars($id)
     {
         $rs = $this->db
+            ->select('a.control_car,Concat(b.licente_plate,"(",b.name,")") as car_id,CONCAT(c.prename,c.name) as driver,c.user_mobile,a.control_car',false)
+            ->where('outsite_id',$id)
+            ->join('car b ','a.car_id=b.id','left')
+            ->join('mas_users c ','a.driver = c.id','left')
             ->get('used_car a')
             ->result_array();
         return $rs;
@@ -216,6 +220,13 @@ class Outsite_model extends CI_Model
             $i++;
         }
 
+        foreach ($data['used_car'] as $u) {
+            $this->db
+                ->set('outsite_id', $lastid)
+                ->set('control_car', $u)
+                ->insert('used_car');
+        }
+
         $this->db->trans_complete();
         return $rs;
 
@@ -259,6 +270,20 @@ class Outsite_model extends CI_Model
                 ->set('outsite_id', $data['id'])
                 ->set('order', $i)
                 ->insert('outsite_member');
+            //echo $u;
+            $i++;
+        }
+
+        $this->db
+            ->where('outsite_id', $data['id'])
+            ->delete('used_car');
+        foreach ($data['used_car'] as $u) {
+            $this->db
+                ->set('car_id', $u['car_id'])
+                ->set('outsite_id', $data['id'])
+                ->set('control_car', $u['control_car'])
+                ->set('driver', $u['driver'])
+                ->insert('used_car');
             //echo $u;
             $i++;
         }

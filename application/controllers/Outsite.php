@@ -35,7 +35,7 @@ class Outsite extends CI_Controller
             $data['action'] = 'insert';
         }
         $data['outsite_member'] = $this->outsite->get_outsite_member($id);
-        //$data['cars'] = $this->outsite->get_outsite_cars($id);
+        $data['cars'] =$this->outsite->get_outsite_cars($id);
         $data['outsite'] = $this->outsite->get_outsite_user($id,$this->user_id);
         $data['outsite_type'] = $this->outsite->get_outsite_type();
         $data['invit_type'] = $this->outsite->getAll_invit_type();
