@@ -112,7 +112,7 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
                 $pdf->setXY(55, $line[10]+1);
                 $pdf->Cell(250, 20, $out_site->travel_type_name, 0, 0, 'L');
                 $pdf->setXY(77, $line[10]+1);
-                $pdf->Cell(250, 20, " หมายเลขทะเบียน ".$out_site->license_plate, 0, 0, 'L');
+                $pdf->Cell(250, 20, " หมายเลขทะเบียน ".to_thai_number_text($out_site->license_plate), 0, 0, 'L');
             }else{
                 $pdf->setXY(55, $line[10]+1);
                 $pdf->Cell(250, 20, $out_site->travel_type_name, 0, 0, 'L');

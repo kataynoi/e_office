@@ -407,13 +407,13 @@ $(document).ready(function () {
             pdf_template = 'outsite1_pdf'
         }else if(invite==1 && person >1 && person <=5){
             pdf_template = 'outsite2_pdf'
-        }else if(invite==1 && person >5 ){
+        }else if(invite==1 && person >4 ){
             pdf_template = 'outsite3_pdf'
         }else if(invite==2 && person ==1){
             pdf_template = 'outsite4_pdf'
         }else if(invite==2 && person >1 && person <=5){
             pdf_template = 'outsite5_pdf'
-        }else if(invite==2 && person >5){
+        }else if(invite==2 && person >4){
             pdf_template = 'outsite6_pdf'
         }
         console.log(pdf_template);

@@ -6,7 +6,7 @@ $pdf = new FPDI(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', 
 
 // get the page count
 //$pageCount = $pdf->setSourceFile('Laboratory-Report.pdf');
-$pageCount = $pdf->setSourceFile(dirname(__FILE__)."/outsite1_template.pdf");
+$pageCount = $pdf->setSourceFile(dirname(__FILE__)."/outsite2_template.pdf");
 // iterate through all pages
 for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
 // import a page
@@ -45,13 +45,15 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
     }
     switch  ($pageNo){
         case 1:
+            $pdf->setXY(24, $line[0]-23);
+            $pdf->Cell(300, 20, to_thai_number_text($book_number)."/", 0, 0, 'P');
             $pdf->setXY(110, $line[0]-23);
             $pdf->Cell(300, 20, to_thai_date_full($out_site->date_permit), 0, 0, 'P');
             $pdf->setXY(50, $line[0]-23);
             $pdf->Cell(100, 20, '-', 0, 0, 'P');
-            $pdf->setXY(50, $line[0]);
+            $pdf->setXY(52, $line[0]);
             $pdf->Cell(300, 20, to_thai_number_text($out_site->invit_name), 0, 0, 'P');
-            $pdf->setXY(45, $line[1]);
+            $pdf->setXY(43, $line[1]);
             $pdf->Cell(250, 20, to_thai_number_text($out_site->invit_number), 0, 0, 'L');
             $pdf->setXY(105, $line[1]);
             $pdf->Cell(250, 20, to_thai_date_full($out_site->invit_date), 0, 0, 'L');
@@ -70,59 +72,72 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
             }
             $pdf->setXY(25, $line[4]);
             $pdf->Cell(250, 20, to_thai_number_text($out_site->invit_place), 0, 0, 'L');
-            $pdf->setXY(138, $line[5]);
-            $pdf->Cell(250, 20, $out_site->claim_type, 0, 0, 'L');
-            $pdf->setXY(66, $line[6]);
-            $pdf->Cell(250, 20, $outsite_member['0']->name, 0, 0, 'L');
-            $pdf->setXY(132, $line[6]);
-            $pdf->Cell(250, 20, $outsite_member['0']->position, 0, 0, 'L');
-            $pdf->setXY(86, $line[7]);
+            /* บิกค่าใช้จ่ายจากไหน */
+            if($out_site->claim_type == 4){
+                $pdf->setXY(28, $line[5]);
+                $pdf->Cell(250, 20, $out_site->claim_type_name, 0, 0, 'L');
+            }else if($out_site->claim_type == 5){
+                $pdf->setXY(28, $line[5]);
+                $pdf->Cell(250, 20, 'ขอเบิกค่าใช้จ่ายเดินทางไปราชการจาก'.$out_site->claim_cause, 0, 0, 'L');
+            }else{
+                $pdf->setXY(28, $line[5]);
+                $pdf->Cell(250, 20, 'ขอเบิกค่าใช้จ่ายเดินทางไปราชการจาก'.$out_site->claim_type_name, 0, 0, 'L');
+            }
+
+
+            $pdf->setXY(57, $line[6]);
+            $pdf->Cell(250, 20, $member['0']->name, 0, 0, 'L');
+            $pdf->setXY(124, $line[6]);
+            $pdf->Cell(245, 20, $member['0']->position, 0, 0, 'L');
+
+
+            $pdf->setXY(83, $line[10]);
             $pdf->Cell(250, 20, to_thai_number_text($out_site->invit_place), 0, 0, 'L');
-            $pdf->setXY(27, $line[8]);
+            $pdf->setXY(27, $line[11]);
             $pdf->Cell(250, 20, to_thai_number_text($out_site->objective), 0, 0, 'L');
 
             if($out_site->permit_start_date == $out_site->permit_end_date){
-                $pdf->setXY(35, $line[9]);
-                $pdf->Cell(250, 20, to_thai_date_full($out_site->permit_start_date)." - ", 0, 0, 'L');
-            }else {
-                $pdf->setXY(35, $line[9]);
+                $pdf->setXY(35, $line[12]);
                 $pdf->Cell(250, 20, to_thai_date_full($out_site->permit_start_date), 0, 0, 'L');
-                $pdf->setXY(70, $line[9]);
+            }else {
+                $pdf->setXY(35, $line[12]);
+                $pdf->Cell(250, 20, to_thai_date_full($out_site->permit_start_date), 0, 0, 'L');
+                $pdf->setXY(70, $line[12]);
                 $pdf->Cell(250, 20, " - ".to_thai_date_full($out_site->permit_end_date), 0, 0, 'L');
             }
-
-
-
-
-            $x;$y=10;$license_plate='';
-            switch ($out_site->travel_type) {
-                case 1:
-                    $x=37;
-                    break;
-                case 2:
-                    $x=59;
-                    break;
-                case 3:
-                    $x=94;
-                    $license_plate=$out_site->license_plate;
-                    break;
-                case 4:
-                    $x=38;
-                    $y=18;
-                    break;
+            $s=(string)$out_site->travel_type_name;
+            if($out_site->travel_type == 6){
+                $pdf->setXY(55, $line[13]+1);
+                //$pdf->Cell(250, 20, $out_site->travel_type_name, 0, 0, 'L');
+                $pdf->writeHTML($s);
+            }elseif($out_site->travel_type == 3){
+                $pdf->setXY(55, $line[13]+1);
+                $pdf->Cell(250, 20, $out_site->travel_type_name, 0, 0, 'L');
+                $pdf->setXY(77, $line[13]+1);
+                $pdf->Cell(250, 20, " หมายเลขทะเบียน ".to_thai_number_text($out_site->license_plate), 0, 0, 'L');
+            }else{
+                $pdf->setXY(55, $line[13]+1);
+                $pdf->Cell(250, 20, $out_site->travel_type_name, 0, 0, 'L');
             }
-            $e=0;
-            if($y==18){$e=1.8;}
-            $pdf->setXY($x, $line[$y]+1-$e);
-            $pdf->Cell(250, 20, '/', 0, 0, 'L');
-            $pdf->setXY($x+55, $line[$y]+1);
-            $pdf->Cell(250, 20,$license_plate , 0, 0, 'L');
+            $n=0;
+            foreach($member as $m){
+                //$line=13+$n;
+                if($n!=0){
+                    $pdf->setXY(38, $line[6+$n]+0.7);
+                    $pdf->Cell(250, 20, to_thai_number($n)." ".$m->prename.$m->name, 0, 0, 'L');
+                    $pdf->setXY(90, $line[6+$n]+0.7);
+                    $pdf->Cell(250, 20, "ตำแหน่ง".to_thai_number_text($m->position), 0, 0, 'L');
+                }
+                $n++;
+            }
+
+            //$pdf->writeHTML($out_site->travel_type_name);
 
 // ลงชื่อ
-            $pdf->setXY(95, $line[16]+3);
-            $pdf->Cell(240, 0, $outsite_member['0']->name, 0, 0, 'P');
-            $pdf->setXY(85, $line[17]+3);
-            $pdf->Cell(240, 0, $outsite_member['0']->position, 0, 0, 'P');
+            $pdf->setXY(95, $line[19]+3);
+            $pdf->Cell(240, 0, $member['0']->name, 0, 0, 'P');
+            $pdf->setXY(85, $line[20]+3);
+            $pdf->Cell(240, 0, $member['0']->position, 0, 0, 'P');
             break;
         case 2:
             $pdf->Cell(30, 20, to_thai_date_full($out_site->date_permit), 0, 0, 'P');
