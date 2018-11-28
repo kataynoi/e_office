@@ -3,20 +3,20 @@
     var name = '<?php echo $user->name ?>';
     var position = '<?php echo $user->position ?>';
     var driver = '<?php echo $user->driver ?>';
-    var invite ='<?php echo $outsite['invite']?>';
-    var travel_type ='<?php echo $outsite['travel_type']?>';
+    var invite = '<?php echo $outsite['invite']?>';
+    var travel_type = '<?php echo $outsite['travel_type']?>';
     var arr_member =
-    <?php echo json_encode($outsite_member);?>;
+        <?php echo json_encode($outsite_member);?>;
     var arr_cars =
-    <?php echo json_encode($cars);?>;
+        <?php echo json_encode($cars);?>;
     //console.log(arr_member );
 
 </script>
 <script>
     $(document).ready(function () {
-        var  id = $('#id').val();
+        var id = $('#id').val();
         console.log(id);
-        if( !id){
+        if (!id) {
             $('.datepicker').datepicker({
                 format: 'dd/mm/yyyy',
                 todayBtn: true,
@@ -24,7 +24,7 @@
                 thaiyear: true             //Set เป็นปี พ.ศ.
             }).datepicker("setDate", "0");
 
-        }else{
+        } else {
             $('.datepicker').datepicker({
                 format: 'dd/mm/yyyy',
                 todayBtn: true,
@@ -59,20 +59,27 @@
 
             </form>
         </div>
-        <div class="form-row" >
+        <div class="form-row">
 
-                <label> มีหนังสือเชิญประชุมหรือไม่ </label>
-                <select id="invite" class="form-control" style="width: 200px">
-                    <option value="0">  --------  </option>
-                    <option value="1" <?php if($outsite['invite'] =='1'){ echo 'selected';}?> >มีหนังสือเชิญประชุม</option>
-                    <option value="2" <?php if($outsite['invite'] =='2'){ echo 'selected';}?> >ไม่มี</option>
-                </select>
+            <label> มีหนังสือเชิญประชุมหรือไม่ </label>
+            <select id="invite" class="form-control" style="width: 200px">
+                <option value="0"> --------</option>
+                <option value="1" <?php if ($outsite['invite'] == '1') {
+                    echo 'selected';
+                } ?> >มีหนังสือเชิญประชุม
+                </option>
+                <option value="2" <?php if ($outsite['invite'] == '2') {
+                    echo 'selected';
+                } ?> >ไม่มี
+                </option>
+            </select>
 
 
         </div>
         <br>
-        <div class="navbar navbar-default"  id="frm_invit1">
-            <form action="#" class="" >
+
+        <div class="navbar navbar-default" id="frm_invit1">
+            <form action="#" class="">
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label> ประเภทการเชิญ </label>
@@ -142,7 +149,7 @@
                 </div>
             </form>
         </div>
-        <div class="navbar navbar-default"  id="frm_invit2">
+        <div class="navbar navbar-default" id="frm_invit2">
             <div class="form-row">
 
                 <div class="form-group col-md-8">
@@ -159,10 +166,10 @@
             </div>
 
 
-
             <div class="form-group" style="margin: 10px">
                 <label for="comment">เหตุผลที่ขอไปราชการ :</label>
-                <textarea class="form-control" rows="5" id="detail_no_invit" ><?php echo $outsite['detail_no_invit']; ?></textarea>
+                <textarea class="form-control" rows="5"
+                          id="detail_no_invit"><?php echo $outsite['detail_no_invit']; ?></textarea>
             </div>
         </div>
         <div class="navbar navbar-default w3-theme-l5">
@@ -196,17 +203,35 @@
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label>เบิกค่าใช้จ่ายเดินทางไปราชการจาก </label>
-                        <input type="text" id="claim_type" class="form-control " data-rel="tooltip"
-                               placeholder=" เช่น เบิกจากต้นสังกัด , เบิกจากผู้จัด"
-                               value="<?php echo $outsite['claim_type']; ?>">
+                        <select id="claim_type" style="width: 250px;" class="form-control">
+                            <option value="">ประเภทการการเบิก</option>
+                            <?php
+                            foreach ($claim_type as $r) {
+                                if ($outsite['claim_type'] == $r->id) {
+                                    $s = 'selected';
+                                } else {
+                                    $s = '';
+                                }
+                                echo "<option value=' $r->id' $s > $r->claim_type </option>";
+
+                            } ?>
+                        </select>
+
                     </div>
                 </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label> อื่นๆ ระบุ</label>
+                        <input class="form-control" type="text" id="claim_cause"
+                               value="<?php echo $outsite['claim_cause'] ?>">
+                    </div>
+                </div>
+
 
             </form>
         </div>
 
-
-<!--        รายชื่อไปราชการ -->
+        <!--        รายชื่อไปราชการ -->
 
         <div class="navbar navbar-default">
             <br>
@@ -236,7 +261,7 @@
 
         </div>
 
-        <div class="navbar navbar-default" >
+        <div class="navbar navbar-default">
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label>เดินทางไปราชการโดย</label>
@@ -252,6 +277,13 @@
                             echo "<option value=' $r->id' $s > $r->travel_type </option>";
                         } ?>
                     </select>
+                </div>
+                <div class="form-row" style="display: none">
+                    <div class="form-group col-md-6">
+                        <label> อื่นๆ ระบุ</label>
+                        <input class="form-control" type="text" id="travel_cause"
+                               value="<?php echo $outsite['travel_cause'] ?>">
+                    </div>
                 </div>
                 <div class="form-group col-md-6" id="txt_license_plate">
                     <label> ทะเบียนรถยนต์ (กรณีเดินทางรถยนต์ส่วนตัว) </label>
@@ -288,8 +320,12 @@
     </div>
     <div class="panel-footer" style="text-align: center;">
         <button type="button" class="btn btn-primary " id="btn_save_outsite"><i class="fa fa-save "></i> บันทึก</button>
-        <button type="button" class="btn btn-success" id="btn_print_pdf"><i class="fa fa-print "></i> พิมพ์เอกสารขออณุญาติไปราชการ</button>
-        <button type="button" class="btn btn-info" id="btn_print_car"><i class="fa fa-print "></i> พิมพใบขอใช้รถยนต์ราชการ</button>
+        <button type="button" class="btn btn-success" id="btn_print_pdf"><i class="fa fa-print "></i>
+            พิมพ์เอกสารขออณุญาติไปราชการ
+        </button>
+        <button type="button" class="btn btn-info" id="btn_print_car"><i class="fa fa-print "></i>
+            พิมพใบขอใช้รถยนต์ราชการ
+        </button>
     </div>
 </div>
 

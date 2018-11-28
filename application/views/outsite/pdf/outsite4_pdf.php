@@ -72,29 +72,7 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
 
 
 
-            $x;$y=10;$license_plate='';
-            switch ($out_site->travel_type) {
-                case 1:
-                    $x=37;
-                    break;
-                case 2:
-                    $x=59;
-                    break;
-                case 3:
-                    $x=94;
-                    $license_plate=$out_site->license_plate;
-                    break;
-                case 4:
-                    $x=38;
-                    $y=18;
-                    break;
-            }
-            $e=0;
-            if($y==18){$e=1.8;}
-            $pdf->setXY($x, $line[$y]+1-$e);
-            $pdf->Cell(250, 20, '/', 0, 0, 'L');
-            $pdf->setXY($x+55, $line[$y]+1);
-            $pdf->Cell(250, 20,$license_plate , 0, 0, 'L');
+
 
 // ลงชื่อ
             $pdf->setXY(95, $line[16]+3);

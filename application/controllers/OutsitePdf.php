@@ -25,10 +25,14 @@ class Outsitepdf extends CI_Controller {
 
         $rs = $this->outsite->read($id);
         // $rs['permit_date'] =to_thai_date($rs['permit_date']);
+        $rs->claim_type_name = $this->outsite->get_claim_type_id($rs->claim_type);
+        $rs->travel_type_name = $this->outsite->get_travel_name($rs->travel_type);
+        $rs->travel_cause = (string)$rs->travel_cause;
         $rs->invit_type=$this->outsite->get_invit_type($rs->invit_type);
         $data['out_site']=$rs;
         //$rs->permit_position=$this->outsite->get_position($rs->permit_user);
-        $rs->permit_user=$this->outsite->get_user($rs->permit_user);
+        //$rs->permit_user=$this->outsite->get_user($rs->permit_user);
+        //$rs
         $data['member']=$this->outsite->get_permit_member($rs->id);
         $data['book_number'] = $this->outsite->get_book_number($data['member'][0]->user_id);
         //console_log($data['member']);

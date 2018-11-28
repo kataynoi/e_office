@@ -107,6 +107,14 @@ class Outsite_model extends CI_Model
         //echo $this->db->last_query();
         return $rs;
     }
+    public function  get_claim_type()
+    {
+        $rs = $this->db
+            ->get('claim_type')
+            ->result();
+        //echo $this->db->last_query();
+        return $rs;
+    }
 
     public function  getAll_travel_type()
     {
@@ -202,10 +210,12 @@ class Outsite_model extends CI_Model
             ->set('permit_end_date', to_mysql_date($data['permit_end_date']))
             ->set('invit_place', $data['invit_place'])
             ->set('claim_type', $data['claim_type'])
+            ->set('claim_cause', $data['claim_cause'])
             ->set('permit_user', $data['permit_user'])
             ->set('objective', $data['objective'])
             ->set('permit_group', $data['permit_group'])
             ->set('travel_type', $data['travel_type'])
+            ->set('travel_cause', $data['travel_cause'])
             ->set('license_plate', $data['license_plate'])
             //->set('driver',$data['driver'])
             ->insert('outsite_permit');
@@ -254,10 +264,12 @@ class Outsite_model extends CI_Model
             ->set('permit_end_date', to_mysql_date($data['permit_end_date']))
             ->set('invit_place', $data['invit_place'])
             ->set('claim_type', $data['claim_type'])
+            ->set('claim_cause', $data['claim_cause'])
             ->set('permit_user', $data['permit_user'])
             ->set('objective', $data['objective'])
             ->set('permit_group', $data['permit_group'])
             ->set('travel_type', $data['travel_type'])
+            ->set('travel_cause', $data['travel_cause'])
             ->set('license_plate', $data['license_plate'])
             //->set('driver',$data['driver'])
             ->update('outsite_permit');
@@ -314,6 +326,22 @@ class Outsite_model extends CI_Model
             ->get('outsite_member a')
             ->result();
         return $rs;
+    }
+    public function  get_claim_type_id($id)
+    {
+        $rs = $this->db
+            ->where('id',$id)
+            ->get('claim_type')
+            ->row();
+        return $rs?$rs->claim_type:'-';
+    }
+    public function  get_travel_name($id)
+    {
+        $rs = $this->db
+            ->where('id',$id)
+            ->get('travel_type')
+            ->row();
+        return $rs?(string)$rs->travel_type:'-';
     }
 
     public function get_book_number($user_id)

@@ -334,8 +334,10 @@ $(document).ready(function () {
         items.permit_end_date = $('#permit_end_date').val();
         items.objective = $('#objective').val();
         items.claim_type = $('#claim_type').val();
+        items.claim_cause = $('#claim_cause').val();
         items.permit_group = $('#permit_group').val();
         items.travel_type = $('#travel_type').val();
+        items.travel_cause = $('#travel_cause').val();
         items.license_plate = $('#license_plate').val();
         console.log(items);
         if(!items.id){items.action='insert'}else{items.action='update'}
@@ -363,8 +365,11 @@ $(document).ready(function () {
         }else if(!items.objective){
             swal('กรุณาระบุวัตถุประสงค์การไปราชการ');
             $('#objective').focus();
-        }else if(!items.claim_type){
+        }else if(!items.claim_type) {
             swal('กรุณาระบุประเภทการเบิกจ่ายค่าเดินทางไปราชการ');
+            $('#claim_type').focus();
+        }else if(items.claim_type == 5 && !items.claim_cause ){
+            swal('กรุณาระบุอื่นๆ');
             $('#claim_type').focus();
         }else if(!items.travel_type){
             swal('กรุณาระบุประเภทการเดินทางไปราชการ');
@@ -460,14 +465,31 @@ $( "#travel_type" ).change(function() {
     if(val==3){
         $('#txt_license_plate').fadeIn();
         hide_frm_used_car();
+        //hide_frm_travel_cause();
         while (cars.length) { cars.pop(); }
         $('#tbl_car_list').empty();
     }else if(val == 4 ) {
         show_frm_used_car();
+        //hide_frm_travel_cause();
         $('#txt_license_plate').fadeOut();
-    }else{
+    }else if(val == 6){
+        //show_frm_travel_cause();
+        $('#txt_license_plate').fadeOut();
+    }
+    else{
         $('#txt_license_plate').fadeOut();
         hide_frm_used_car();
+        //hide_frm_travel_cause();
+    }
+});
+
+    $("#claim_type" ).change(function() {
+    var val = $(this).val();
+        console.log(val);
+    if(val != 5){
+        hide_frm_claim_cause();
+    }else{
+        show_frm_claim_cause();
     }
 });
 
@@ -484,6 +506,16 @@ function check_control_car(cars){
 if($('#travel_type').val() == 4 ) {
     show_frm_used_car();
 }
+/*if($('#claim_type').val() == 5 ) {
+    show_frm_claim_cause();
+}else {
+    hide_frm_claim_cause();
+}
+    if($('#travel_type').val() == 6 ) {
+    show_frm_travel_cause();
+}else {
+    hide_frm_travel_cause();
+}*/
 
 $(':input').change(function(){
     disable_print();
@@ -508,6 +540,21 @@ function hide_frm_used_car(){
     $('#frm_used_car').fadeOut();
     $('#btn_print_car').hide();
 }
-
+function hide_frm_claim_cause(){
+    $('#claim_cause').parent().parent().fadeOut();
+    $('#claim_cause').val('');
+}
+    function show_frm_claim_cause(){
+    console.log('Show Claim');
+    $('#claim_cause').parent().parent().fadeIn();
+}
+    function hide_frm_travel_cause(){
+    $('#travel_cause').parent().parent().fadeOut();
+    $('#travel_cause').val('');
+}
+    function show_frm_travel_cause(){
+    console.log('Show travel');
+    $('#travel_cause').parent().parent().fadeIn();
+}
 
 });

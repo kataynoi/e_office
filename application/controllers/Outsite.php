@@ -39,6 +39,7 @@ class Outsite extends CI_Controller
         $data['outsite'] = $this->outsite->get_outsite_user($id,$this->user_id);
         $data['outsite_type'] = $this->outsite->get_outsite_type();
         $data['invit_type'] = $this->outsite->getAll_invit_type();
+        $data['claim_type'] = $this->outsite->get_claim_type();
         $data['travel_type'] = $this->outsite->getAll_travel_type();
         $data['user'] = $this->outsite->get_user_id($this->user_id);
         $this->layout->view('outsite/add_outsite_permit', $data);

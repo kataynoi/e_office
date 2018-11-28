@@ -9,6 +9,9 @@
 //echo $outsite_member['1']['position'];
 //print_r('xxx'.$outsite_member);
 echo 'xxxx';
+
+
+echo " Travel ".$out_site->travel_type_name;
 if(!empty($member)){
     foreach($member as $m){
         echo $m->name;
