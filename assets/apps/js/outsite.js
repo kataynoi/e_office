@@ -119,7 +119,7 @@ $(document).ready(function () {
             else {
                 if(items.action == 'insert'){
                     swal('บันทึกข้อมูลเรียบร้อยแล้ว ');
-                    window.location = site_url+"/outsite";
+                    window.location.replace(site_url+"/outsite/");
                 }else if(items.action == 'update'){
                     swal('แก้ไขข้อมูลเรียบร้อยแล้ว ');
                     enable_print();
