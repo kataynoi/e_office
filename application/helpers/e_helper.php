@@ -452,7 +452,7 @@ if(!function_exists('to_thai_number_text'))
         $txt = str_replace('1','๑',$txt);
         $txt = str_replace('2','๒',$txt);
         $txt = str_replace('3','๓',$txt);
-        $txt = str_replace('4','๓',$txt);
+        $txt = str_replace('4','๔',$txt);
         $txt = str_replace('5','๕',$txt);
         $txt = str_replace('6','๖',$txt);
         $txt = str_replace('7','๗',$txt);

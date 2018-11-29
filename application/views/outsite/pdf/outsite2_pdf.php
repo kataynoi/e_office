@@ -85,24 +85,24 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
             }
 
 
-            $pdf->setXY(57, $line[6]);
-            $pdf->Cell(250, 20, $member['0']->name, 0, 0, 'L');
-            $pdf->setXY(124, $line[6]);
+            $pdf->setXY(57, $line[6]+1);
+            $pdf->Cell(250, 20, $member['0']->prename.$member['0']->name, 0, 0, 'L');
+            $pdf->setXY(124, $line[6]+1);
             $pdf->Cell(245, 20, $member['0']->position, 0, 0, 'L');
 
 
-            $pdf->setXY(83, $line[10]);
+            $pdf->setXY(83, $line[10]+1);
             $pdf->Cell(250, 20, to_thai_number_text($out_site->invit_place), 0, 0, 'L');
-            $pdf->setXY(27, $line[11]);
+            $pdf->setXY(27, $line[11]+1);
             $pdf->Cell(250, 20, to_thai_number_text($out_site->objective), 0, 0, 'L');
 
             if($out_site->permit_start_date == $out_site->permit_end_date){
-                $pdf->setXY(35, $line[12]);
+                $pdf->setXY(35, $line[12]+1);
                 $pdf->Cell(250, 20, to_thai_date_full($out_site->permit_start_date), 0, 0, 'L');
             }else {
-                $pdf->setXY(35, $line[12]);
+                $pdf->setXY(35, $line[12]+1);
                 $pdf->Cell(250, 20, to_thai_date_full($out_site->permit_start_date), 0, 0, 'L');
-                $pdf->setXY(70, $line[12]);
+                $pdf->setXY(70, $line[12]+1);
                 $pdf->Cell(250, 20, " - ".to_thai_date_full($out_site->permit_end_date), 0, 0, 'L');
             }
             $s=(string)$out_site->travel_type_name;
@@ -134,10 +134,10 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
             //$pdf->writeHTML($out_site->travel_type_name);
 
 // ลงชื่อ
-            $pdf->setXY(95, $line[19]+3);
-            $pdf->Cell(240, 0, $member['0']->name, 0, 0, 'P');
-            $pdf->setXY(85, $line[20]+3);
-            $pdf->Cell(240, 0, $member['0']->position, 0, 0, 'P');
+            $pdf->setXY(0, $line[19]+3);
+            $pdf->Cell(240, 0, $member['0']->prename.$member['0']->name, 0, 0, 'C');
+            $pdf->setXY(0, $line[20]+3);
+            $pdf->Cell(240, 0, $member['0']->position, 0, 0, 'C');
             break;
         case 2:
             $pdf->Cell(30, 20, to_thai_date_full($out_site->date_permit), 0, 0, 'P');
