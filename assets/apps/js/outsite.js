@@ -397,7 +397,7 @@ $(document).ready(function () {
         var day = '';
         var id = $('#id').val();
         var invite = $('#invite').val();
-        var person = arr.length;;
+        var person = arr.length;
         if($('#petmit_start_date') == $('#petmit_end_date')){
             day =1;
         }else{
@@ -405,13 +405,13 @@ $(document).ready(function () {
         }
         if( invite==1 && person==1){
             pdf_template = 'outsite1_pdf'
-        }else if(invite==1 && person >1 && person <=5){
+        }else if(invite==1 && person >1 && person <=4){
             pdf_template = 'outsite2_pdf'
         }else if(invite==1 && person >4 ){
             pdf_template = 'outsite3_pdf'
         }else if(invite==2 && person ==1){
             pdf_template = 'outsite4_pdf'
-        }else if(invite==2 && person >1 && person <=5){
+        }else if(invite==2 && person >1 && person <=4){
             pdf_template = 'outsite5_pdf'
         }else if(invite==2 && person >4){
             pdf_template = 'outsite6_pdf'

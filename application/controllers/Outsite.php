@@ -55,8 +55,9 @@ class Outsite extends CI_Controller
             $sub_array[] = $row->invit_subject;
             $sub_array[] = $row->invit_place;
             $sub_array[] = $row->invit_name;
-            $sub_array[] = '<div class="btn-group" role="group"><a href="'.site_url('outsite/add_outsite_permit/').$row->id.'" class="btn btn-warning btn-sm" data-id="' . $row->id . '" class="btn btn-warning btn-xs"><i class="far fa-edit "></i> Edit</a>'.
-            '<button data-btn="btn_del" class="btn btn-danger btn-sm" data-id="' . $row->id . '" class="btn btn-danger btn-xs"><i class="far fa-trash-alt "></i> Delete</button></div>';
+            $sub_array[] = '<div class="btn-group" role="group">'.
+                            '<a href="'.site_url('outsite/add_outsite_permit/').$row->id.'" class="btn btn-warning btn-sm" data-id="' . $row->id . '" class="btn btn-warning btn-xs"><i class="far fa-edit "></i> Edit</a>'.
+                            '<button data-btn="btn_del" class="btn btn-danger btn-sm" data-id="' . $row->id . '" class="btn btn-danger btn-xs"><i class="far fa-trash-alt "></i> Delete</button></div>';
             $data[] = $sub_array;
         }
         $output = array(

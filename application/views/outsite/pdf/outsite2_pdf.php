@@ -3,7 +3,8 @@ $this->load->library('Pdf');
 
 // initiate FPDI
 $pdf = new FPDI(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-
+$pdf->setPrintHeader(FALSE);
+$pdf->setPrintFooter(FALSE);
 // get the page count
 //$pageCount = $pdf->setSourceFile('Laboratory-Report.pdf');
 $pageCount = $pdf->setSourceFile(dirname(__FILE__)."/outsite2_template.pdf");

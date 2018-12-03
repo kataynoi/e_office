@@ -1,11 +1,11 @@
 <?php
-$this->load->library('Pdf');
+//$this->load->library('Pdf');
+require_once APPPATH.'third_party/tcpdf/tcpdf.php';
+require_once APPPATH.'third_party/fpdi/fpdi.php';
 
-// initiate FPDI
 $pdf = new FPDI(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-
-// get the page count
-//$pageCount = $pdf->setSourceFile('Laboratory-Report.pdf');
+$pdf->setPrintHeader(FALSE);
+$pdf->setPrintFooter(FALSE);
 $pageCount = $pdf->setSourceFile(dirname(__FILE__)."/outsite1_template.pdf");
 // iterate through all pages
 for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
@@ -20,6 +20,7 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
         $pdf->AddPage('P');
     }
 
+
 // use the imported page
     $pdf->useTemplate($templateId);
     //$pdf = new MyPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -27,6 +28,7 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
     $pdf->SetAutoPageBreak(true, 20);
     $pdf->setFontSubsetting(false);
     $pdf->SetTitle('ขออนุญาติไปราชการ_'.$out_site->date_permit);
+
 
 
 // add a page
@@ -45,6 +47,7 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
     }
     switch  ($pageNo){
         case 1:
+            /*ส่วนหัว*/
             $pdf->setXY(24, $line[0]-23);
             $pdf->Cell(300, 20, to_thai_number_text($book_number)."/", 0, 0, 'P');
             $pdf->setXY(110, $line[0]-23);
@@ -72,7 +75,7 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
             }
             $pdf->setXY(25, $line[4]);
             $pdf->Cell(250, 20, to_thai_number_text($out_site->invit_place), 0, 0, 'L');
-/* บิกค่าใช้จ่ายจากไหน */
+            /* บิกค่าใช้จ่ายจากไหน */
             if($out_site->claim_type == 4){
                 $pdf->setXY(28, $line[5]);
                 $pdf->Cell(250, 20, $out_site->claim_type_name, 0, 0, 'L');
@@ -85,8 +88,9 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
             }
 
 
-            $pdf->setXY(57, $line[6]+1);
-            $pdf->Cell(250, 20, $member['0']->prename.$member['0']->name, 0, 0, 'L');
+            /*ส่วนที่ 2 */
+            $pdf->setXY(57, $line[7]+1);
+            $pdf->Cell(0, 6, $member['0']->prename.$member['0']->name, 0, 0, 'L');
             $pdf->setXY(124, $line[6]+1);
             $pdf->Cell(245, 20, $member['0']->position, 0, 0, 'L');
             $pdf->setXY(83, $line[7]+1);
@@ -135,4 +139,5 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
 
 
 // Output the new PDF
+$pdf->setPrintHeader(true);
 $pdf->Output('outsite_'.$out_site->date_permit);
