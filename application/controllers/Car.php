@@ -11,6 +11,7 @@ class Car extends CI_Controller
             redirect(site_url('user/login'));
         $this->load->model('Car_model', 'car');
         $this->load->model('User_model', 'user');
+        $this->load->model('Outsite_model', 'outsite');
         $this->layout->setLayout('default_layout');
         $this->db = $this->load->database('default', true);
     }
@@ -37,6 +38,22 @@ class Car extends CI_Controller
     {
         $data['driver'] = $this->car->get_driver_list();
         $this->layout->view('car/calendar_view', $data);
+
+    }
+    public function used_car($id)
+    {
+
+        $rs = $this->outsite->read($id);
+
+        $rs->claim_type_name = $this->outsite->get_claim_type_id($rs->claim_type);
+        $rs->travel_type_name = $this->outsite->get_travel_name($rs->travel_type);
+        $rs->travel_cause = (string)$rs->travel_cause;
+        $rs->invit_type=$this->outsite->get_invit_type($rs->invit_type);
+
+        $data['out_site']=$rs;
+        $data['member']=$this->outsite->get_permit_member($rs->id);
+        $data['book_number'] = $this->outsite->get_book_number($data['member'][0]->user_id);
+        $this->load->view('car/pdf/used_car_view',$data);
 
     }
 }

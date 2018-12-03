@@ -323,9 +323,9 @@
         <button type="button" class="btn btn-success" id="btn_print_pdf"><i class="fa fa-print "></i>
             พิมพ์เอกสารขออณุญาติไปราชการ
         </button>
-        <button type="button" class="btn btn-info" id="btn_print_car"><i class="fa fa-print "></i>
+        <a href="<?php echo site_url('/car/used_car/'.$outsite['id'])?>" class="btn btn-info" id="btn_print_car"><i class="fa fa-print "></i>
             พิมพใบขอใช้รถยนต์ราชการ
-        </button>
+        </a>
     </div>
 </div>
 
