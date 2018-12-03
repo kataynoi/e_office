@@ -114,7 +114,8 @@ $(document).ready(function () {
     outsite.save_outsite = function (items) {
         outsite.ajax.save_outsite(items, function (err, data) {
             if (err) {
-                app.alert(err);
+                //app.alert(err);
+                swal('รายชื่อผู้ขออณุญาติซ้ำกัน');
             }
             else {
                 if(items.action == 'insert'){
