@@ -59,4 +59,8 @@ class Car extends CI_Controller
         //$this->load->view('outsite/pdf/test_view',$data);
 
     }
+    public function approve_car(){
+        $data['car'] = $this->car->get_used_car();
+        $this->layout->view('car/approve_car_view',$data);
+    }
 }

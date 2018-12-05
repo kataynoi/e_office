@@ -15,6 +15,7 @@ class Outsite extends CI_Controller
             redirect(site_url('user/login'));
         $this->layout->setLayout('default_layout');
         $this->load->model('Outsite_model', 'outsite');
+        $this->load->model('Basic_model', 'basic');
         $this->user_id = $this->session->userdata('id');
 
 
@@ -36,7 +37,7 @@ class Outsite extends CI_Controller
         }
         $data['outsite_member'] = $this->outsite->get_outsite_member($id);
         $data['cars'] =$this->outsite->get_outsite_cars($id);
-        $data['outsite'] = $this->outsite->get_outsite_user($id,$this->user_id);
+        $data['outsite'] = $this->outsite->get_outsite_user($id);
         $data['outsite_type'] = $this->outsite->get_outsite_type();
         $data['invit_type'] = $this->outsite->getAll_invit_type();
         $data['claim_type'] = $this->outsite->get_claim_type();
@@ -50,14 +51,22 @@ class Outsite extends CI_Controller
         $fetch_data = $this->outsite->make_datatables();
         $data = array();
         foreach ($fetch_data as $row) {
+            $disable_delete = "";
+            if($row->permit_start_date < date('Y-m-d')||$row->permit_user!=$this->user_id){
+                $disable_delete = "disabled";
+            }
+
+            $row->permit_user==$this->user_id?$txt_edit='Edit .':$txt_edit='View';
+            $row->permit_user==$this->user_id?$txt_color='btn-warning':$txt_color='btn-success';
             $sub_array = array();
             $sub_array[] = to_thai_date_short($row->permit_start_date) . " - " . to_thai_date_short($row->permit_end_date);
             $sub_array[] = $row->invit_subject;
             $sub_array[] = $row->invit_place;
-            $sub_array[] = $row->invit_name;
+            $sub_array[] = $this->basic->get_user_name($row->permit_user);
             $sub_array[] = '<div class="btn-group" role="group">'.
-                            '<a href="'.site_url('outsite/add_outsite_permit/').$row->id.'" class="btn btn-warning btn-sm" data-id="' . $row->id . '" class="btn btn-warning btn-xs"><i class="far fa-edit "></i> Edit</a>'.
-                            '<button data-btn="btn_del" class="btn btn-danger btn-sm" data-id="' . $row->id . '" class="btn btn-danger btn-xs"><i class="far fa-trash-alt "></i> Delete</button></div>';
+                            '<a href="'.site_url('outsite/add_outsite_permit/').$row->id.'" class="btn '.$txt_color.' btn-sm" data-id="' . $row->id . '" class="btn btn-warning btn-xs"><i class="far fa-edit "></i>'.$txt_edit.'</a>'.
+                            '<button data-btn="btn_del" '.$disable_delete.' class="btn btn-danger btn-sm" data-id="' . $row->id . '" ><i class="far fa-trash-alt "></i> Delete</button>
+                            <button data-btn="btn_claim" class="btn btn-info btn-sm" data-id="' . $row->id . '"><i class="far fa-usd"></i>เบิกเงิน</button></div>';
             $data[] = $sub_array;
         }
         $output = array(

@@ -4,7 +4,15 @@
     var position = '<?php echo $user->position ?>';
     var driver = '<?php echo $user->driver ?>';
     var invite = '<?php echo $outsite['invite']?>';
+    var lock = '<?php echo $outsite['lock']?>';
+    var permit_user = '<?php echo $outsite['permit_user']?>';
     var travel_type = '<?php echo $outsite['travel_type']?>';
+    var date_permit = '<?php echo $outsite['date_permit']?>';
+    var invit_start_date = '<?php echo $outsite['invit_start_date']?>';
+    var invit_end_date = '<?php echo $outsite['invit_end_date']?>';
+    var permit_start_date = '<?php echo $outsite['permit_start_date']?>';
+    var permit_end_date = '<?php echo $outsite['permit_end_date']?>';
+
     var arr_member =
         <?php echo json_encode($outsite_member);?>;
     var arr_cars =
@@ -19,17 +27,19 @@
         if (!id) {
             $('.datepicker').datepicker({
                 format: 'dd/mm/yyyy',
-                todayBtn: true,
+                todayBtn: false,
                 language: 'th',             //เปลี่ยน label ต่างของ ปฏิทิน ให้เป็น ภาษาไทย   (ต้องใช้ไฟล์ bootstrap-datepicker.th.min.js นี้ด้วย)
-                thaiyear: true             //Set เป็นปี พ.ศ.
+                thaiyear: true,             //Set เป็นปี พ.ศ.
+                autoclose: true
             }).datepicker("setDate", "0");
 
         } else {
             $('.datepicker').datepicker({
                 format: 'dd/mm/yyyy',
-                todayBtn: true,
+                todayBtn: false,
                 language: 'th',             //เปลี่ยน label ต่างของ ปฏิทิน ให้เป็น ภาษาไทย   (ต้องใช้ไฟล์ bootstrap-datepicker.th.min.js นี้ด้วย)
-                thaiyear: false              //Set เป็นปี พ.ศ.
+                thaiyear: true,              //Set เป็นปี พ.ศ.
+                autoclose: true
             });
         }
 
@@ -55,7 +65,7 @@
                 <input type="text" id="date_permit" data-type="date" class="form-control datepicker"
                        data-date-language="th"
                        data-rel="tooltip" data-date-format="dd/mm/yyyy"
-                       value="<?php echo to_thai_date($outsite['date_permit']); ?>">
+                       value="">
 
             </form>
         </div>

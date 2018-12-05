@@ -39,6 +39,12 @@
                     <li><a href="<?php echo site_url('/car/calendar')?>">ตารางการใช้รถ</a></li>
                     <li><a href="<?php echo site_url('/car/cars')?>">รถยนต์ราชการ</a></li>
                     <li><a href="<?php echo site_url('/car/drivers')?>"">พนักงานขับรถยนต์</a></li>
+                    <?PHP
+                    if($this->session->userdata('id')=='121' || $this->session->userdata('id')=='160' ||$this->session->userdata('id')=='88'||$this->session->userdata('id')=='65'){
+                        echo "<li role=''><a href=".site_url('/car/approve_car').">อนุมัติการใช้รถยนต์ราชการ</a></li>";
+                    }
+                    ?>
+
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

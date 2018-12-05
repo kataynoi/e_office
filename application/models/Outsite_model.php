@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Outsite_model extends CI_Model
 {
     var $table = "outsite_permit";
-    var $select_column = array("id", "permit_start_date", "permit_end_date", "invit_subject", "invit_place", "invit_name");
+    var $select_column = array("id", "permit_start_date", "permit_end_date", "invit_subject", "invit_place", "permit_user",);
     var $order_column = array("invit_start_date");
 
 
@@ -23,11 +23,11 @@ class Outsite_model extends CI_Model
         return $rs;
     }
 
-    public function get_outsite_user($id, $user_id)
+    public function get_outsite_user($id)
     {
         $rs = $this->db
             ->where('a.id', $id)
-            ->where('a.permit_user', $user_id)
+            //->where('a.permit_user', $user_id)
             ->get('outsite_permit a')
             ->row_array();
         return $rs;
@@ -138,8 +138,11 @@ class Outsite_model extends CI_Model
     function make_query()
     {
         $user_id = $this->session->userdata('id');
+        $sql="SELECT id from outsite_permit a WHERE permit_user ='$user_id' UNION SELECT outsite_id as id FROM outsite_member WHERE user_id ='$user_id'";
+       // $outsite_id = $this->db->query($sql)->result();
         $this->db->select($this->select_column);
-        $this->db->where('permit_user', $user_id);
+        //$this->db->where('permit_user', $user_id);
+        $this->db->where_in('id',$sql,false);
         $this->db->from($this->table);
         if (isset($_POST["search"]["value"])) {
             $this->db->group_start();
@@ -151,7 +154,7 @@ class Outsite_model extends CI_Model
         if (isset($_POST["order"])) {
             $this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
-            $this->db->order_by('invit_start_date', 'DESC');
+            $this->db->order_by('permit_start_date', 'DESC');
         }
     }
 

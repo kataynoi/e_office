@@ -228,6 +228,13 @@ app.set_runtime = function()
     $('[data-rel="tooltip"]').tooltip();
 };
 
+app.disable_form = function()
+{
+    $("input").prop('disabled', true);
+    $("select").prop('disabled', true);
+    $("textarea").prop('disabled', true);
+    $(".btn").prop('disabled', true);
+};
 app.to_string_date = function(s) {
     var d = s.split('/');
     var str = d[2] + d[1] + d[0];

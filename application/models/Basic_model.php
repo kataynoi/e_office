@@ -30,5 +30,13 @@ class Basic_model extends CI_Model
             ->result();
         return $rs;
     }
+    public function get_user_name($id){
+
+        $rs = $this->db
+            ->where('id',$id)
+            ->get('mas_users')
+            ->row();
+        return $rs?$rs->prename.$rs->name:'-';
+    }
 
 }

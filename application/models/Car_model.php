@@ -26,4 +26,17 @@ class Car_model extends CI_Model
            ->result();
        return $rs;
    }
+
+    public function get_used_car()
+    {
+        $rs = $this->db
+            ->select('b.licente_plate,concat(c.prename,c.name) as driver,concat(d.prename,d.name) as control_car',false)
+            ->join('car b ', 'a.car_id = b.id','left')
+            ->join('mas_users c ', 'a.driver = c.id','left')
+            ->join('mas_users d ', 'a.control_car = d.id','left')
+            ->get('used_car a')
+            ->result();
+        return $rs ;
+
+    }
 }

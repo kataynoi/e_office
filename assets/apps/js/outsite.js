@@ -1,14 +1,30 @@
 $(document).ready(function () {
     var arr = arr_member;
     var cars = arr_cars;
-    //console.log(arr);
-    //console.log(cars);
+    if(lock){
+        if(lock==1 || permit_user != id ){
+            lock_form();
+        }
+    }
 
     set_arr_user();
     set_cars();
     hide_frm_used_car();
     $('#txt_license_plate').hide();
     //set_cars();
+    //$("#date_permit").datepicker('setDate', '0');
+
+    //$("#datetimepickerFrom").datepicker('setDate', new Date());
+    $("#date_permit").datepicker('setDate', new Date(date_permit));
+    $("#invit_start_date").datepicker('setDate', new Date(invit_start_date));
+    $("#invit_end_date").datepicker('setDate', new Date(invit_end_date));
+    $("#permit_start_date").datepicker('setDate', new Date(permit_start_date));
+    $("#permit_end_date").datepicker('setDate', new Date(permit_end_date));
+
+
+    //queryDate = '2009-11-01';
+   // $('#date_permit').datepicker({defaultDate: new Date ('2018-10-11')});
+
     function set_arr_user() {
         $('#tbl_list > tbody').empty();
         for (var i = 0; i < arr.length; i++) {
@@ -561,6 +577,12 @@ function disable_print(){
 function enable_print(){
     $('#btn_print_pdf').removeAttr("disabled");
 }
+    function disable_print_car(){
+    $('#btn_print_car').attr("disabled", "disabled");
+}
+function enable_print_car(){
+    $('#btn_print_car').removeAttr("disabled");
+}
 function show_frm_used_car(){
     $('#frm_used_car').fadeIn();
     $('#btn_print_car').show();
@@ -585,5 +607,11 @@ function hide_frm_claim_cause(){
     console.log('Show travel');
     $('#travel_cause').parent().parent().fadeIn();
 }
+    function lock_form(){
+
+            app.disable_form();
+            enable_print();
+            enable_print_car();
+    }
 
 });
