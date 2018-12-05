@@ -45,15 +45,18 @@ class Car extends CI_Controller
 
         $rs = $this->outsite->read($id);
 
-        $rs->claim_type_name = $this->outsite->get_claim_type_id($rs->claim_type);
-        $rs->travel_type_name = $this->outsite->get_travel_name($rs->travel_type);
-        $rs->travel_cause = (string)$rs->travel_cause;
-        $rs->invit_type=$this->outsite->get_invit_type($rs->invit_type);
+       // $rs->claim_type_name = $this->outsite->get_claim_type_id($rs->claim_type);
+        //$rs->travel_type_name = $this->outsite->get_travel_name($rs->travel_type);
+        //$rs->travel_cause = (string)$rs->travel_cause;
+        //$rs->invit_type=$this->outsite->get_invit_type($rs->invit_type);
 
         $data['out_site']=$rs;
         $data['member']=$this->outsite->get_permit_member($rs->id);
         $data['book_number'] = $this->outsite->get_book_number($data['member'][0]->user_id);
+        $data['group_name'] = $this->outsite->get_group_name_user($data['member'][0]->user_id);
+        $data['car'] = $this->outsite->get_used_car($rs->id);
         $this->load->view('car/pdf/used_car_view',$data);
+        //$this->load->view('outsite/pdf/test_view',$data);
 
     }
 }

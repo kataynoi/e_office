@@ -1,8 +1,8 @@
 $(document).ready(function () {
     var arr = arr_member;
     var cars = arr_cars;
-    console.log(arr);
-    console.log(cars);
+    //console.log(arr);
+    //console.log(cars);
 
     set_arr_user();
     set_cars();
@@ -37,15 +37,21 @@ $(document).ready(function () {
         }
         for (var i = 0; i < cars.length; i++) {
             var control = cars[i].control_car;
-            cars[i].car_id==null?cars[i].car_id='<span class="badge badge-danger">รอ.. อนุมัติ</span>':cars[i].car_id;
-            cars[i].driver==null?cars[i].driver='':cars[i].driver;
-            cars[i].user_mobile==null?cars[i].user_mobile='':cars[i].user_mobile;
            // console.log(control);
+            if(cars[i].approve==0){
+                cars[i].car_name='รออนุมัติ';
+                cars[i].driver_name='';
+                cars[i].user_mobile='';
+            }else if(cars[i].approve==2){
+                cars[i].car_name='ไม่ได้รับการอนุมัติ';
+                cars[i].driver_name=cars[i].cause;
+                cars[i].user_mobile='';
+            }
             $('#tbl_car_list > tbody').append(
                 '<tr>' +
                 '<td>' + (i + 1) + '</td>' +
-                '<td>' + cars[i].car_id +'</td>' +
-                '<td>' + cars[i].driver + '</td>' +
+                '<td>' + cars[i].car_name +'</td>' +
+                '<td>' + cars[i].driver_name + '</td>' +
                 '<td>' + cars[i].user_mobile+ '</td>' +
                 '<td>' +
                 '<select class="form-control" data-name="sl_control_car" data-id="'+i+'" id="'+i+'">' +
@@ -54,7 +60,13 @@ $(document).ready(function () {
                 '</td>' +
                 '<td><div class="btn-group" role="group" aria-label="Basic example">' +
                 '<button type="button" class="btn btn-danger" data-btn="btn_del_car" data-id="' + i + '"><i class="fa fa-minus-square"></i></button>' +
-                '</div></td></td>' +
+                '</div>' +
+                '<input type="hidden" id="car_id" value="'+cars[i].car_id+'">' +
+                '<input type="hidden" id="outsite_id" value="'+cars[i].outsite_id+'">' +
+                '<input type="hidden" id="driver" value="'+cars[i].driver+'">' +
+                '<input type="hidden" id="car_id" value="'+cars[i].approve+'">' +
+                '<input type="hidden" id="car_id" value="'+cars[i].cause+'">' +
+                '</td>' +
                 '</tr>'
             );
 
@@ -263,7 +275,7 @@ $(document).ready(function () {
         console.log('car');
         e.preventDefault();
         var id = cars.length;
-        cars.push({"id":"","outsite_id":"","car_id": "", "driver": "", "control_car": ""});
+        cars.push({"id":"","outsite_id":"","car_id": "", "driver": "", "control_car": "",approve:"",cause:""});
         console.log(cars);
         var no = cars.length;
         var option;
@@ -282,7 +294,9 @@ $(document).ready(function () {
           option+
           '</select>' +
           '</td>' +
-          '<td></td>' +
+          '<td><div class="btn-group" role="group" aria-label="Basic example">' +
+          '<button type="button" class="btn btn-danger" data-btn="btn_del_car" data-id="' + (no-1) + '"><i class="fa fa-minus-square"></i></button>' +
+          '</div></td>' +
           '</tr>'
       )
 
@@ -340,18 +354,28 @@ $(document).ready(function () {
         items.travel_type = $('#travel_type').val();
         items.travel_cause = $('#travel_cause').val();
         items.license_plate = $('#license_plate').val();
-        console.log(items);
+
         if(!items.id){items.action='insert'}else{items.action='update'}
         // set UPermit member
         var user_id = [];
         for (i = 0; i < arr.length; i++) {
             user_id.push(parseInt(arr[i]["user_id"]));
         }
-        console.log(user_id);
         items.users = user_id;
-
-        // Set Cars
+        //var used_car =[];
+        /*for (i = 0; i < cars.length; i++) {
+            used_car.push([cars[i].outsite_id, cars[i].car_id, cars[i].driver, cars[i].control_car, cars[i].approve, cars[i].cause]);
+        }*/
         items.used_car = cars;
+        //console.log(items.used_car);
+        console.log(items);
+        if(validate_outsite(items,user_id)){
+            outsite.save_outsite(items,action);
+        }
+    });
+
+
+    function validate_outsite (items,user_id,used_car){
         if (!items.date_permit) {
             swal('กรุณาระบุวันที่ขออนุญาติไปราชการ');
             $('#date_permit').focus();
@@ -387,10 +411,12 @@ $(document).ready(function () {
             swal('กรุณาระบุผู้ควบคุมรถ');
         }
         else {
-            outsite.save_outsite(items,action);
+            return true;
         }
-        //console.log(items);
-    });
+    }
+
+
+
 
     $('#btn_print_pdf').on('click', function () {
         // alert('test');
@@ -526,7 +552,9 @@ $('select').change(function(){
 });
 $("#textarea").keypress(function(){
     disable_print();
-})
+});
+
+
 function disable_print(){
     $('#btn_print_pdf').attr("disabled", "disabled");
 }

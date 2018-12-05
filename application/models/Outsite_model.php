@@ -45,17 +45,6 @@ class Outsite_model extends CI_Model
         return $rs;
     }
 
-    public function get_outsite_cars($id)
-    {
-        $rs = $this->db
-            ->select('a.control_car,Concat(b.licente_plate,"(",b.name,")") as car_id,CONCAT(c.prename,c.name) as driver,c.user_mobile,a.control_car', false)
-            ->where('outsite_id', $id)
-            ->join('car b ', 'a.car_id=b.id', 'left')
-            ->join('mas_users c ', 'a.driver = c.id', 'left')
-            ->get('used_car a')
-            ->result_array();
-        return $rs;
-    }
 
     public function get_invit_type($id)
     {
@@ -234,7 +223,11 @@ class Outsite_model extends CI_Model
             foreach ($data['used_car'] as $u) {
                 $this->db
                     ->set('outsite_id', $lastid)
-                    ->set('control_car', $u)
+                    ->set('car_id', $u['car_id'])
+                    ->set('driver', $u['driver'])
+                    ->set('control_car', $u['control_car'])
+                    ->set('approve', $u['approve'])
+                    ->set('cause', $u['cause'])
                     ->insert('used_car');
             }
         }
@@ -293,9 +286,12 @@ class Outsite_model extends CI_Model
         if (isset($data['used_car'])) {
             foreach ($data['used_car'] as $u) {
                 $this->db
-                    ->set('car_id', $u['car_id'])
                     ->set('outsite_id', $data['id'])
+                    ->set('car_id', $u['car_id'])
+                    ->set('driver', $u['driver'])
                     ->set('control_car', $u['control_car'])
+                    ->set('approve', $u['approve'])
+                    ->set('cause', $u['cause'])
                     ->set('driver', $u['driver'])
                     ->insert('used_car');
                 //echo $u;
@@ -355,4 +351,40 @@ class Outsite_model extends CI_Model
         return $rs ? $rs->book_number : '-';
 
     }
+    public function get_group_name_user($user_id)
+    {
+        $rs = $this->db
+            ->select('b.name')
+            ->where('a.id', $user_id)
+            ->join('co_workgroup b ', 'a.group = b.id')
+            ->get('mas_users a')
+            ->row();
+        return $rs ? $rs->name : '-';
+
+    }
+    public function get_used_car($id)
+    {
+        $rs = $this->db
+            ->select('b.licente_plate,concat(c.prename,c.name) as driver,concat(d.prename,d.name) as control_car',false)
+            ->where('a.outsite_id', $id)
+            ->join('car b ', 'a.car_id = b.id','left')
+            ->join('mas_users c ', 'a.driver = c.id','left')
+            ->join('mas_users d ', 'a.control_car = d.id','left')
+            ->get('used_car a')
+            ->result();
+        return $rs ;
+
+    }
+    public function get_outsite_cars($id)
+    {
+        $rs = $this->db
+            ->select('a.driver, a.outsite_id, a.control_car,Concat(b.licente_plate,"(",b.name,")") as car_name,a.car_id,CONCAT(c.prename,c.name) as driver_name,c.user_mobile,a.approve, a.cause', false)
+            ->where('outsite_id', $id)
+            ->join('car b ', 'a.car_id=b.id', 'left')
+            ->join('mas_users c ', 'a.driver = c.id', 'left')
+            ->get('used_car a')
+            ->result_array();
+        return $rs;
+    }
+
 }
