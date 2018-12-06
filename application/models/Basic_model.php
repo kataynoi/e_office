@@ -30,6 +30,14 @@ class Basic_model extends CI_Model
             ->result();
         return $rs;
     }
+    public function sl_cars(){
+
+        $rs = $this->db
+            //->where('provcode',$id)
+            ->get('car')
+            ->result();
+        return $rs;
+    }
     public function get_user_name($id){
 
         $rs = $this->db

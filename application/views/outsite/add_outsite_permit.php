@@ -12,7 +12,6 @@
     var invit_end_date = '<?php echo $outsite['invit_end_date']?>';
     var permit_start_date = '<?php echo $outsite['permit_start_date']?>';
     var permit_end_date = '<?php echo $outsite['permit_end_date']?>';
-
     var arr_member =
         <?php echo json_encode($outsite_member);?>;
     var arr_cars =
@@ -42,7 +41,6 @@
                 autoclose: true
             });
         }
-
     });
 </script>
 <br>

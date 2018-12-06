@@ -34,7 +34,7 @@
 
 
             <li>
-                <a href="#"><i class="fa fa-bus fa-fw"></i> ขอใช้รถราชการ (รอก่อนนะ...)<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-bus fa-fw"></i> ขอใช้รถราชการ<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li><a href="<?php echo site_url('/car/calendar')?>">ตารางการใช้รถ</a></li>
                     <li><a href="<?php echo site_url('/car/cars')?>">รถยนต์ราชการ</a></li>

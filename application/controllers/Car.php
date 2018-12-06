@@ -11,9 +11,11 @@ class Car extends CI_Controller
             redirect(site_url('user/login'));
         $this->load->model('Car_model', 'car');
         $this->load->model('User_model', 'user');
+        $this->load->model('Basic_model', 'basic');
         $this->load->model('Outsite_model', 'outsite');
         $this->layout->setLayout('default_layout');
         $this->db = $this->load->database('default', true);
+        $this->user_id = $this->session->userdata('id');
     }
 
     public function index()
@@ -60,7 +62,51 @@ class Car extends CI_Controller
 
     }
     public function approve_car(){
-        $data['car'] = $this->car->get_used_car();
+        ///$data['cars'] = $this->car->sl_cars();
+        $data['cars'] = $this->basic->sl_cars();
+        $data['driver'] = $this->car->get_driver_list();
         $this->layout->view('car/approve_car_view',$data);
+    }
+
+    function fetch_used_car()
+    {
+        $fetch_data = $this->car->make_datatables();
+        $data = array();
+        foreach ($fetch_data as $row) {
+/*            $disable_delete = "";
+            if($row->permit_start_date < date('Y-m-d')||$row->permit_user!=$this->user_id){
+                $disable_delete = "disabled";
+            }*/
+            if($row->approve==0){
+                $btn_type='btn-warning';
+                $btn_text='รออนุมัติ';
+                $car_name = "";
+            }elseif($row->approve==1){
+                $btn_type='btn-success';
+                $btn_text=' อนุมัติ .';
+                $car_name = '<button type="button" class="btn btn-success">'.$row->car_name."</button><br>".$row->driver_name;
+            }else if($row->approve==2){
+                $btn_type='btn-danger';
+                $btn_text='ไม่อนุมัติ';
+                $car_name = "<span style='color: red'>".$row->cause."</span>";
+            }
+
+
+            $sub_array = array();
+            $sub_array[] = '<div class="btn-group" role="group">'.
+                '<button data-toggle="modal" data-target="#approveCarModal" data-name="btn_approve" data-id="' . $row->id . '" class="btn '.$btn_type.'"><i class="far fa-edit "></i>'.$btn_text.'</a></div>';
+            $sub_array[] = to_thai_date_short($row->permit_start_date) . " - " . to_thai_date_short($row->permit_end_date);
+            $sub_array[] = $row->objective."<br>".$row->invit_place;;
+            $sub_array[] = $row->control_car_name;;
+            $sub_array[] = $car_name;
+            $data[] = $sub_array;
+        }
+        $output = array(
+            "draw" => intval($_POST["draw"]),
+            "recordsTotal" => $this->outsite->get_all_data(),
+            "recordsFiltered" => $this->outsite->get_filtered_data(),
+            "data" => $data
+        );
+        echo json_encode($output);
     }
 }
