@@ -63,9 +63,14 @@ class Car extends CI_Controller
     }
     public function approve_car(){
         ///$data['cars'] = $this->car->sl_cars();
-        $data['cars'] = $this->basic->sl_cars();
-        $data['driver'] = $this->car->get_driver_list();
-        $this->layout->view('car/approve_car_view',$data);
+        if(check_role('1',$this->user_id)){
+            $data['cars'] = $this->basic->sl_cars();
+            $data['driver'] = $this->car->get_driver_list();
+            $this->layout->view('car/approve_car_view',$data);
+        }else{
+            $this->layout->view('errors/index.html');
+        }
+
     }
 
     function fetch_used_car()
@@ -94,7 +99,7 @@ class Car extends CI_Controller
 
             $sub_array = array();
             $sub_array[] = '<div class="btn-group" role="group">'.
-                '<button data-toggle="modal" data-target="#approveCarModal" data-name="btn_approve" data-id="' . $row->id . '" class="btn '.$btn_type.'"><i class="far fa-edit "></i>'.$btn_text.'</a></div>';
+                '<button data-toggle="modal" data-cause="'.$row->cause.'" data-car="'.$row->car_id.'" data-driver="'.$row->driver.'" data-approve="'.$row->approve.'" data-target="#approveCarModal" data-btn="btn_approve" data-id="' . $row->id . '" class="btn '.$btn_type.'"><i class="far fa-edit "></i>'.$btn_text.'</a></div>';
             $sub_array[] = to_thai_date_short($row->permit_start_date) . " - " . to_thai_date_short($row->permit_end_date);
             $sub_array[] = $row->objective."<br>".$row->invit_place;;
             $sub_array[] = $row->control_car_name;;
@@ -108,5 +113,24 @@ class Car extends CI_Controller
             "data" => $data
         );
         echo json_encode($output);
+    }
+    public  function  get_used_car(){
+        $id = $this->input->post('id');
+        $rs = $this->car->get_used_car_id($id);
+        $rows = json_encode($rs);
+        $json = '{"success": true, "rows": ' . $rows . '}';
+        render_json($json);
+    }
+
+    public function  save_used_car(){
+        $data = $this->input->post('items');
+        $rs=$this->car->update_used_car($data);
+        if($rs){
+            $json = '{"success": true}';
+        }else{
+            $json = '{"success": false}';
+        }
+
+        render_json($json);
     }
 }

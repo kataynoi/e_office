@@ -40,7 +40,7 @@
                     <li><a href="<?php echo site_url('/car/cars')?>">รถยนต์ราชการ</a></li>
                     <li><a href="<?php echo site_url('/car/drivers')?>"">พนักงานขับรถยนต์</a></li>
                     <?PHP
-                    if($this->session->userdata('id')=='121' || $this->session->userdata('id')=='160' ||$this->session->userdata('id')=='88'||$this->session->userdata('id')=='65'){
+                    if(check_role('1',$this->session->userdata('id'))){
                         echo "<li role=''><a href=".site_url('/car/approve_car').">อนุมัติการใช้รถยนต์ราชการ</a></li>";
                     }
                     ?>

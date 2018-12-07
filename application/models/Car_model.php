@@ -77,7 +77,7 @@ class Car_model extends CI_Model
    }
     public function get_driver_list(){
        $rs = $this->db
-           ->select('b.id,CONCAT(b.prename,b.name) as driver_name,b.user_mobile,b.position')
+           ->select('a.user_id,b.id,CONCAT(b.prename,b.name) as driver_name,b.user_mobile,b.position')
            ->join('mas_users b' , 'a.user_id=b.id','left')
            ->get('driver a')
            ->result();
@@ -101,6 +101,18 @@ class Car_model extends CI_Model
             ->where('id',$id)
             ->get('used_car')
             ->result();
+        return $rs;
+    }
+
+    public function update_used_car($data)
+    {
+        $rs = $this->db
+            ->where('id',$data['id'])
+            ->set('car_id',$data['car_id'])
+            ->set('driver',$data['driver'])
+            ->set('approve',$data['approve'])
+            ->set('cause', $data['cause'])
+            ->update('used_car');
         return $rs;
     }
 }

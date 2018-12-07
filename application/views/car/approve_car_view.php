@@ -12,7 +12,7 @@
         <div class="panel-heading w3-theme">
             <i class="fa fa-user fa-2x "></i> ข้อมูลการขออนุญาตใช้รถราชการ
             <span class="pull-right"> <a href="<?php echo site_url() ?>/outsite/add_outsite_permit"
-                                         class="btn btn-success"><i class="fa fa-save"></i> สร้างใบขออณุญาตไปราชการ</a>
+                                         class="btn btn-success"><i class="fa fa-save"></i> </a>
 </span>
 
         </div>
@@ -48,45 +48,51 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-inline">
-                    <select id="approve" class="form-control">
-                        <option value="1">อนุมัติ</option>
-                        <option value="2">ไม่อนุมัติ</option>
-                    </select>
-                </div>
-                <br>
-                <div class="form-inline">
-                    <select id="travel_type" class="form-control">
-                        <option value="">รถยนต์</option>
-                        <?php
-                        foreach ($cars as $r) {
-                            if ($used_car['car_id'] == $r->id) {
-                                $s = 'selected';
-                            } else {
-                                $s = '';
-                            }
-                            echo "<option value=' $r->id' $s > $r->licente_plate [$r->name] </option>";
-                        } ?>
-                    </select>
-                </div>
-                <br>
-                <div class="form-inline">
-                    <select id="travel_type" class="form-control">
-                        <option value="">พนักงานขับรถยนต์</option>
-                        <?php
-                        foreach ($driver as $r) {
-                            if ($used_car['driver'] == $r->id) {
-                                $s = 'selected';
-                            } else {
-                                $s = '';
-                            }
-                            echo "<option value=' $r->id' $s > $r->driver_name </option>";
-                        } ?>
-                    </select>
-                </div>
+
+                <form>
+                    <input type="hidden" id="id">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">อนุมัติและจัดรถยนต์ราชการ</label>
+                        <select id="approve" class="form-control">
+                            <?php
+                            //$used_car['approve']='1';
+                            $approve =array('รออนุมัติ','อนุมัติ','ไม่อนุมัติ');
+                            foreach ($approve as $key => $value) {
+                                echo "<option value='$key' > $value </option>";
+                            } ?>
+                        </select>
+                    </div>
+                    <div class="form-group" id="frm_approve">
+                        <label for="exampleInputPassword1">รถยนต์ที่ใช้</label>
+                        <select id="car_id" class="form-control">
+                            <option value="">รถยนต์</option>
+                            <?php
+                            foreach ($cars as $r) {
+                                echo "<option value='$r->id' > $r->licente_plate [$r->name] </option>";
+                            } ?>
+                        </select>
+
+                        <label for="exampleInputPassword1">พนักงานขับรถยนต์</label>
+                        <select id="driver" class="form-control">
+                            <option value="">พนักงานขับรถยนต์</option>
+                            <?php
+                            foreach ($driver as $r) {
+                                echo "<option value='$r->user_id' > $r->driver_name </option>";
+                            } ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="frm_not_approve">
+                        <label for="exampleInputPassword1">เหตุผลที่ไม่อนุมัติ</label>
+                        <textarea id="cause" rows="3" class="form-control">
+
+                        </textarea>
+                    </div>
+                </form>
+
             </div>
             <div class="modal-footer">
-                <button type="button" id="save_approve_car" class="btn btn-success" data-dismiss="modal">Save</button>
+                <button type="button" id="btn_save_approve" data-btn="btn_save_approve" class="btn btn-success">Save</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>

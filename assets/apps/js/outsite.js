@@ -16,6 +16,7 @@ $(document).ready(function () {
 
     //$("#datetimepickerFrom").datepicker('setDate', new Date());
     $("#date_permit").datepicker('setDate', new Date(date_permit));
+    $("#invit_date").datepicker('setDate', new Date(invit_date));
     $("#invit_start_date").datepicker('setDate', new Date(invit_start_date));
     $("#invit_end_date").datepicker('setDate', new Date(invit_end_date));
     $("#permit_start_date").datepicker('setDate', new Date(permit_start_date));

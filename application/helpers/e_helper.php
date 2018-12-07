@@ -42,7 +42,7 @@ if ( ! function_exists('version'))
 {
     function version()
     {
-        $version=' E Office Mahasarakham 0.0.1';
+        $version=' E Office Mahasarakham 1.0.0';
 
         return $version;
 
@@ -554,6 +554,19 @@ if(!function_exists('get_nation_nhso_name'))
             ->get('ref_nhso_nation')
             ->row();
         return $rs ? $rs->name : '-';
+    }
+}
+
+if(!function_exists('check_role'))
+{
+    function check_role($role_id,$user_id)
+    {
+        $ci =& get_instance();
+        $rs = $ci->db
+            ->where('user_id',$user_id)
+            ->where('role_id',$role_id)
+            ->count_all_results('user_role');
+        return $rs>=1 ? true : false;
     }
 }
 /**

@@ -56,7 +56,7 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
             $pdf->Cell(0, 0, $group_name, 0, 0, 'L');
 
             $pdf->setXY(178, $line[7]+2.5);
-            $pdf->Cell(0, 0, to_thai_number(sizeof($member)), 0, 0, 'L');
+            $pdf->Cell(0, 0, to_thai_number(sizeof($member)-1), 0, 0, 'L');
 
             $pdf->setXY(25, $line[9]+3);
             $pdf->Cell(0, 0, to_thai_number_text($out_site->objective), 0, 0, 'L');

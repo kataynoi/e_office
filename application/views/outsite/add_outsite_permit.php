@@ -8,6 +8,7 @@
     var permit_user = '<?php echo $outsite['permit_user']?>';
     var travel_type = '<?php echo $outsite['travel_type']?>';
     var date_permit = '<?php echo $outsite['date_permit']?>';
+    var invit_date = '<?php echo $outsite['invit_date']?>';
     var invit_start_date = '<?php echo $outsite['invit_start_date']?>';
     var invit_end_date = '<?php echo $outsite['invit_end_date']?>';
     var permit_start_date = '<?php echo $outsite['permit_start_date']?>';
@@ -16,7 +17,6 @@
         <?php echo json_encode($outsite_member);?>;
     var arr_cars =
         <?php echo json_encode($cars);?>;
-    //console.log(arr_member );
 
 </script>
 <script>
