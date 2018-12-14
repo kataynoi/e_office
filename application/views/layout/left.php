@@ -3,9 +3,9 @@
         <ul class="nav" id="side-menu">
             <li class="sidebar-search">
                 <div class="input-group custom-search-form">
-                    <input type="text" class="form-control" placeholder="Search...">
+                    <input type="text" id="txt_search_link" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
+                                <button class="btn btn-default" type="button" id="btn_search_link">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -19,11 +19,12 @@
                 <a href="<?php echo site_url('outsite')?>"><i class="fa fa-bus fa-fw"></i> ขออณุญาตไปราชการ<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="<?php echo site_url('outsite')?>">ขออณุญาตไปราชการ</a>
-                    </li>
-                    <li>
                         <a href="<?php echo site_url('outsite/add_outsite_permit')?>">สร้างใบขออณุญาตไปราชการ</a>
                     </li>
+                    <li>
+                        <a href="<?php echo site_url('outsite')?>">รายการขออณุญาตไปราชการ</a>
+                    </li>
+
                     <li>
                         <a href="<?php echo site_url('calendar/outsite')?>">ปฏิทินไปราชการ</a>
                     </li>
@@ -85,3 +86,5 @@
     </div>
     <!-- /.sidebar-collapse -->
 </div>
+
+<script src="<?php echo base_url() ?>assets/apps/js/search.js" charset="utf-8"></script>

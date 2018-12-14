@@ -121,9 +121,6 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
             }
             break;
     }
-
 }
-
-
 // Output the new PDF
-$pdf->Output('outsite_'.$out_site->date_permit);
+$pdf->Output('car_'.$out_site->date_permit);

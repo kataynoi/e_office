@@ -14,7 +14,7 @@ $(document).ready(function() {
         "columnDefs": [
             {
                 "targets": [2, 3],
-                "orderable": false,
+                "orderable": true,
             },
         ],
     });
