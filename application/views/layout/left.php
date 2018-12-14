@@ -16,13 +16,13 @@
                 <a href="index.html"><i class="fas fa-chart-line"></i> Dashboard</a>
             </li>
             <li>
-                <a href="<?php echo site_url('outsite')?>"><i class="fa fa-bus fa-fw"></i> ขออณุญาตไปราชการ<span class="fa arrow"></span></a>
+                <a href="<?php echo site_url('outsite')?>"><i class="fa fa-bus fa-fw"></i> ขอนุญาตไปราชการ<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="<?php echo site_url('outsite/add_outsite_permit')?>">สร้างใบขออณุญาตไปราชการ</a>
+                        <a href="<?php echo site_url('outsite/add_outsite_permit')?>">สร้างใบขอนุุาตไปราชการ</a>
                     </li>
                     <li>
-                        <a href="<?php echo site_url('outsite')?>">รายการขออณุญาตไปราชการ</a>
+                        <a href="<?php echo site_url('outsite')?>">รายการขอนุุญาตไปราชการ</a>
                     </li>
 
                     <li>
