@@ -59,7 +59,7 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
             $pdf->Cell(0, 0, to_thai_number(sizeof($member)-1), 0, 0, 'L');
 
             $pdf->setXY(25, $line[9]+3);
-            $pdf->Cell(0, 0, to_thai_number_text($out_site->objective), 0, 0, 'L');
+            $pdf->Cell(0, 0, to_thai_number_text($out_site->objective)." ณ ".to_thai_number_text($out_site->invit_place), 0, 0, 'L');
 
             $pdf->setXY(50, $line[10]+3);
             $pdf->Cell(0, 0, to_thai_date_full($out_site->permit_start_date), 0, 0, 'L');
