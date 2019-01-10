@@ -144,7 +144,7 @@ class Car extends CI_Controller
             }
 
             $sub_array = array();
-            $sub_array[] = '<div class="btn-group" role="group">'.
+            $sub_array[] = '<div class="" role="group">'.
                 '<span  class="badge badge-big '.$btn_type.'"><i class="far fa-edit "></i>'.$btn_text.'</span></div>';
             $sub_array[] = to_thai_date_short($row->permit_start_date) . " - " . to_thai_date_short($row->permit_end_date);
             $sub_array[] = $row->objective."<br>".$row->invit_place;;
