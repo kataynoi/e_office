@@ -44,7 +44,7 @@ $(document).ready(function(){
             else {
                 swal('แก้ไขข้อมูล เรียบร้อยแล้ว');
                 $('#modalEditPassword').modal('hide');
-                window.location = base_url+"user/logout";
+                window.location = site_url+"user/logout";
             }
         });
     }

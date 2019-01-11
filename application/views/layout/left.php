@@ -13,7 +13,7 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="index.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="<?php echo site_url();?>"><i class="fas fa-chart-line"></i> Dashboard</a>
             </li>
             <li>
                 <a href="<?php echo site_url('outsite')?>"><i class="fa fa-bus fa-fw"></i> ขอนุญาตไปราชการ<span class="fa arrow"></span></a>
