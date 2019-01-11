@@ -39,14 +39,9 @@ class Car extends CI_Controller
     public function calendar()
     {
         ///$data['cars'] = $this->car->sl_cars();
-        if(check_role('1',$this->user_id)){
             $data['cars'] = $this->basic->sl_cars();
             $data['driver'] = $this->car->get_driver_list();
             $this->layout->view('car/calendar_view',$data);
-        }else{
-            $this->layout->view('errors/index.html');
-        }
-
     }
     public function used_car($id)
     {
