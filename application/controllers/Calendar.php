@@ -6,16 +6,18 @@ class Calendar extends CI_Controller
     public function __construct() {
         Parent::__construct();
         $this->layout->setLayout('default_layout');
-        $this->load->model("calendar_model");
+        $this->load->model("calendar_model",'calendar');
     }
 
     public function index()
     {
         $this->layout->view("calendar/index.php", array());
     }
-    public function outsite()
+    public function outsite($month='2018-10')
     {
-        $this->layout->view("calendar/outsite_calendar.php", array());
+
+        $data['outsite_calendar'] = $this->calendar->get_ousite_calendar($month);
+        $this->layout->view("calendar/outsite_calendar.php", $data);
     }
 
 }
