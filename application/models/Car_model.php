@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Car_model extends CI_Model
 {
     var $table = "used_car a";
-    var $select_column = array("e.objective","e.invit_place","e.permit_start_date","e.permit_end_date","a.id", "a.outsite_id", "a.car_id", "a.driver", "a.control_car", "a.approve", "a.cause",'b.licente_plate,concat(c.prename,c.name) as driver_name,concat(d.prename,d.name) as control_car_name','b.licente_plate as car_name');
+    var $select_column = array("e.permit_user","e.objective","e.invit_place","e.permit_start_date","e.permit_end_date","a.id", "a.outsite_id", "a.car_id", "a.driver", "a.control_car", "a.approve", "a.cause",'b.licente_plate,concat(c.prename,c.name) as driver_name,concat(d.prename,d.name) as control_car_name','b.licente_plate as car_name');
     var $order_column = array("invit_start_date");
 
 

@@ -102,7 +102,6 @@ if ( ! function_exists('get_provname'))
         return $provname;
 
     }
-
 }
 
 if(!function_exists('to_thai_date'))
@@ -542,6 +541,19 @@ if(!function_exists('get_group_name'))
             ->get('co_workgroup')
             ->row();
         return $rs ? $rs->name : '-';
+    }
+}
+
+if ( ! function_exists('get_user_name'))
+{
+    function get_user_name($id)
+    {
+        $CI = get_instance();
+        $CI->load->model('Basic_model');
+        $user_name=$CI->Basic_model->get_user_name($id);
+
+        return $user_name;
+
     }
 }
 if(!function_exists('get_nation_nhso_name'))

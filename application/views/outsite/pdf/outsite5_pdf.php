@@ -56,7 +56,7 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
 
             /* ไม่มีหนังสือเชิญ */
             $pdf->setXY(0, $line[10]);
-            $pdf->writeHTML("<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            $pdf->writeHTML("<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 ".to_thai_number_text($out_site->detail_no_invit,1)."</div>");
 
             /*ส่วนที่ 2 */
