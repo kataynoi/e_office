@@ -17,6 +17,7 @@
     <link href="<?php echo base_url()?>assets/vendor/css/bootstrap.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
     <link href="<?php echo base_url()?>assets/vendor/css/metisMenu.min.css" rel="stylesheet">
+    <!--<link href="<?php /*echo base_url()*/?>assets/vendor/css/left.css" rel="stylesheet"-->
     <!-- Custom CSS -->
     <link href="<?php echo base_url()?>assets/vendor/css/sb-admin-2.min.css" rel="stylesheet">
     <!--Set Color Page-->
@@ -92,6 +93,7 @@
     </nav>
     <div>
         <div id="page-wrapper">
+           <!-- <button id="hide_left" data-show="true">Hide</button>-->
             <?php echo $content_for_layout?>
         </div>
     </div>
@@ -106,3 +108,4 @@
 </body>
 
 </html>
+

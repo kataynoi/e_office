@@ -177,7 +177,7 @@
             <div class="form-group" style="margin: 10px">
                 <label for="comment">เหตุผลที่ขอไปราชการ :</label>
                 <textarea class="form-control" rows="5"
-                          id="detail_no_invit"><?php echo $outsite['detail_no_invit']; ?></textarea>
+                          id="detail_no_invit" placeholder="ตัวอย่าง : ด้วยกลุ่มงานอนามัยสิ่งแวดล้อมและอาชีวอนามัย  สำนักงานสาธารณสุขจังหวัดมหาสารคาม  จะออกเก็บข้อมูลเพื่อการวิจัย/ขออนุเคราะห์ตรวจน้ำอุปโภค-บริโภคภายในโรงเรียน ตามแผนปฏิบัติราชการปีงบประมาณ 2562 "><?php echo $outsite['detail_no_invit']; ?></textarea>
             </div>
         </div>
         <div class="navbar navbar-default w3-theme-l5">

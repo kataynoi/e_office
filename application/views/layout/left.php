@@ -19,10 +19,10 @@
                 <a href="<?php echo site_url('outsite')?>"><i class="fa fa-bus fa-fw"></i> ขอนุญาตไปราชการ<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="<?php echo site_url('outsite/add_outsite_permit')?>">สร้างใบขอนุุาตไปราชการ</a>
+                        <a href="<?php echo site_url('outsite/add_outsite_permit')?>">สร้างใบขอนุญาตปราชการ</a>
                     </li>
                     <li>
-                        <a href="<?php echo site_url('outsite')?>">รายการขอนุุญาตไปราชการ</a>
+                        <a href="<?php echo site_url('outsite')?>">รายการขอนุญาตไปราชการ</a>
                     </li>
 
                     <li>
