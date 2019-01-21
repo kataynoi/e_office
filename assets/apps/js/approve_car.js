@@ -3,6 +3,7 @@ $(document).ready(function() {
         "processing": true,
         "serverSide": true,
         "order": [],
+        "paging": true,
         "pageLength": 50,
         "ajax": {
             url: site_url + '/car/fetch_used_car',
@@ -13,8 +14,8 @@ $(document).ready(function() {
         },
         "columnDefs": [
             {
-                "targets": [2, 3],
-                "orderable": true,
+                "targets": [3, 4],
+                "orderable": false,
             },
         ],
     });

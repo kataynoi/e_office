@@ -65,8 +65,8 @@ class Outsite extends CI_Controller
             $sub_array[] = $this->basic->get_user_name($row->permit_user);
             $sub_array[] = '<div class="btn-group" role="group">'.
                             '<a href="'.site_url('outsite/add_outsite_permit/').$row->id.'" class="btn '.$txt_color.' btn-sm" data-id="' . $row->id . '" class="btn btn-warning btn-xs"><i class="far fa-edit "></i>'.$txt_edit.'</a>'.
-                            '<button data-btn="btn_del" '.$disable_delete.' class="btn btn-danger btn-sm" data-id="' . $row->id . '" ><i class="far fa-trash-alt "></i> Delete</button>
-                            <button data-btn="btn_claim" class="btn btn-info btn-sm" data-id="' . $row->id . '"><i class="far fa-usd"></i>เบิกเงิน</button></div>';
+                            '<button data-btn="btn_del" '.$disable_delete.' class="btn btn-danger btn-sm" data-id="' . $row->id . '" ><i class="far fa-trash-alt "></i> Delete</button>'.
+                            '<a href="'.site_url('#').$row->id.'" class="btn btn-info btn-sm" data-id="' . $row->id . '" class="btn btn-info btn-xs"><i class="fa fa-bars "></i>เบิกเงิน</a>';
             $data[] = $sub_array;
         }
         $output = array(
@@ -105,5 +105,21 @@ class Outsite extends CI_Controller
         }
 
         render_json($json);
+    }
+    public function  claim($id = 0){
+        if ($id != 0) {
+            $data['action'] = 'update';
+        } else {
+            $data['action'] = 'insert';
+        }
+        $data['outsite_member'] = $this->outsite->get_outsite_member($id);
+        $data['cars'] =$this->outsite->get_outsite_cars($id);
+        $data['outsite'] = $this->outsite->get_outsite_user($id);
+        $data['outsite_type'] = $this->outsite->get_outsite_type();
+        $data['invit_type'] = $this->outsite->getAll_invit_type();
+        $data['claim_type'] = $this->outsite->get_claim_type();
+        $data['travel_type'] = $this->outsite->getAll_travel_type();
+        $data['user'] = $this->outsite->get_user_id($this->user_id);
+        $this->layout->view('claim/claimform_view',$data);
     }
 }

@@ -3,6 +3,7 @@ $(document).ready(function() {
         "processing": true,
         "serverSide": true,
         "order": [],
+
         "pageLength": 50,
         "ajax": {
             url: site_url + '/outsite/fetch_outsite',

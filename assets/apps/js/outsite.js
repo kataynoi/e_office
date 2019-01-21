@@ -404,7 +404,7 @@ $(document).ready(function () {
             swal('กรุณาระบุรายละเอียดการเชิญประชุมให้ครบถ้วน');
         }else if(items.invite==2 && (!items.invit_subject || !items.invit_place )){
             swal('กรุณาระบุเรื่องและสถานที่ไปราชการให้ครบถ้วน');
-        }else if(!items.objective){
+        }else if(items.invite==2 && !items.objective){
             swal('กรุณาระบุวัตถุประสงค์การไปราชการ');
             $('#objective').focus();
         }else if(!items.detail_no_invit){
