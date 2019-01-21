@@ -404,10 +404,10 @@ $(document).ready(function () {
             swal('กรุณาระบุรายละเอียดการเชิญประชุมให้ครบถ้วน');
         }else if(items.invite==2 && (!items.invit_subject || !items.invit_place )){
             swal('กรุณาระบุเรื่องและสถานที่ไปราชการให้ครบถ้วน');
-        }else if(items.invite==2 && !items.objective){
+        }else if(!items.objective){
             swal('กรุณาระบุวัตถุประสงค์การไปราชการ');
             $('#objective').focus();
-        }else if(!items.detail_no_invit){
+        }else if(items.invite==2 && !items.detail_no_invit){
             swal('กรุณาระบุเหตุผลการไปราชการ');
             $('#detail_no_invit').focus();
         }else if(!items.claim_type) {
