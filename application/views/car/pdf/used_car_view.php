@@ -137,8 +137,6 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
                 }else{
                     $pdf->Cell(20, 0, to_thai_number($n), 0, 1, 'L');
                 }
-                $pdf->setXY(28, $line[4+$n]+7);
-                $pdf->Cell(0, 0, to_thai_number($n), 0, 1, 'L');
                 $pdf->setXY(45, $line[4+$n]+7);
                 $pdf->Cell(0, 0, $m->prename.$m->name, 0, 1, 'L');
                 $pdf->setXY(105, $line[4+$n]+7);
