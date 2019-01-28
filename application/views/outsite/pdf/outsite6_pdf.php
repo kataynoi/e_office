@@ -84,7 +84,7 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
                 $pdf->Cell(250, 0, $out_site->travel_type_name, 0, 0, 'L');
             }
             if($out_site->claim_type == 4){
-                $pdf->setXY(25, $line[19]+1.8);
+                $pdf->setXY(25, $line[20]+1.8);
                 $pdf->Cell(250, 0, $out_site->claim_type_name, 0, 0, 'L');
             }else if($out_site->claim_type == 5){
                 $pdf->setXY(25, $line[20]+1.8);
