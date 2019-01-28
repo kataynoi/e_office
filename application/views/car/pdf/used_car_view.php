@@ -94,6 +94,7 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
                 $line[$i]=$startline+($perline*$i);
             }
             $n=1;
+            $addpage=0;
             $pdf->setXY(0, $line[2]);
             $pdf->Cell(0, 0, "รายชื่อผู้".to_thai_number_text($out_site->objective), 0, 0, 'C');
             if($out_site->permit_start_date == $out_site->permit_end_date){
@@ -108,7 +109,34 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
 
 
             foreach($member as $m){
-                //$line=13+$n;
+                if($n==30){
+                    $addpage=1;
+                    $pageCount = $pdf->setSourceFile(dirname(__FILE__)."/addperson.pdf");
+                    $templateId = $pdf->importPage(1);
+                    //$size = $pdf->getTemplateSize($templateId);
+                    $pdf->AddPage('P');
+                    $pdf->useTemplate($templateId);
+
+
+                    $pdf->setXY(0, $line[2]);
+                    $pdf->Cell(0, 0, "รายชื่อผู้".to_thai_number_text($out_site->objective), 0, 0, 'C');
+                    if($out_site->permit_start_date == $out_site->permit_end_date){
+                        $end_date = '';
+                    }else {
+                        $end_date =" - ".to_thai_date_full($out_site->permit_end_date);
+                    }
+                    $pdf->setXY(0, $line[3]);
+                    $pdf->Cell(0, 0, "วันที่ ".to_thai_date_full($out_site->permit_start_date).$end_date, 0, 0, 'C');
+                    $pdf->setXY(0, $line[4]);
+                    $pdf->Cell(0, 0, "ณ ".to_thai_number_text($out_site->invit_place), 0, 0, 'C');
+                    $n=1;
+                }
+                $pdf->setXY(28, $line[4+$n]+7);
+                if($addpage==1){
+                    $pdf->Cell(20, 0, to_thai_number($n+29), 0, 1, 'L');
+                }else{
+                    $pdf->Cell(20, 0, to_thai_number($n), 0, 1, 'L');
+                }
                 $pdf->setXY(28, $line[4+$n]+7);
                 $pdf->Cell(0, 0, to_thai_number($n), 0, 1, 'L');
                 $pdf->setXY(45, $line[4+$n]+7);
