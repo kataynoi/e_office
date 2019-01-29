@@ -81,7 +81,7 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
 
             }
 
-            $pdf->setXY(120, $line[25]+2);
+            $pdf->setXY(120, $line[27]+2);
             $pdf->Cell(0, 0, $member['0']->prename.$member['0']->name, 0, 0, 'C');
 
             break;
