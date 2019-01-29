@@ -55,33 +55,33 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
             $pdf->setXY(48, $line[7]+2.5);
             $pdf->Cell(0, 0, $group_name, 0, 0, 'L');
 
-            $pdf->setXY(178, $line[7]+2.5);
-            $pdf->Cell(0, 0, to_thai_number(sizeof($member)-1), 0, 0, 'L');
 
             $pdf->setXY(25, $line[9]+3);
-            $pdf->Cell(0, 0, to_thai_number_text($out_site->objective)." ณ ".to_thai_number_text($out_site->invit_place), 0, 0, 'L');
+            $pdf->Cell(0, 0, to_thai_number_text($out_site->objective), 0, 0, 'L');
+            $pdf->setXY(26, $line[10]+3);
+            $pdf->Cell(0, 0, "ณ ".to_thai_number_text($out_site->invit_place), 0, 0, 'L');
 
-            $pdf->setXY(50, $line[10]+3);
+            $pdf->setXY(55, $line[11]+3);
             $pdf->Cell(0, 0, to_thai_date_full($out_site->permit_start_date), 0, 0, 'L');
 
-            $pdf->setXY(35, $line[11]+3);
+            $pdf->setXY(35, $line[12]+3);
             $pdf->Cell(0, 0, to_thai_date_full($out_site->permit_end_date), 0, 0, 'L');
-            $pdf->setXY(70, $line[12]+5);
+            $pdf->setXY(70, $line[13]+5);
             $pdf->Cell(0, 0, to_thai_number(sizeof($car)), 0, 0, 'L');
             $n=1;
             foreach($car as $m){
                 //$line=13+$n;
-                $pdf->setXY(65, $line[13+$n]-1);
+                $pdf->setXY(65, $line[14+$n]-1);
                 $pdf->Cell(0, 0, to_thai_number_text($m->licente_plate), 0, 1, 'L');
-                $pdf->setXY(106, $line[13+$n]-1);
+                $pdf->setXY(106, $line[14+$n]-1);
                 $pdf->Cell(0, 0, $m->driver, 0, 1, 'L');
-                $pdf->setXY(49, $line[14+$n]-1);
+                $pdf->setXY(49, $line[15+$n]-1);
                 $pdf->Cell(0, 0, $m->control_car, 0, 1, 'L');
                 $n=$n+2;
 
             }
 
-            $pdf->setXY(120, $line[27]);
+            $pdf->setXY(120, $line[28]);
             $pdf->Cell(0, 0, $member['0']->prename.$member['0']->name, 0, 0, 'C');
 
             break;
