@@ -180,8 +180,6 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
                 $pdf->Cell(20, 0, to_thai_number_text($m->position), 0, 1, 'L');
 
                 $n++;
-
-
             }
             break;
     }
