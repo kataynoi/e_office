@@ -214,15 +214,8 @@ class Outsite_model extends CI_Model
         $lastid = $this->db->insert_id();
         $i = 1;
         foreach ($data['users'] as $u) {
-            $sql = "REPLACE INTO outsite_member('user_id','outsite_id''order') VALUES($u,$lastid,$i)";
-            /*$this->db
-                ->set('user_id', $u)
-                ->set('outsite_id', $lastid)
-                ->set('order', $i)
-                ->insert('outsite_member');
-            //echo $u;*/
+            $sql = "INSERT IGNORE INTO outsite_member(`user_id`,`outsite_id`,`order`) VALUES($u,$lastid,$i)";
             $this->db->query($sql);
-
             $i++;
         }
         if (isset($data['used_car'])) {
@@ -276,26 +269,11 @@ class Outsite_model extends CI_Model
         $this->db
             ->where('outsite_id', $data['id'])
             ->delete('outsite_member');
-/*        foreach ($data['users'] as $u) {
-            $this->db
-                ->set('user_id', $u)
-                ->set('outsite_id', $data['id'])
-                ->set('order', $i)
-                ->insert('outsite_member');
-            //echo $u;
-            $i++;
-        }*/
+
         $lastid = $data['id'];
         foreach ($data['users'] as $u) {
             $sql = "INSERT IGNORE INTO outsite_member(`user_id`,`outsite_id`,`order`) VALUES($u,$lastid,$i)";
-/*            $this->db
-                ->set('user_id', $u)
-                ->set('outsite_id', $lastid)
-                ->set('orderx', $i)
-                ->insert('outsite_member');
-            //echo $u;*/
             $this->db->query($sql);
-
             $i++;
         }
         $this->db
