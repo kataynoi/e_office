@@ -199,6 +199,7 @@ $(document).ready(function () {
     }
 
     outsite.set_permit_user = function (id, name, position) {
+
         arr.push({"user_id": id, "name": name, "position": position, driver: ""});
         set_arr_user();
         console.log(arr);
