@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Outsite_model extends CI_Model
 {
     var $table = "outsite_permit";
-    var $select_column = array("id", "permit_start_date", "permit_end_date", "invit_subject", "invit_place", "permit_user",);
+    var $select_column = array("id", "permit_start_date", "permit_end_date", "invit_subject", "invit_place", "permit_user","lock");
     var $order_column = array("invit_start_date");
 
 

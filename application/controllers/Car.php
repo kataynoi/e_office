@@ -108,8 +108,8 @@ class Car extends CI_Controller
         }
         $output = array(
             "draw" => intval($_POST["draw"]),
-            "recordsTotal" => $this->outsite->get_all_data(),
-            "recordsFiltered" => $this->outsite->get_filtered_data(),
+            "recordsTotal" => $this->car->get_all_data(),
+            "recordsFiltered" => $this->car->get_filtered_data(),
             "data" => $data
         );
         echo json_encode($output);

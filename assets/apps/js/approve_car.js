@@ -4,7 +4,7 @@ $(document).ready(function() {
         "serverSide": true,
         "order": [],
         "paging": true,
-        "pageLength": 50,
+        "pageLength": 25,
         "ajax": {
             url: site_url + '/car/fetch_used_car',
             data: {
