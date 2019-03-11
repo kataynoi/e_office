@@ -308,6 +308,15 @@ class Outsite_model extends CI_Model
         return $rs;
     }
 
+    public function set_lock($id, $val)
+    {
+        $rs = $this->db
+            ->set('lock',$val)
+            ->where('id', $id)
+            ->update('outsite_permit');
+        return $rs;
+    }
+
     public function get_permit_member($id)
     {
         $rs = $this->db

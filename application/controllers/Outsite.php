@@ -51,8 +51,11 @@ class Outsite extends CI_Controller
         $fetch_data = $this->outsite->make_datatables();
         $data = array();
         foreach ($fetch_data as $row) {
-
-            $row->lock == '1'? $lock ='<i class="fa fa-lock"></i>':$lock='';
+            if(check_role(4,$this->session->userdata('id'))){
+                $row->lock == '1'? $lock ='<button class="btn" data-btn="lock" data-id="' . $row->id . '" data-lock="1"><i class="fa fa-lock" style="color:orange" ></i></button>':$lock='<button class="btn" data-btn="lock" data-id="' . $row->id . '" data-lock="0"><i class="fa fa-unlock " style="color:green" ></i></button>';
+            }else{
+                $row->lock == '1'? $lock ='<i class="fa fa-lock" style="color:orange" title="หากต้องการปลดล๊อคเพื่อแก้ไขกรุณาติดต่อ Admin" ></i>':$lock='<i class="fa fa-unlock " style="color:green" id="lock" data-lock="0" title="That&apos;s what this widget is"></i>';
+            }
 
             $disable_delete = "";
             if($row->permit_start_date < date('Y-m-d')||$row->permit_user!=$this->user_id){
@@ -62,7 +65,7 @@ class Outsite extends CI_Controller
             $row->permit_user==$this->user_id?$txt_edit='Edit .':$txt_edit='View';
             $row->permit_user==$this->user_id?$txt_color='btn-warning':$txt_color='btn-success';
             $sub_array = array();
-            $sub_array[] = to_thai_date_short($row->permit_start_date) . " - " . to_thai_date_short($row->permit_end_date)." ".$lock;
+            $sub_array[] = $lock." ".to_thai_date_short($row->permit_start_date) . " - " . to_thai_date_short($row->permit_end_date);
             $sub_array[] = $row->invit_subject;
             $sub_array[] = $row->invit_place;
             $sub_array[] = $this->basic->get_user_name($row->permit_user);
@@ -103,6 +106,23 @@ class Outsite extends CI_Controller
         $rs=$this->outsite->del_outsite($id,$this->user_id);
         if($rs){
             $json = '{"success": true}';
+        }else{
+            $json = '{"success": false}';
+        }
+
+        render_json($json);
+    }
+
+    public function set_lock(){
+        $id = $this->input->post('id');
+        $val = $this->input->post('val');
+        if(check_role(4,$this->user_id)){
+            $rs=$this->outsite->set_lock($id,$val);
+            if($rs){
+                $json = '{"success": true}';
+            }else{
+                $json = '{"success": false}';
+            }
         }else{
             $json = '{"success": false}';
         }
