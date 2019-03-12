@@ -581,6 +581,20 @@ if(!function_exists('check_role'))
         return $rs>=1 ? true : false;
     }
 }
+
+if(!function_exists('get_group_name_by_user'))
+{
+    function get_group_name_by_user($user_id)
+    {
+        $ci =& get_instance();
+        $rs = $ci->db
+            ->where('a.id',$user_id)
+            ->join('co_workgroup b','a.group = b.id')
+            ->get('mas_users a')
+            ->row();
+        return $rs? $rs->name : '-';
+    }
+}
 /**
 * Get current age
 *

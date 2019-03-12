@@ -89,3 +89,40 @@
     </div>
 </div>
 
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <Label>รายการไปราชการวันนี้</Label>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <table class="table table-responsive">
+                <thead>
+                <tr>
+                    <th style="width: 5%">#</th>
+                    <th style="width: 30%">เรื่องที่ไปราชการ</th>
+                    <th style="width: 20%">สถานที่ไปราชการ</th>
+                    <th style="width: 25%">กลุ่มงาน</th>
+                    <!--<th style="width: 20%">วันที่</th-->>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $line = 0;
+                foreach($outsite_today as $r){
+                    $line++;
+                    echo "<tr>";
+                    echo "<td>$line</td>";
+                    echo "<td>$r->objective</td>";
+                    echo "<td>$r->invit_place</td>";
+                    echo "<td>".get_group_name_by_user($r->permit_user)."</td>";
+                    //echo "<td>".to_thai_date($r->permit_start_date)." - ".to_thai_date($r->permit_end_date)."</td>";
+                    echo "</tr>";
+                }
+                ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
