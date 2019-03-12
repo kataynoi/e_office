@@ -22,7 +22,10 @@
                         <a href="<?php echo site_url('outsite/add_outsite_permit')?>">สร้างใบขอนุญาตปราชการ</a>
                     </li>
                     <li>
-                        <a href="<?php echo site_url('outsite')?>">รายการขอนุญาตไปราชการ</a>
+                        <a href="<?php echo site_url('outsite')?>">รายการขอนุญาตไปราชการของคุณ</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo site_url('outsite/all')?>">รายการขอนุญาตไปราชการทั้งหมด</a>
                     </li>
 
                     <li>
@@ -49,7 +52,7 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            <li>
+            <!--<li>
                 <a href="#"><i class="fas fa-calendar-plus"></i> จองห้องประชุม (รอก่อนนะ...)<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
@@ -74,11 +77,11 @@
                                 <a href="#">Third Level Item</a>
                             </li>
                         </ul>
-                        <!-- /.nav-third-level -->
+
                     </li>
                 </ul>
-                <!-- /.nav-second-level -->
-            </li>
+
+            </li>-->
             <li>
                 <a href="<?php echo site_url('admin/login')?>"><i class="fa fa-user-secret fa-fw"></i> ผู้ใช้งานระบบ (สำหรับ Admin)</a>
             </li>

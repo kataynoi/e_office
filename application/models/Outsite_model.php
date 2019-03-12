@@ -45,7 +45,6 @@ class Outsite_model extends CI_Model
         return $rs;
     }
 
-
     public function get_invit_type($id)
     {
         $rs = $this->db
@@ -96,6 +95,7 @@ class Outsite_model extends CI_Model
         //echo $this->db->last_query();
         return $rs;
     }
+
     public function  get_claim_type()
     {
         $rs = $this->db
@@ -181,6 +181,54 @@ class Outsite_model extends CI_Model
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
+
+
+    /*getAll Outsite*/
+
+    function make_query_all()
+    {
+
+        $this->db->select($this->select_column);
+        $this->db->from($this->table);
+        if (isset($_POST["search"]["value"])) {
+            $this->db->group_start();
+            $this->db->like("invit_subject", $_POST["search"]["value"]);
+            $this->db->or_like("invit_name", $_POST["search"]["value"]);
+            $this->db->or_like("invit_place", $_POST["search"]["value"]);
+            $this->db->group_end();
+        }
+        if (isset($_POST["order"])) {
+            $this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+        } else {
+            $this->db->order_by('permit_start_date', 'DESC');
+        }
+    }
+
+    function make_datatables_all()
+    {
+        $this->make_query_all();
+        if ($_POST["length"] != -1) {
+            $this->db->limit($_POST['length'], $_POST['start']);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    function get_filtered_data_all()
+    {
+        $this->make_query_all();
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    function get_all_data_all()
+    {
+        $this->db->select("*");
+        $this->db->from($this->table);
+        return $this->db->count_all_results();
+    }
+
+    /*End getAll Outsite*/
 
     public function save_outsite($data)
     {

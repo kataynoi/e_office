@@ -23,9 +23,13 @@ class Outsite extends CI_Controller
 
     public function index()
     {
-
         $data['outsite_permit'] = $this->outsite->get_outsite_by_user($this->user_id);
         $this->layout->view('outsite/index', $data);
+    }
+    public function all()
+    {
+        $data['outsite_permit'] = $this->outsite->get_outsite_by_user($this->user_id);
+        $this->layout->view('outsite/all_view', $data);
     }
 
     public function  add_outsite_permit($id = 0)
@@ -79,6 +83,43 @@ class Outsite extends CI_Controller
             "draw" => intval($_POST["draw"]),
             "recordsTotal" => $this->outsite->get_all_data(),
             "recordsFiltered" => $this->outsite->get_filtered_data(),
+            "data" => $data
+        );
+        echo json_encode($output);
+    }
+function fetch_outsite_all()
+    {
+        $fetch_data = $this->outsite->make_datatables_all();
+        $data = array();
+        foreach ($fetch_data as $row) {
+            if(check_role(4,$this->session->userdata('id'))){
+                $row->lock == '1'? $lock ='<button class="btn" data-btn="lock" data-id="' . $row->id . '" data-lock="1"><i class="fa fa-lock" style="color:orange" ></i></button>':$lock='<button class="btn" data-btn="lock" data-id="' . $row->id . '" data-lock="0"><i class="fa fa-unlock " style="color:green" ></i></button>';
+            }else{
+                $row->lock == '1'? $lock ='<i class="fa fa-lock" style="color:orange" title="หากต้องการปลดล๊อคเพื่อแก้ไขกรุณาติดต่อ Admin" ></i>':$lock='<i class="fa fa-unlock " style="color:green" id="lock" data-lock="0" title="That&apos;s what this widget is"></i>';
+            }
+
+            $disable_delete = "";
+            if($row->permit_start_date < date('Y-m-d')||$row->permit_user!=$this->user_id){
+                $disable_delete = "disabled";
+            }
+
+            $row->permit_user==$this->user_id?$txt_edit='Edit .':$txt_edit='View';
+            $row->permit_user==$this->user_id?$txt_color='btn-warning':$txt_color='btn-success';
+            $sub_array = array();
+            $sub_array[] = $lock." ".to_thai_date_short($row->permit_start_date) . " - " . to_thai_date_short($row->permit_end_date);
+            $sub_array[] = $row->invit_subject;
+            $sub_array[] = $row->invit_place;
+            $sub_array[] = $this->basic->get_user_name($row->permit_user);
+            $sub_array[] = '<div class="btn-group" role="group">'.
+                            '<a href="'.site_url('outsite/add_outsite_permit/').$row->id.'" class="btn '.$txt_color.' btn-sm" data-id="' . $row->id . '" class="btn btn-warning btn-xs">'.$txt_edit.'</a>'.
+                            '<button data-btn="btn_del" '.$disable_delete.' class="btn btn-danger btn-sm" data-id="' . $row->id . '" >Delete</button>'.
+                            '<a href="'.site_url('#').$row->id.'" class="btn btn-info btn-sm" data-id="' . $row->id . '" class="btn btn-info btn-xs">เบิกเงิน</a>';
+            $data[] = $sub_array;
+        }
+        $output = array(
+            "draw" => intval($_POST["draw"]),
+            "recordsTotal" => $this->outsite->get_all_data_all(),
+            "recordsFiltered" => $this->outsite->get_filtered_data_all(),
             "data" => $data
         );
         echo json_encode($output);
