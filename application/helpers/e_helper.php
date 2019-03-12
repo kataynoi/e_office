@@ -71,7 +71,7 @@ if ( ! function_exists('year'))
 {
     function year()
     {
-        $year='2017';
+        $year='2019';
 
         return $year;
 
