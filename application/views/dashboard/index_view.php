@@ -102,7 +102,7 @@
                     <th style="width: 30%">เรื่องที่ไปราชการ</th>
                     <th style="width: 20%">สถานที่ไปราชการ</th>
                     <th style="width: 25%">กลุ่มงาน</th>
-                    <!--<th style="width: 20%">วันที่</th-->>
+                    <!--<th style="width: 20%">วันที่</th>-->
                 </tr>
                 </thead>
                 <tbody>
