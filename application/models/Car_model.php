@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Car_model extends CI_Model
 {
     var $table = "used_car a";
-    var $select_column = array("e.permit_user","e.objective","e.invit_place","e.permit_start_date","e.permit_end_date","a.id", "a.outsite_id", "a.car_id", "a.driver", "a.control_car", "a.approve", "a.cause",'b.licente_plate,concat(c.prename,c.name) as driver_name,concat(d.prename,d.name) as control_car_name','b.licente_plate as car_name');
+    var $select_column = array("e.id as outsite_id","e.permit_user","e.objective","e.invit_place","e.permit_start_date","e.permit_end_date","a.id", "a.outsite_id", "a.car_id", "a.driver", "a.control_car", "a.approve", "a.cause",'b.licente_plate,concat(c.prename,c.name) as driver_name,concat(d.prename,d.name) as control_car_name','b.licente_plate as car_name');
     var $order_column = array("invit_start_date");
 
 
@@ -106,6 +106,7 @@ class Car_model extends CI_Model
 
     public function update_used_car($data)
     {
+        $this->db->trans_start();
         $rs = $this->db
             ->where('id',$data['id'])
             ->set('car_id',$data['car_id'])
@@ -113,6 +114,14 @@ class Car_model extends CI_Model
             ->set('approve',$data['approve'])
             ->set('cause', $data['cause'])
             ->update('used_car');
+        if($data['approve']=='1' && $data['driver'] !='' ) {
+            $this->db
+                ->set('user_id', $data['driver'])
+                ->set('outsite_id', $data['outsite_id'])
+                ->set('order', 99)
+                ->insert('outsite_member');
+        }
+        $this->db->trans_complete();
         return $rs;
     }
 }

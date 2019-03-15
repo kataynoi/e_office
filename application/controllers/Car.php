@@ -99,7 +99,7 @@ class Car extends CI_Controller
 
             $sub_array = array();
             $sub_array[] = '<div class="btn-group" role="group">'.
-                '<button data-toggle="modal" data-cause="'.$row->cause.'" data-car="'.$row->car_id.'" data-driver="'.$row->driver.'" data-approve="'.$row->approve.'" data-target="#approveCarModal" data-btn="btn_approve" data-id="' . $row->id . '" class="btn '.$btn_type.'"><i class="far fa-edit "></i>'.$btn_text.'</a></div>';
+                '<button data-toggle="modal" data-cause="'.$row->cause.'" data-car="'.$row->car_id.'" data-driver="'.$row->driver.'" data-approve="'.$row->approve.'" data-target="#approveCarModal" data-btn="btn_approve" data-id="' . $row->id . '" data-outsite_id="' . $row->outsite_id . '" class="btn '.$btn_type.'"><i class="far fa-edit "></i>'.$btn_text.'</a></div>';
             $sub_array[] = to_thai_date_short($row->permit_start_date) . " - " . to_thai_date_short($row->permit_end_date);
             $sub_array[] = $row->objective."<br>".$row->invit_place." <span style='color:blue;'>[ผู้ควบคุมรถ:".$row->control_car_name."]</span>";
             $sub_array[] = get_user_name($row->permit_user);

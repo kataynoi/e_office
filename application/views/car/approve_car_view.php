@@ -48,7 +48,7 @@
                 </button>
             </div>
             <div class="modal-body">
-
+                <input id='outsite_id' class="form-control" type="hidden" value="xx">
                 <form>
                     <input type="hidden" id="id">
                     <div class="form-group">

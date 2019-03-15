@@ -81,7 +81,7 @@ approve_index.save_used_car = function(items){
         else {
             //swal('ลบข้อมูลเรียบร้อย')
             app.alert('บันทึกข้อมูลเรียบร้อย');
-            location.reload();
+            //location.reload();
 
         }
     });
@@ -116,6 +116,7 @@ $('#btn_save_approve').click(function(){
     items.id = $('#id').val();
     items.approve = $('#approve').val();
     items.car_id = $('#car_id').val();
+    items.outsite_id = $('#outsite_id').val();
     items.driver = $('#driver').val();
     items.cause = $('#cause').val();
     console.log(items);
@@ -148,8 +149,10 @@ $(document).on('click', 'button[data-btn="btn_approve"]', function(e) {
     var id = $(this).data('id');
     var approve = $(this).data('approve');
     var car_id = $(this).data('car');
+    var outsite_id = $(this).data('outsite_id');
     var driver_id = $(this).data('driver');
     var cause = $(this).data('cause');
+    console.log(outsite_id);
     if(approve == 0){
         $('#frm_approve').hide();
         $('#frm_not_approve').hide();
@@ -162,9 +165,9 @@ $(document).on('click', 'button[data-btn="btn_approve"]', function(e) {
     $("#approve option[value="+approve+"]").attr('selected', 'selected');
     $("#car_id option[value="+car_id+"]").attr('selected', 'selected');
     $("#driver option[value="+driver_id+"]").attr('selected', 'selected');
+    $("#outsite_id").val(outsite_id);
     $('#cause').val(cause);
     $('#id').val(id);
-
 
 
 });

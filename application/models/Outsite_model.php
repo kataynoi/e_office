@@ -311,13 +311,19 @@ class Outsite_model extends CI_Model
             ->set('travel_type', $data['travel_type'])
             ->set('travel_cause', $data['travel_cause'])
             ->set('license_plate', $data['license_plate'])
+            ->set('expand','NULL',false)
             //->set('driver',$data['driver'])
             ->update('outsite_permit');
         $i = 1;
-        $this->db
-            ->where('outsite_id', $data['id'])
-            ->delete('outsite_member');
 
+        // Delete Member
+        $this->db->where('outsite_id', $data['id'])->delete('outsite_member');
+        $this->db
+            ->set('sign_type','NULL',false)
+            ->set('permit_id','NULL',false)
+            ->set('note','NULL',false)
+            ->where('permit_id', $data['id'])
+            ->update('sign_work');
         $lastid = $data['id'];
         foreach ($data['users'] as $u) {
             $sql = "INSERT IGNORE INTO outsite_member(`user_id`,`outsite_id`,`order`) VALUES($u,$lastid,$i)";
@@ -349,10 +355,16 @@ class Outsite_model extends CI_Model
 
     public function del_outsite($id, $user_id)
     {
+        $this->db->trans_start();
         $rs = $this->db
             ->where('id', $id)
             ->where('permit_user', $user_id)
             ->delete('outsite_permit');
+        $this->db
+            ->where('outsite_id', $id)
+            ->delete('used_car');
+        $this->db->where('outsite_id', $id)->delete('outsite_member');
+        $this->db->trans_complete();
         return $rs;
     }
 

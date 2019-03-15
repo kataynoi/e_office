@@ -144,7 +144,7 @@ $(document).ready(function () {
         outsite.ajax.save_outsite(items, function (err, data) {
             if (err) {
                 //app.alert(err);
-                swal('รายชื่อผู้ขออณุญาติซ้ำกัน');
+                swal(err);
             }
             else {
                 if(items.action == 'insert'){
@@ -405,6 +405,10 @@ $(document).ready(function () {
             swal('กรุณาระบุรายละเอียดการเชิญประชุมให้ครบถ้วน');
         }else if(items.invite==2 && (!items.invit_subject || !items.invit_place )){
             swal('กรุณาระบุเรื่องและสถานที่ไปราชการให้ครบถ้วน');
+        }else if(!items.permit_start_date || !items.permit_end_date){
+            swal('กรุณาระบุวันที่ต้องการไปราชการ');
+        }else if(items.permit_start_date > items.permit_end_date){
+            swal('วันสุดท้ายการไปราชการก่อนวันเริ่มต้นไม่ได้');
         }else if(!items.objective){
             swal('กรุณาระบุวัตถุประสงค์การไปราชการ');
             $('#objective').focus();
