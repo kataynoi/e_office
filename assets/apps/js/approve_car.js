@@ -81,7 +81,7 @@ approve_index.save_used_car = function(items){
         else {
             //swal('ลบข้อมูลเรียบร้อย')
             app.alert('บันทึกข้อมูลเรียบร้อย');
-            //location.reload();
+            location.reload();
 
         }
     });

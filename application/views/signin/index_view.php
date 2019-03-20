@@ -7,7 +7,10 @@
  */
 
 ?>
-<table class="table table-bordered">
+<p>
+
+</p>
+<table class="table table-bordered" style="font-size: smaller">
     <thead>
     <tr>
         <th>#</th>
