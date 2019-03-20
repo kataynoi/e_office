@@ -114,12 +114,10 @@ class Car_model extends CI_Model
             ->set('approve',$data['approve'])
             ->set('cause', $data['cause'])
             ->update('used_car');
+
         if($data['approve']=='1' && $data['driver'] !='' ) {
-            $this->db
-                ->set('user_id', $data['driver'])
-                ->set('outsite_id', $data['outsite_id'])
-                ->set('order', 99)
-                ->insert('outsite_member');
+            $sql = "INSERT IGNORE INTO `outsite_member` (`user_id`, `outsite_id`, `order`) VALUES (".$data['driver'].", ".$data['outsite_id'].", 99)";
+            $this->db->query($sql);
         }
         $this->db->trans_complete();
         return $rs;
