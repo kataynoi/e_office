@@ -84,10 +84,15 @@ $(document).on('click', 'button[data-btn="lock"]', function(e) {
     console.log('Function Lock');
     var id = $(this).data('id');
     var lock = $(this).data('lock');
-
+    var lock_text ='';
+    if(lock==1){
+        lock_text = 'สิปลดล๊อคแม่นบ่ กะกดติ๊ละ .....';
+    }else{
+        lock_text ='นั่น!!!  สิล๊อค ติบาดหนิ..... กดสะแม้';
+    }
     swal({
         title: "คำเตือน?",
-        text: "คุณต้องการปลดล๊อคหรือไม่ ",
+        text: lock_text,
         icon: "warning",
         buttons: [
             'cancel !',
