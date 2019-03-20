@@ -394,6 +394,10 @@ $(document).ready(function () {
 
 
     function validate_outsite (items,user_id,used_car){
+
+        var permit_start_date = app.string_to_date(app.to_string_date_mysql(items.permit_start_date));
+        var permit_end_date = app.string_to_date(app.to_string_date_mysql(items.permit_end_date));
+
         if (!items.date_permit) {
             swal('กรุณาระบุวันที่ขออนุญาติไปราชการ');
             $('#date_permit').focus();
@@ -407,7 +411,7 @@ $(document).ready(function () {
             swal('กรุณาระบุเรื่องและสถานที่ไปราชการให้ครบถ้วน');
         }else if(!items.permit_start_date || !items.permit_end_date){
             swal('กรุณาระบุวันที่ต้องการไปราชการ');
-        }else if(items.permit_start_date > items.permit_end_date){
+        }else if(permit_start_date > permit_end_date){
             swal('วันสุดท้ายการไปราชการก่อนวันเริ่มต้นไม่ได้');
         }else if(!items.objective){
             swal('กรุณาระบุวัตถุประสงค์การไปราชการ');

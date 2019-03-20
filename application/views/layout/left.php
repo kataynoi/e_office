@@ -83,7 +83,10 @@
 
             </li>-->
             <li>
-                <a href="<?php echo site_url('admin/login')?>"><i class="fa fa-user-secret fa-fw"></i> ผู้ใช้งานระบบ (สำหรับ Admin)</a>
+                <a href="<?php echo site_url('signin/')?>"><i class="far fa-calendar-check"></i> รายงานลงเวลาปฏิบัติราชการ</a>
+            </li>
+            <li>
+                <a href="<?php echo site_url('admin/login')?>"><i class="far fa-calendar-check"></i></a>
             </li>
         </ul>
     </div>

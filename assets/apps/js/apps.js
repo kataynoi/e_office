@@ -240,6 +240,16 @@ app.to_string_date = function(s) {
     var str = d[2] + d[1] + d[0];
     return str;
 };
+app.to_string_date_mysql = function(s) {
+    var d = s.split('/');
+    var str = (d[2]-543)+'-'+ d[1] +'-'+ d[0];
+    return str;
+};
+app.string_to_date = function(s) {
+    var parts =s.split('-');
+    var mydate = new Date(parts[0], parts[1] - 1, parts[2]);
+    return mydate;
+};
 
 $(function() {
     app.set_runtime();
