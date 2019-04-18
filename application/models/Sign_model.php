@@ -23,7 +23,7 @@ class Sign_model extends CI_Model
                         LEFT JOIN mas_users b ON a.user_id = b.id
                         LEFT JOIN sign_type c ON a.sign_type = c.id
                         WHERE b.`group`='".$workgroup."'
-                        GROUP BY a.user_id ";
+                        GROUP BY a.user_id ORDER BY b.order";
         $rs=$this->db->query($sql)->result();
         return $rs;
 
