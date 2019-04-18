@@ -251,6 +251,12 @@ app.string_to_date = function(s) {
     return mydate;
 };
 
+app.daysInMonth = function(year) {
+    var array = year.split("-");
+    console.log(array[0]+ array[1]);
+        return new Date(array[0], array[1], 0).getDate();
+};
+
 $(function() {
     app.set_runtime();
 });

@@ -71,7 +71,7 @@ if ( ! function_exists('year'))
 {
     function year()
     {
-        $year='2019';
+        $year=2019;
 
         return $year;
 
@@ -127,6 +127,16 @@ if(!function_exists('to_thai_date'))
     }
 }
 
+if(!function_exists('get_thai_month'))
+{
+    function get_thai_month()
+    {
+        $strMonth = Array("มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน",'กรกฎาคม',"สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
+    return$strMonth;
+    }
+
+}
+
 if(!function_exists('to_thai_date_full'))
 {
     function to_thai_date_full($eng_date)
@@ -139,15 +149,10 @@ if(!function_exists('to_thai_date_full'))
         else
         {
             $new_date = explode('-', $eng_date);
-
             $new_y = (int) $new_date[0] + 543;
-
             $new_m = (string)$strMonthCut[(int)$new_date[1]];
-
             $new_d = $new_date[2];
-
             $thai_date = to_thai_number((int)$new_d) . ' ' . $new_m . ' ' . to_thai_number($new_y);
-
             return $thai_date;
         }
     }
