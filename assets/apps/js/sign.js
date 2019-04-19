@@ -25,7 +25,7 @@ $(document).ready(function(){
                 //data = JSON.parse(data);
                 console.log(data.success);
                 if(data.success){
-                    swal('Get Success');
+                    //swal('Get Success');
                     var no=1;
                     $('#tbl_list > tbody').empty();
                     if (_.size(data.rows) > 0) {
