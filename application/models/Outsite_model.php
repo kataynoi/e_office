@@ -39,7 +39,7 @@ class Outsite_model extends CI_Model
             ->select('a.user_id,b.name,b.position,b.driver')
             ->where('a.outsite_id', $id)
             ->join('mas_users b', 'a.user_id = b.id')
-            ->order_by('order')
+            ->order_by('a.order')
             ->get('outsite_member a')
             ->result_array();
         return $rs;
@@ -383,7 +383,7 @@ class Outsite_model extends CI_Model
             ->select('a.user_id,b.prename, b.name,b.position')
             ->where('a.outsite_id', $id)
             ->join('mas_users b', 'a.user_id=b.id')
-            ->order_by('order')
+            ->order_by('a.order')
             ->get('outsite_member a')
             ->result();
         return $rs;
