@@ -20,7 +20,7 @@
             <option value="<?php echo year()+543;?>"> เลือกปี </option>
             <?php
             $s='';
-            for($i=2562;$i<=2570;$i++){
+            for($i=2561;$i<=2570;$i++){
                 $i==(year()+543)?$s='selected':$s='';
                 echo '<option value='.($i-543).' '.$s.'>'.$i.'</option>';
             }
