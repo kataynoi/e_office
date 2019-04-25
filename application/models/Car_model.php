@@ -123,6 +123,10 @@ class Car_model extends CI_Model
             $sql = "INSERT IGNORE INTO `outsite_member` (`user_id`, `outsite_id`, `order`,`note`) VALUES (".$data['driver'].", ".$data['outsite_id'].", 99,'driver')";
             $this->db->query($sql);
         }
+        $this->db
+            ->where('id',$data['outsite_id'])
+            ->set('expand',NULL)
+            ->update('outsite_permit');
         $this->db->trans_complete();
         return $rs;
     }
