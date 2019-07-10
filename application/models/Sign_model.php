@@ -17,10 +17,6 @@ class Sign_model extends CI_Model
                         a.user_id,CONCAT(b.prename,b.`name`) as `name`
 
                         ,GROUP_CONCAT(CONCAT(DATE_FORMAT(date_work,'%d'),'|',sign_in,'|',sign_out,'|',c.s_type)) as date_work1
-                        ,GROUP_CONCAT(date_work) as date_work
-                        ,GROUP_CONCAT(sign_in) as sign_in
-                        ,GROUP_CONCAT(sign_out) as sign_out
-                        ,GROUP_CONCAT(c.s_type) as sign_type
                         ,b.order as member_order
                         FROM (SELECT * FROM sign_work WHERE DATE_FORMAT(date_work,'%Y-%m') = '".$month."' ORDER BY date_work ASC) a
                         LEFT JOIN mas_users b ON a.user_id = b.id

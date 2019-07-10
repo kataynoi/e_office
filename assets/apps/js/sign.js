@@ -41,7 +41,6 @@ $(document).ready(function(){
             if (_.size(data.rows) > 0) {
                 _.each(data.rows, function (v) {
                     //v.sign_in = v.sign_in.replace('00:00:00','-');
-
                     var sign_work = v.date_work1.split(",");
 
                     var signin_txt='';
