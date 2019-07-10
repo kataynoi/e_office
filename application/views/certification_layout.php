@@ -88,7 +88,7 @@
         <!-- /.navbar-static-side -->
     </nav>
     <div>
-        <div id="page-wrapper">
+        <div style="margin-left: 50px;margin-right: 50px">
            <!-- <button id="hide_left" data-show="true">Hide</button>-->
             <?php echo $content_for_layout?>
         </div>

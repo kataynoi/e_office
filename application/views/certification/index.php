@@ -10,8 +10,6 @@
     <div class="panel panel-info ">
         <div class="panel-heading w3-theme">
             <i class="fa fa-user fa-2x "></i> ข้อมูลผู้ขอรับเกียรติบัตร
-            <span class="pull-right"> <a href="<?php echo site_url() ?>/outsite/add_outsite_permit"
-                                         class="btn btn-success"><i class="fa fa-save"></i> </a>
 </span>
 
         </div>

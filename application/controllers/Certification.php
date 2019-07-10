@@ -29,7 +29,7 @@ class Certification extends CI_Controller
             $sub_array = array();
             $sub_array[] = $row->id;
             $sub_array[] = $row->name;
-            $sub_array[] ='<a href="'.site_url('certification/certification_pdf/').$row->id.'" target="_blank" class="btn btn-info">พิมพ์เกียรติบัตร</a>';
+            $sub_array[] ='<a href="'.site_url('certification/certification_pdf/').$row->id.'" target="_blank" class="btn btn-info"><i class="fa fa-print  "></i> พิมพ์เกียรติบัตร</a>';
             $data[] = $sub_array;
         }
         $output = array(
