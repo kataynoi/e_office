@@ -8,6 +8,12 @@ application.rar
 composer.json
 application/config/database.php
 application/config/config.php
+application/controllers/Crud.php
+application/models/Crud_model.php
+application/views/crud
+application/views/layout/left_crud.php
+application/views/crud_layout.php
 contributing.md
 /vendor
+assets/apps/crud.js
 *.docx

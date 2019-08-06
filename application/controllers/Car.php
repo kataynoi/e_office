@@ -4,6 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Car extends CI_Controller
 {
 
+    //public  $token = "SqTlGz2Hl6kNa45hsespDXvgw899jVnT2155p3qL7wl";
+    public  $token = "11td8e4FDnxXdd6mtOru9RlCmR56r8g778duDN"; //ขอใช้รถจริง
     public function __construct()
     {
         parent::__construct();
@@ -167,12 +169,49 @@ class Car extends CI_Controller
     public function  save_used_car(){
         $data = $this->input->post('items');
         $rs=$this->car->update_used_car($data);
+
         if($rs){
+            $line_message= $this->get_line_message($data['id'],$data['approve']);
+            $this->notify_message($line_message,$this->token);
             $json = '{"success": true}';
         }else{
             $json = '{"success": false}';
         }
 
+
         render_json($json);
+    }
+    public  function get_line_message($id,$approve){
+
+        if($approve=='1'){
+            $rs =$this->car->get_message_approve($id);
+            $message = 'อนุมัติ -> รายการขอรถที่ '.$id.' ขอโดย '.$rs['control_car'].' ไปราชการที่ '.$rs['invit_place']//.' เพื่อ'.$rs['objective']
+                .' ['.to_thai_date_short($rs['permit_start_date']).'-'.to_thai_date_short($rs['permit_end_date'])
+                .'] ได้รับการอนุมัติ รถยนต์'.$rs['car_name'].'[ '.$rs['licente_plate'].'] พนักงานขับรถ . '.$rs['driver'].' Tel:'.$rs['user_mobile'];
+        }else if($approve=='2'){
+            $rs =$this->car->get_message_notapprove($id);
+            $message = 'ไม่อนุมัติ->รายการขอรถที่ '.$id.' ขอโดย '.$rs['control_car'].' ไปราชการที่ '.$rs['invit_place']//.'เพื่อ '.$rs['objective']
+                .'['.to_thai_date_short($rs['permit_start_date']).'-'.to_thai_date_short($rs['permit_end_date'])
+                .'] ไม่ได้รับการอนุมัติ เนื่องจาก'.$rs['cause'];
+
+        }
+        return $message;
+    }
+    public  function notify_message($message,$token){
+        $queryData = array('message' => $message);
+        $queryData = http_build_query($queryData,'','&');
+        $headerOptions = array(
+            'http'=>array(
+                'method'=>'POST',
+                'header'=> "Content-Type: application/x-www-form-urlencoded\r\n"
+                    ."Authorization: Bearer ".$token."\r\n"
+                    ."Content-Length: ".strlen($queryData)."\r\n",
+                'content' => $queryData
+            ),
+        );
+        $context = stream_context_create($headerOptions);
+        $result = file_get_contents(LINE_API,FALSE,$context);
+        $res = json_decode($result);
+        return $res;
     }
 }
