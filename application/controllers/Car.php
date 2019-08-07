@@ -191,7 +191,7 @@ class Car extends CI_Controller
                 .'] ได้รับการอนุมัติ รถยนต์'.$rs['car_name'].'[ '.$rs['licente_plate'].'] พนักงานขับรถ . '.$rs['driver'].' Tel:'.$rs['driver_mobile'];
         }else if($approve=='2'){
             $rs =$this->car->get_message_notapprove($id);
-            $message = 'ไม่อนุมัติ->รายการขอรถที่ '.$id.' ขอโดย '.$rs['control_car'].' ไปราชการที่ '.$rs['invit_place']//.'เพื่อ '.$rs['objective']
+            $message = 'ไม่อนุมัติ->รายการขอรถที่ '.$id.' ขอโดย '.$rs['control_car'].'['.$rs['control_car_mobile'].'] ไปราชการที่ '.$rs['invit_place']//.'เพื่อ '.$rs['objective']
                 .'['.to_thai_date_short($rs['permit_start_date']).'-'.to_thai_date_short($rs['permit_end_date'])
                 .'] ไม่ได้รับการอนุมัติ เนื่องจาก'.$rs['cause'];
 
