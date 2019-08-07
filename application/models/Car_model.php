@@ -133,7 +133,7 @@ class Car_model extends CI_Model
 
     public function get_message_approve($id){
         $rs = $this->db
-            ->select('CONCAT(c.prename,c.name) as control_car,CONCAT(e.prename,e.name) as driver, b.invit_place,b.permit_start_date,b.permit_end_date,b.objective,d.name as car_name,d.licente_plate,e.user_mobile,a.cause')
+            ->select('CONCAT(c.prename,c.name) as control_car,CONCAT(e.prename,e.name) as driver, b.invit_place,b.permit_start_date,b.permit_end_date,b.objective,d.name as car_name,d.licente_plate,e.user_mobile as driver_mobile,c.user_mobile as control_car_mobile,a.cause')
             ->where('a.id',$id)
             ->join('outsite_permit as b','a.outsite_id = b.id')
             ->join('mas_users as c','a.control_car = c.id')
