@@ -5,7 +5,7 @@ class Car extends CI_Controller
 {
 
     //public  $token = "SqTlGz2Hl6kNa45hsespDXvgw899jVnT2155p3qL7wl";
-    public  $token = "11td8e4FDnxXdd6mtOru9RlCmR56r8g778duDN"; //ขอใช้รถจริง
+    public  $token = "T87rTXoPjNMSgGcXzky6PEi8n0dmfXVoEZ0jg8NScNU"; //ขอใช้รถจริง
     public function __construct()
     {
         parent::__construct();
@@ -172,12 +172,11 @@ class Car extends CI_Controller
 
         if($rs){
             $line_message= $this->get_line_message($data['id'],$data['approve']);
-            $this->notify_message($line_message,$this->token);
+            $this->notify_message2($line_message,$this->token);
             $json = '{"success": true}';
         }else{
             $json = '{"success": false}';
         }
-
 
         render_json($json);
     }
@@ -210,8 +209,34 @@ class Car extends CI_Controller
             ),
         );
         $context = stream_context_create($headerOptions);
+        //$my_url = urlencode(LINE_API);
         $result = file_get_contents(LINE_API,FALSE,$context);
         $res = json_decode($result);
         return $res;
     }
+
+public function notify_message2($message,$token){
+    //$token = $this->token; // ใส่โทเคน
+    $str = $message; // ใส่ข้อความที่ต้องการ
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://notify-api.line.me/api/notify",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => "message=".$str,
+        CURLOPT_HTTPHEADER => array(
+            "Authorization: Bearer ".$token,
+            "Cache-Control: no-cache",
+            "Content-type: application/x-www-form-urlencoded"
+        ),
+    ));
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+    curl_close($curl);
+}
+
 }
