@@ -5,6 +5,7 @@ class Car extends CI_Controller
 {
 
     //public  $token = "SqTlGz2Hl6kNa45hsespDXvgw899jVnT2155p3qL7wl";
+    public  $token_car = "jUkE7zzX5hw8qJwxO1cFLPF2BWtOrmYcEiOZu3yxpxE";
     public  $token = "T87rTXoPjNMSgGcXzky6PEi8n0dmfXVoEZ0jg8NScNU"; //ขอใช้รถจริง
     public function __construct()
     {
@@ -173,6 +174,7 @@ class Car extends CI_Controller
         if($rs){
             $line_message= $this->get_line_message($data['id'],$data['approve']);
             $this->notify_message2($line_message,$this->token);
+            $this->notify_message2($line_message,$this->token_car);
             $json = '{"success": true}';
         }else{
             $json = '{"success": false}';
@@ -196,28 +198,9 @@ class Car extends CI_Controller
         }
         return $message;
     }
-    public  function notify_message($message,$token){
-        $queryData = array('message' => $message);
-        $queryData = http_build_query($queryData,'','&');
-        $headerOptions = array(
-            'http'=>array(
-                'method'=>'POST',
-                'header'=> "Content-Type: application/x-www-form-urlencoded\r\n"
-                    ."Authorization: Bearer ".$token."\r\n"
-                    ."Content-Length: ".strlen($queryData)."\r\n",
-                'content' => $queryData
-            ),
-        );
-        $context = stream_context_create($headerOptions);
-        //$my_url = urlencode(LINE_API);
-        $result = file_get_contents(LINE_API,FALSE,$context);
-        $res = json_decode($result);
-        return $res;
-    }
 
 public function notify_message2($message,$token){
-    //$token = $this->token; // ใส่โทเคน
-    $str = $message; // ใส่ข้อความที่ต้องการ
+    $str = $message;
     $curl = curl_init();
     curl_setopt_array($curl, array(
         CURLOPT_URL => "https://notify-api.line.me/api/notify",
