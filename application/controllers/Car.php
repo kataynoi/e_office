@@ -4,9 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Car extends CI_Controller
 {
 
-    //public  $token = "SqTlGz2Hl6kNa45hsespDXvgw899jVnT2155p3qL7wl";
-    public  $token_car = "jUkE7zzX5hw8qJwxO1cFLPF2BWtOrmYcEiOZu3yxpxE";
-    public  $token = "T87rTXoPjNMSgGcXzky6PEi8n0dmfXVoEZ0jg8NScNU"; //ขอใช้รถจริง
+
+    public  $token_car =  LINE_TOKEN_CAR; // ยาน
+    public  $token = LINE_TOKEN_CARUSE; //ขอใช้รถจริง
     public function __construct()
     {
         parent::__construct();

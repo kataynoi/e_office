@@ -153,4 +153,5 @@ class Car_model extends CI_Model
             ->row_array();
         return $rs;
     }
+
 }
