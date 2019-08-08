@@ -172,9 +172,14 @@ class Car extends CI_Controller
         $rs=$this->car->update_used_car($data);
 
         if($rs){
+
             $line_message= $this->get_line_message($data['id'],$data['approve']);
-            $this->notify_message2($line_message,$this->token);
-            $this->notify_message2($line_message,$this->token_car);
+            if($data['approve']=='1'){
+                $this->notify_message($line_message,$this->token);
+                $this->notify_message($line_message,$this->token_car);
+            }elseif($data['approve']=='2'){
+                $this->notify_message($line_message,$this->token);
+            }
             $json = '{"success": true}';
         }else{
             $json = '{"success": false}';
@@ -199,7 +204,7 @@ class Car extends CI_Controller
         return $message;
     }
 
-public function notify_message2($message,$token){
+public function notify_message($message,$token){
     $str = $message;
     $curl = curl_init();
     curl_setopt_array($curl, array(
