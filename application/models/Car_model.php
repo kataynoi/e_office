@@ -145,7 +145,7 @@ class Car_model extends CI_Model
     }
     public function get_message_notapprove($id){
         $rs = $this->db
-            ->select('CONCAT(c.prename,c.name) as control_car, b.invit_place,b.permit_start_date,b.permit_end_date,b.objective,a.cause')
+            ->select('CONCAT(c.prename,c.name) as control_car, b.invit_place,b.permit_start_date,b.permit_end_date,b.objective,c.user_mobile as control_car_mobile,a.cause')
             ->where('a.id',$id)
             ->join('outsite_permit as b','a.outsite_id = b.id')
             ->join('mas_users as c','a.control_car = c.id')
