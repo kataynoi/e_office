@@ -13,9 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 defined('SHOW_DEBUG_BACKTRACE') OR define('SHOW_DEBUG_BACKTRACE', TRUE);
 define('LINE_API',"https://notify-api.line.me/api/notify");
-define('LINE_TOKEN_CARUSE',"T87rTXoPjNMSgGcXzky6PEi8n0dmfXVoEZ0jg8NScNU");
-define('LINE_TOKEN_CAR',"jUkE7zzX5hw8qJwxO1cFLPF2BWtOrmYcEiOZu3yxpxE");
-define('LINE_TOKEN_ME',"SqTlGz2Hl6kNa45hsespDXvgw899jVnT2155p3qL7wl");
+
 
 /*
 |--------------------------------------------------------------------------

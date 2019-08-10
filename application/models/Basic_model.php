@@ -46,5 +46,13 @@ class Basic_model extends CI_Model
             ->row();
         return $rs?$rs->prename.$rs->name:'-';
     }
+    public function get_line_token($id){
+
+        $rs = $this->db
+            ->where('id',$id)
+            ->get('line_token')
+            ->row();
+        return $rs?$rs->token:'';
+    }
 
 }
