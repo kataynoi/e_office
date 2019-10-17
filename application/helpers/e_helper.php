@@ -42,7 +42,7 @@ if ( ! function_exists('version'))
 {
     function version()
     {
-        $version=' E Office Mahasarakham 1.0.0';
+        $version=' E Office Mahasarakham 1.0.0 ปีงบประมาณ '.(current_year()+543);
 
         return $version;
 
