@@ -67,14 +67,16 @@ if ( ! function_exists('sys_id'))
  * @param   string  $t Type of serial
  * @return  string
  */
-if ( ! function_exists('year'))
+if ( ! function_exists('current_year'))
 {
-    function year()
+    function current_year()
     {
-        $year=2019;
-
-        return $year;
-
+        $ci =& get_instance();
+        $rs = $ci->db
+            ->limit(1)
+            ->get('config')
+            ->row();
+        return $rs? $rs->config_year : '0';
     }
 
 }
