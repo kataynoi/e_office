@@ -17,11 +17,11 @@
     <form action="#" class="navbar-form">
         <label class="control-label"> ปี </label>
         <select id="sl_year" style="width: 200px;" class="form-control">
-            <option value="<?php echo year()+543;?>"> เลือกปี </option>
+            <option value="<?php echo current_year()+543;?>"> เลือกปี </option>
             <?php
             $s='';
             for($i=2561;$i<=2570;$i++){
-                $i==(year()+543)?$s='selected':$s='';
+                $i==(current_year()+543)?$s='selected':$s='';
                 echo '<option value='.($i-543).' '.$s.'>'.$i.'</option>';
             }
             ?>

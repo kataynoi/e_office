@@ -19,6 +19,7 @@ class Signin extends CI_Controller
         $data['sign'] = '';
         $data['sign_type'] = $this->db->get('sign_type')->result();
         $data['sl_group'] = $this->db->get('co_workgroup')->result();
+
         $this->layout->view('signin/index_view', $data);
 
 

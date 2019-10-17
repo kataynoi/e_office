@@ -52,41 +52,16 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            <!--<li>
-                <a href="#"><i class="fas fa-calendar-plus"></i> จองห้องประชุม (รอก่อนนะ...)<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="#">Second Level Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Second Level Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Third Level <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level">
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                        </ul>
 
-                    </li>
-                </ul>
-
-            </li>-->
             <li>
-                <a href="<?php echo site_url('signin/')?>"><i class="far fa-calendar-check"></i> รายงานลงเวลาปฏิบัติราชการ</a>
+                <a href="#"><i class="fa fa-bus fa-fw"></i> งานบุคลากร<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li><a href="<?php echo site_url('/signin/')?>"> รายงานลงเวลาปฏิบัติราชการ</a></li>
+                    <li><a href="<?php echo site_url('/employee')?>"> บุคลากร</a></li>
+                </ul>
             </li>
             <li>
-                <a href="<?php echo site_url('admin/login')?>"><i class="far fa-calendar-check"></i></a>
+                <a href="<?php echo site_url('admin/login')?>"><i class="far fa-calendar-check">Admin</i></a>
             </li>
         </ul>
     </div>
