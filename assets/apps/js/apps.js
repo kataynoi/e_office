@@ -256,6 +256,13 @@ app.daysInMonth = function(year) {
     console.log(array[0]+ array[1]);
         return new Date(array[0], array[1], 0).getDate();
 };
+app.wait=function (ms)
+{
+    var d = new Date();
+    var d2 = null;
+    do { d2 = new Date(); }
+    while(d2-d < ms);
+}
 
 $(function() {
     app.set_runtime();
