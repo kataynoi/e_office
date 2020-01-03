@@ -22,7 +22,7 @@ class Car extends CI_Controller
 
     public function index()
     {
-        $data['user'] = $this->db->get('mas_users')->result();
+        $data['user'] = $this->db->get('employee')->result();
 
         $this->layout->view('welcome_message', $data);
     }

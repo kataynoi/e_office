@@ -38,7 +38,7 @@ class Outsite_model extends CI_Model
         $rs = $this->db
             ->select('a.user_id,b.name,b.position,b.driver')
             ->where('a.outsite_id', $id)
-            ->join('mas_users b', 'a.user_id = b.id')
+            ->join('employee b', 'a.user_id = b.id')
             ->order_by('a.order')
             ->get('outsite_member a')
             ->result_array();
@@ -61,7 +61,7 @@ class Outsite_model extends CI_Model
         $rs = $this->db
             ->where('id', $id)
             ->limit(1)
-            ->get('mas_users')
+            ->get('employee')
             ->row();
         //echo $this->db->last_query();
         return $rs ? $rs->prename . $rs->name : NULL;
@@ -72,7 +72,7 @@ class Outsite_model extends CI_Model
         $rs = $this->db
             ->where('id', $id)
             ->limit(1)
-            ->get('mas_users')
+            ->get('employee')
             ->row();
         //echo $this->db->last_query();
         return $rs ? $rs->position : 'xxxx';
@@ -119,7 +119,7 @@ class Outsite_model extends CI_Model
         $rs = $this->db
             ->where('id', $id)
             ->limit(1)
-            ->get('mas_users')
+            ->get('employee')
             ->row();
         //echo $this->db->last_query();
         return $rs;
@@ -382,7 +382,7 @@ class Outsite_model extends CI_Model
         $rs = $this->db
             ->select('a.user_id,b.prename, b.name,b.position')
             ->where('a.outsite_id', $id)
-            ->join('mas_users b', 'a.user_id=b.id')
+            ->join('employee b', 'a.user_id=b.id')
             ->order_by('a.order')
             ->get('outsite_member a')
             ->result();
@@ -411,7 +411,7 @@ class Outsite_model extends CI_Model
             ->select('b.book_number')
             ->where('a.id', $user_id)
             ->join('co_workgroup b ', 'a.group = b.id')
-            ->get('mas_users a')
+            ->get('employee a')
             ->row();
         return $rs ? $rs->book_number : '-';
 
@@ -422,7 +422,7 @@ class Outsite_model extends CI_Model
             ->select('b.name')
             ->where('a.id', $user_id)
             ->join('co_workgroup b ', 'a.group = b.id')
-            ->get('mas_users a')
+            ->get('employee a')
             ->row();
         return $rs ? $rs->name : '-';
 
@@ -433,8 +433,8 @@ class Outsite_model extends CI_Model
             ->select('b.licente_plate,concat(c.prename,c.name) as driver,concat(d.prename,d.name) as control_car',false)
             ->where('a.outsite_id', $id)
             ->join('car b ', 'a.car_id = b.id','left')
-            ->join('mas_users c ', 'a.driver = c.id','left')
-            ->join('mas_users d ', 'a.control_car = d.id','left')
+            ->join('employee c ', 'a.driver = c.id','left')
+            ->join('employee d ', 'a.control_car = d.id','left')
             ->get('used_car a')
             ->result();
         return $rs ;
@@ -446,7 +446,7 @@ class Outsite_model extends CI_Model
             ->select('a.driver, a.outsite_id, a.control_car,Concat(b.licente_plate,"(",b.name,")") as car_name,a.car_id,CONCAT(c.prename,c.name) as driver_name,c.user_mobile,a.approve, a.cause', false)
             ->where('outsite_id', $id)
             ->join('car b ', 'a.car_id=b.id', 'left')
-            ->join('mas_users c ', 'a.driver = c.id', 'left')
+            ->join('employee c ', 'a.driver = c.id', 'left')
             ->get('used_car a')
             ->result_array();
         return $rs;

@@ -514,7 +514,7 @@ if (!function_exists('get_group_name_by_user')) {
         $rs = $ci->db
             ->where('a.id', $user_id)
             ->join('co_workgroup b', 'a.group = b.id')
-            ->get('mas_users a')
+            ->get('employee a')
             ->row();
         return $rs ? $rs->name : '-';
     }

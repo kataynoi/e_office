@@ -19,7 +19,7 @@ class Sign_model extends CI_Model
                         ,GROUP_CONCAT(CONCAT(DATE_FORMAT(date_work,'%d'),'|',sign_in,'|',sign_out,'|',c.s_type)) as date_work1
                         ,b.order as member_order
                         FROM (SELECT * FROM sign_work WHERE DATE_FORMAT(date_work,'%Y-%m') = '".$month."' ORDER BY date_work ASC) a
-                        LEFT JOIN mas_users b ON a.user_id = b.id
+                        LEFT JOIN employee b ON a.user_id = b.id
                         LEFT JOIN sign_type c ON a.sign_type = c.id
                         WHERE b.`group`='".$workgroup."'
                         GROUP BY a.user_id) a ORDER BY a.member_order";

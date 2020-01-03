@@ -84,9 +84,7 @@
                         <label for="name">เลขบัตรประชาชน</label>
                         <input type="text" class="form-control" id="cid"
                                placeholder="3440120000000" value="<?php echo $user_profiles['cid']?>"  >
-                        <label for="name">Username</label>
-                        <input type="text" class="form-control" id="username"
-                               placeholder="" value="<?php echo $user_profiles['username']?>"  >
+
                         <label for="name">หน่วยบริการ</label>
                             <select class="form-control" id="hospcode">
                                 <?php

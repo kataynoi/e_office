@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Employee_model extends CI_Model
 {
-    var $table = "mas_users as a";
+    var $table = "employee as a";
     var $order_column = Array('prename', 'name', 'position', 'group', 'user_mobile');
 
     function make_query()

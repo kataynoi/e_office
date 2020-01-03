@@ -21,8 +21,8 @@ class Car_model extends CI_Model
         $this->db->select($this->select_column);
         //$this->db->where('permit_user', $user_id);
         $this->db->join('car b ', 'a.car_id = b.id','left');
-        $this->db->join('mas_users c ', 'a.driver = c.id','left');
-        $this->db->join('mas_users d ', 'a.control_car = d.id','left');
+        $this->db->join('employee c ', 'a.driver = c.id','left');
+        $this->db->join('employee d ', 'a.control_car = d.id','left');
         $this->db->join('outsite_permit e ', 'a.outsite_id = e.id');
         $this->db->from($this->table);
         if (isset($_POST["search"]["value"])) {
@@ -70,7 +70,7 @@ class Car_model extends CI_Model
    public function get_car_list(){
        $rs = $this->db
            ->select('a.*,CONCAT(b.prename,b.name) as driver_name')
-           ->join('mas_users b' , 'a.default_driver=b.id','left')
+           ->join('employee b' , 'a.default_driver=b.id','left')
            ->get('car a')
            ->result();
        return $rs;
@@ -78,7 +78,7 @@ class Car_model extends CI_Model
     public function get_driver_list(){
        $rs = $this->db
            ->select('a.user_id,b.id,CONCAT(b.prename,b.name) as driver_name,b.user_mobile,b.position')
-           ->join('mas_users b' , 'a.user_id=b.id','left')
+           ->join('employee b' , 'a.user_id=b.id','left')
            ->get('driver a')
            ->result();
        return $rs;
@@ -89,8 +89,8 @@ class Car_model extends CI_Model
         $rs = $this->db
             ->select('b.licente_plate,concat(c.prename,c.name) as driver,concat(d.prename,d.name) as control_car',false)
             ->join('car b ', 'a.car_id = b.id','left')
-            ->join('mas_users c ', 'a.driver = c.id','left')
-            ->join('mas_users d ', 'a.control_car = d.id','left')
+            ->join('employee c ', 'a.driver = c.id','left')
+            ->join('employee d ', 'a.control_car = d.id','left')
             ->get('used_car a')
             ->result();
         return $rs ;
@@ -136,9 +136,9 @@ class Car_model extends CI_Model
             ->select('CONCAT(c.prename,c.name) as control_car,CONCAT(e.prename,e.name) as driver, b.invit_place,b.permit_start_date,b.permit_end_date,b.objective,d.name as car_name,d.licente_plate,e.user_mobile as driver_mobile,c.user_mobile as control_car_mobile,a.cause')
             ->where('a.id',$id)
             ->join('outsite_permit as b','a.outsite_id = b.id')
-            ->join('mas_users as c','a.control_car = c.id')
+            ->join('employee as c','a.control_car = c.id')
             ->join('car as d','a.car_id = d.id')
-            ->join('mas_users as e','a.driver = e.id')
+            ->join('employee as e','a.driver = e.id')
             ->get('used_car as a')
             ->row_array();
         return $rs;
@@ -148,7 +148,7 @@ class Car_model extends CI_Model
             ->select('CONCAT(c.prename,c.name) as control_car, b.invit_place,b.permit_start_date,b.permit_end_date,b.objective,c.user_mobile as control_car_mobile,a.cause')
             ->where('a.id',$id)
             ->join('outsite_permit as b','a.outsite_id = b.id')
-            ->join('mas_users as c','a.control_car = c.id')
+            ->join('employee as c','a.control_car = c.id')
             ->get('used_car as a')
             ->row_array();
         return $rs;

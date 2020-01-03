@@ -53,7 +53,6 @@ $(document).ready(function(){
         var items={};
         items.id=$('#id').val();
         items.prename = $('#prename').val();
-        items.username=$('#username').val();
         items.name = $('#name').val();
         items.cid=$('#cid').val();
         items.hospcode=$('#hospcode').val();
@@ -72,9 +71,6 @@ $(document).ready(function(){
         }else if (!items.email) {
             swal('กรุณาระบุ email');
             $('#email').focus();
-        }else if(!items.username){
-            swal('กรุณาระบุ Username');
-            $('#username').focus();
         }else{
             console.log(items);
             console.log('Test save Profiles');

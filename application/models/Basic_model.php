@@ -42,7 +42,7 @@ class Basic_model extends CI_Model
 
         $rs = $this->db
             ->where('id',$id)
-            ->get('mas_users')
+            ->get('employee')
             ->row();
         return $rs?$rs->prename.$rs->name:'-';
     }

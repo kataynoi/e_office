@@ -33,7 +33,7 @@ class Welcome extends CI_Controller
             ->count_all_results();
         $data['count_users'] = $this->db
             ->where('active','1')
-            ->from('mas_users')
+            ->from('employee')
             ->count_all_results();
         $data['outsite_today'] = $this->db->select('id,permit_user,objective,invit_place,permit_start_date,permit_end_date')
             ->where("DATE_FORMAT(NOW(),'%Y-%m-%d') = permit_start_date")
