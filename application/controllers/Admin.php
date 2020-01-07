@@ -18,7 +18,8 @@ class Admin extends CI_Controller
     public function index()
     {
         $data[] = '';
-        $data["cequipment"] = $this->crud->get_cequipment();$data["use_status"] = $this->crud->get_use_status();
+        //$data["cequipment"] = $this->crud->get_cequipment();$data["use_status"] = $this->crud->get_use_status();
+        $data[]='';
         $this->layout->view('admin/index', $data);
     }
 

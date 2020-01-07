@@ -14,7 +14,7 @@
     <script src="<?php echo base_url()?>assets/vendor/js/jquery.min.js"></script>
     <script src="<?php echo base_url()?>assets/vendor/js/jquery.blockUI.js"></script>
     <!-- Bootstrap Core CSS -->
-    <link href="<?php echo base_url()?>assets/vendor/css/bootstrap.css" rel="stylesheet">
+    <link href="<?php echo base_url()?>assets/vendor/css/bootstrap3.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
     <link href="<?php echo base_url()?>assets/vendor/css/metisMenu.min.css" rel="stylesheet">
     <!--<link href="<?php /*echo base_url()*/?>assets/vendor/css/left.css" rel="stylesheet"-->

@@ -61,7 +61,7 @@
                 </ul>
             </li>
             <li>
-                <a href="<?php echo site_url('admin/login')?>"><i class="far fa-calendar-check">Admin</i></a>
+                <a href="<?php echo site_url('admin/')?>"><i class="far fa-calendar-check">Admin</i></a>
             </li>
         </ul>
     </div>

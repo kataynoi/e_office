@@ -1,6 +1,6 @@
 <script src="<?php echo base_url()?>assets/vendor/js/jquery.min.js"></script>
 <!-- Bootstrap Core CSS -->
-<link href="<?php echo base_url()?>assets/vendor/css/bootstrap.css" rel="stylesheet">
+<link href="<?php echo base_url()?>assets/vendor/css/bootstrap3.css" rel="stylesheet">
 <link href="<?php echo base_url()?>assets/vendor/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
