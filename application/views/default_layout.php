@@ -14,9 +14,10 @@
     <script src="<?php echo base_url()?>assets/vendor/js/jquery.min.js"></script>
     <script src="<?php echo base_url()?>assets/vendor/js/jquery.blockUI.js"></script>
     <!-- Bootstrap Core CSS -->
-    <link href="<?php echo base_url()?>assets/vendor/css/bootstrap.css" rel="stylesheet">
+    <link href="<?php echo base_url()?>assets/vendor/css/bootstrap3.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
     <link href="<?php echo base_url()?>assets/vendor/css/metisMenu.min.css" rel="stylesheet">
+    <!--<link href="<?php /*echo base_url()*/?>assets/vendor/css/left.css" rel="stylesheet"-->
     <!-- Custom CSS -->
     <link href="<?php echo base_url()?>assets/vendor/css/sb-admin-2.min.css" rel="stylesheet">
     <!--Set Color Page-->
@@ -28,8 +29,8 @@
     <!-- theme Color-->
 
     <!-- Alert Css-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous"> <link href="<?php echo base_url()?>assets/vendor/css/freeow.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/v4-shims.css">
     <!-- Alert Css-->
 
     <!-- Custom Fonts -->
@@ -92,6 +93,7 @@
     </nav>
     <div>
         <div id="page-wrapper">
+           <!-- <button id="hide_left" data-show="true">Hide</button>-->
             <?php echo $content_for_layout?>
         </div>
     </div>
@@ -106,3 +108,4 @@
 </body>
 
 </html>
+

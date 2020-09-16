@@ -3,7 +3,6 @@
 <link href="<?php echo base_url()?>assets/vendor/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 
-
 <html>
 <body>
 <br>
@@ -11,7 +10,7 @@
     <div class="panel panel-info ">
         <div class="panel-heading w3-theme">
             <i class="fa fa-user fa-2x "></i> ข้อมูลการขออนุญาตไปราชการ
-            <span class="pull-right"> <a href="<?php echo site_url()?>/outsite/add_outsite_permit" class="btn btn-success"><i class="fa fa-save"></i> สร้างใบขออณุญาตไปราชการ</a>
+            <span class="pull-right"> <a href="<?php echo site_url()?>/outsite/add_outsite_permit" class="btn btn-success"><i class="fa fa-save"></i> สร้างใบขออนุญาตไปราชการ</a>
 </span>
 
         </div>
@@ -23,8 +22,8 @@
                     <th width="20%">วันที่ไปราชการ</th>
                     <th width="30%">เรื่อง</th>
                     <th width="15%">สถานที่</th>
-                    <th width="20%">ผู้เชิญ</th>
-                    <th width="15%">การจัดการ</th>
+                    <th width="15 %">ผู้ขอนุญาติ</th>
+                    <th width="20%">การจัดการ</th>
 
                 </tr>
                 </thead>

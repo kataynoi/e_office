@@ -11,21 +11,32 @@
     <meta name="author" content="">
 
     <title><?php echo version();?></title>
-    <script src="<?php echo base_url()?>vendor/jquery/jquery.min.js"></script>
+    <script src="<?php echo base_url()?>assets/vendor/js/jquery.min.js"></script>
+    <script src="<?php echo base_url()?>assets/vendor/js/jquery.blockUI.js"></script>
     <!-- Bootstrap Core CSS -->
-    <link href="<?php echo base_url()?>vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="<?php echo base_url()?>assets/vendor/css/bootstrap3.css" rel="stylesheet">
     <!-- MetisMenu CSS -->
-    <link href="<?php echo base_url()?>vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-
+    <link href="<?php echo base_url()?>assets/vendor/css/metisMenu.min.css" rel="stylesheet">
+    <!--<link href="<?php /*echo base_url()*/?>assets/vendor/css/left.css" rel="stylesheet"-->
     <!-- Custom CSS -->
-    <link href="<?php echo base_url()?>dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="<?php echo base_url()?>assets/vendor/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?php echo base_url()?>assets/vendor/css/freeow.css" rel="stylesheet">
+    <!--Set Color Page-->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue.css">
+    <!--
+        https://www.w3schools.com/w3css/w3css_color_themes.asp
+    -->
+    <!-- theme Color-->
+    <link href="<?php echo base_url()?>assets/vendor/css/toggle-button.css" rel="stylesheet">
+    <!-- Alert Css-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/v4-shims.css">
+    <!-- Alert Css-->
 
     <!-- Custom Fonts -->
-    <link href="<?php echo base_url()?>vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="<?php echo base_url()?>vendor/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css">
-
-    <![endif]-->
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Kanit');
     </style>
@@ -34,25 +45,59 @@
 <style>
     body {
         font-family: 'Kanit', sans-serif;
+        font-size: 90%;
     }
 </style>
-<body>
+<!-- Custom Fonts -->
 
+<!-- jQuery -->
+
+
+<!-- Bootstrap Core JavaScript -->
+<script src="<?php echo base_url()?>assets/vendor/js/bootstrap.min.js"></script>
+<!-- Metis Menu Plugin JavaScript -->
+<script src="<?php echo base_url()?>assets/vendor/js/metisMenu.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="<?php echo base_url()?>assets/vendor/js/sb-admin-2.min.js"></script>
+
+<script src="<?php echo base_url()?>assets/vendor/js/underscore.min.js"></script>
+
+<script src="<?php echo base_url()?>assets/vendor/js/jquery.cookie.min.js"></script>
+<script src="<?php echo base_url()?>assets/vendor/js/jquery.maskedinput.min.js"></script>
+<script src="<?php echo base_url()?>assets/vendor/js/jquery.freeow.min.js"></script>
+<script src="<?php echo base_url()?>assets/vendor/js/jquery.numeric.js"></script>
+<script src="<?php echo base_url()?>assets/vendor/js/numeral.min.js"></script>
+<link href="<?php echo base_url()?>assets/vendor/css/bootstrap-datepicker.css" rel="stylesheet" />
+<script src="<?php echo base_url()?>assets/vendor/js/bootstrap-datepicker-custom.js"></script>
+<script src="<?php echo base_url()?>assets/vendor/js/bootstrap-datepicker.th.min.js" charset="UTF-8"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="<?php echo base_url()?>assets/vendor/js/jquery.blockUI.js"></script>
+<script src="<?php echo base_url()?>assets/apps/js/apps.js"></script>
+<script type="text/javascript" charset="utf-8">
+    var site_url = '<?php echo site_url()?>';
+    var base_url = '<?php echo base_url()?>';
+    var csrf_token = '<?php echo $this->security->get_csrf_hash(); ?>';
+</script>
+<body >
+<?php $this->session->set_userdata('admin','admin');?>
 <div id="wrapper">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div>
-                <?php echo $header_for_layout?>
+    <nav class="navbar navbar-default navbar-static-top w3-theme" role="navigation" style="margin-bottom: 0">
+        <div >
+            <?php echo $header_for_layout?>
         </div>
-        <div>
-                <?php echo $left_for_layout?>
+        <!-- /.navbar-static-side -->
+        <div id="left_menu">
+            <?php echo $left_for_layout?>
         </div>
         <!-- /.navbar-static-side -->
     </nav>
     <div>
         <div id="page-wrapper">
-        <?php echo $content_for_layout?>
+           <!-- <button id="hide_left" data-show="true">Hide</button>-->
+            <?php echo $content_for_layout?>
         </div>
     </div>
     <div>
@@ -62,51 +107,8 @@
     <!-- /#page-wrapper -->
 
 </div>
-<!-- /#wrapper -->
-
-<!-- jQuery -->
-
-
-<!-- Bootstrap Core JavaScript -->
-<script src="<?php echo base_url()?>vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url()?>vendor/jquery-ui/jquery-ui.js"></script>
-
-<!-- Metis Menu Plugin JavaScript -->
-<script src="<?php echo base_url()?>vendor/metisMenu/metisMenu.min.js"></script>
-
-<!-- Morris Charts JavaScript -->
-
-
-<!-- Custom Theme JavaScript -->
-<script src="<?php echo base_url()?>dist/js/sb-admin-2.js"></script>
-
-<script src="<?php echo base_url()?>vendor/js/underscore.min.js"></script>
-<script src="<?php echo base_url()?>vendor/js/jquery.blockUI.js"></script>
-<script src="<?php echo base_url()?>vendor/js/jquery.cookie.min.js"></script>
-<script src="<?php echo base_url()?>vendor/js/jquery.freeow.min.js"></script>
-<script src="<?php echo base_url()?>vendor/js/jquery.maskedinput.min.js"></script>
-<script src="<?php echo base_url()?>vendor/js/jquery.numeric.js"></script>
-<script src="<?php echo base_url()?>vendor/js/numeral.min.js"></script>
-<script src="<?php echo base_url()?>assets/apps/js/apps.js"></script>
-<link href="<?php echo base_url()?>vendor/datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
-<script src="<?php echo base_url()?>vendor/datepicker/dist/js/bootstrap-datepicker-custom.js"></script>
-<script src="<?php echo base_url()?>vendor/datepicker/dist/locales/bootstrap-datepicker.th.min.js" charset="UTF-8"></script>
-<script>
-    $(document).ready(function () {
-        $('.datepicker').datepicker({
-            format: 'dd/mm/yyyy',
-            todayBtn: true,
-            language: 'th',             //เปลี่ยน label ต่างของ ปฏิทิน ให้เป็น ภาษาไทย   (ต้องใช้ไฟล์ bootstrap-datepicker.th.min.js นี้ด้วย)
-            thaiyear: true              //Set เป็นปี พ.ศ.
-        }).datepicker("setDate", "0");  //กำหนดเป็นวันปัจุบัน
-    });
-</script>
-<script type="text/javascript" charset="utf-8">
-    var site_url = '<?php echo site_url()?>';
-    var base_url = '<?php echo base_url()?>';
-
-    var csrf_token = '<?php echo $this->security->get_csrf_hash(); ?>';
-</script>
+<div id="freeow" class=" badge badge-success freeow-bottom-right"></div>
 </body>
 
 </html>
+

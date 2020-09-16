@@ -10,4 +10,16 @@ application/config/database.php
 application/config/config.php
 contributing.md
 /vendor
+assets/apps/crud.js
 *.docx
+
+application/controllers/Create_crud.php
+application/controllers/Create_report.php
+application/models/Create_crud_model.php
+application/views/create_crud
+application/views/create_report
+application/views/layout/left_crud.php
+assets/apps/js/create_crud.js
+assets/apps/js/create_report.js
+/crud
+/report

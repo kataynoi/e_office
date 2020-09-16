@@ -3,9 +3,9 @@
         <ul class="nav" id="side-menu">
             <li class="sidebar-search">
                 <div class="input-group custom-search-form">
-                    <input type="text" class="form-control" placeholder="Search...">
+                    <input type="text" id="txt_search_link" class="form-control" placeholder="Search...">
                                 <span class="input-group-btn">
-                                <button class="btn btn-default" type="button">
+                                <button class="btn btn-default" type="button" id="btn_search_link">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -13,17 +13,21 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="index.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+                <a href="<?php echo site_url();?>"><i class="fas fa-chart-line"></i> Dashboard</a>
             </li>
             <li>
-                <a href="<?php echo site_url('outsite')?>"><i class="fa fa-bus fa-fw"></i> ขออณุญาตไปราชการ<span class="fa arrow"></span></a>
+                <a href="<?php echo site_url('outsite')?>"><i class="fa fa-bus fa-fw"></i> ขอนุญาตไปราชการ<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="<?php echo site_url('outsite')?>">ขออณุญาตไปราชการ</a>
+                        <a href="<?php echo site_url('outsite/add_outsite_permit')?>">สร้างใบขอนุญาตปราชการ</a>
                     </li>
                     <li>
-                        <a href="<?php echo site_url('outsite/add_outsite_permit')?>">สร้างใบขออณุญาตไปราชการ</a>
+                        <a href="<?php echo site_url('outsite')?>">รายการขอนุญาตไปราชการของคุณ</a>
                     </li>
+                    <li>
+                        <a href="<?php echo site_url('outsite/all')?>">รายการขอนุญาตไปราชการทั้งหมด</a>
+                    </li>
+
                     <li>
                         <a href="<?php echo site_url('calendar/outsite')?>">ปฏิทินไปราชการ</a>
                     </li>
@@ -34,48 +38,34 @@
 
 
             <li>
-                <a href="#"><i class="fa fa-bus fa-fw"></i> ขอใช้รถราชการ (รอก่อนนะ...)<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-bus fa-fw"></i> ขอใช้รถราชการ<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li>
-                        <a href="panels-wells.html">Panels and Wells</a>
-                    </li>
+                    <li><a href="<?php echo site_url('/car/calendar')?>">ตารางการใช้รถ</a></li>
+                    <li><a href="<?php echo site_url('/car/cars')?>">รถยนต์ราชการ</a></li>
+                    <li><a href="<?php echo site_url('/car/drivers')?>"">พนักงานขับรถยนต์</a></li>
+                    <?PHP
+                    if(check_role('1',$this->session->userdata('id'))){
+                        echo "<li role=''><a href=".site_url('/car/approve_car').">อนุมัติการใช้รถยนต์ราชการ</a></li>";
+                    }
+                    ?>
+
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
+
             <li>
-                <a href="#"><i class="fas fa-calendar-plus"></i> จองห้องประชุม (รอก่อนนะ...)<span class="fa arrow"></span></a>
+                <a href="#"><i class="fa fa-bus fa-fw"></i> งานบุคลากร<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li>
-                        <a href="#">Second Level Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Second Level Item</a>
-                    </li>
-                    <li>
-                        <a href="#">Third Level <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level">
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level Item</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-third-level -->
-                    </li>
+                    <li><a href="<?php echo site_url('/signin/')?>"> รายงานลงเวลาปฏิบัติราชการ</a></li>
+                    <li><a href="<?php echo site_url('/employee')?>"> บุคลากร</a></li>
                 </ul>
-                <!-- /.nav-second-level -->
             </li>
             <li>
-                <a href="<?php echo site_url('admin/login')?>"><i class="fa fa-user-secret fa-fw"></i> ผู้ใช้งานระบบ (สำหรับ Admin)</a>
+                <a href="<?php echo site_url('admin/')?>"><i class="far fa-calendar-check">Admin</i></a>
             </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->
 </div>
+
+<script src="<?php echo base_url() ?>assets/apps/js/search.js" charset="utf-8"></script>

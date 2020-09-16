@@ -1,6 +1,6 @@
 <script src="<?php echo base_url()?>assets/vendor/js/jquery.min.js"></script>
 <!-- Bootstrap Core CSS -->
-<link href="<?php echo base_url()?>assets/vendor/css/bootstrap.css" rel="stylesheet">
+<link href="<?php echo base_url()?>assets/vendor/css/bootstrap3.css" rel="stylesheet">
 <link href="<?php echo base_url()?>assets/vendor/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
@@ -102,7 +102,7 @@
         <div class="col-md-4">
             <section class="login-form">
                 <form method="post" action="#" role="login" id="frm_login">
-                    <img src="<?php echo base_url('assets/apps/img/logo.png')?>" class="img-responsive" alt="" />
+                    <img width="100px" src="<?php echo base_url('assets/img/logo.png')?>" class="img-responsive" alt="" />
                     <input type="email" id="username" placeholder="Username" required class="form-control input-lg" value="" />
 
                     <input type="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
@@ -123,11 +123,13 @@
                      <i class="fa fa-bullhorn fa-2x"></i>  ประกาศ
                 </div>
                 <div class="panel-body">
-                    1.	ทดสอบระบบ  5 - 14 พฤศจิกายน 2561 เริ่มใช้งานระบบ จริงวัที่ 15 พฤศจิกายยน 2561
+                    1.	ระบบจะทำการ Lock ใบขออนุญาตไปราชการห้ามแก้ไข 00.00 น. หลังจากการไปราชการ  1 วัน กรณีจำเป็นต้องแก้ไขให้ติดต่อ ผู้ดูแลระบบ
                     <br>
                     2.	ขอให้บุคคลากรทุกท่าน Login เข้าสู่ระบบ และแก้ไข User Profiles ให้ถูกต้อง ก่อนเริ่มใช้งานจริง
                     <br>
-                    3. กรณีแก้ไขคำนำหน้า ให้ใช้ นางสาว แทน น.ส.
+                    3.	ให้ทุกท่านแก้ไข กลุ่มงาน ให้ถูกต้องเพื่อเลขหนังสือที่ถูกต้อง
+                    <br>
+                    4. กรณีแก้ไขคำนำหน้า ให้ใช้ นางสาว แทน น.ส.
                     <br>
                 </div>
 

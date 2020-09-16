@@ -15,7 +15,7 @@ $(document).ready(function(){
         }
 
     };
-
+   //  window.location= site_url+'/user/user_profile/';
     users.do_auth = function(username,password){
         users.ajax.do_auth(username,password, function (err, data) {
             if (err) {
@@ -23,7 +23,29 @@ $(document).ready(function(){
             }
             else {
                 if(data.success){
-                    window.location= base_url;
+                    if(password=='1234'){
+                        swal({
+                                title: "คำเตือน",
+                                text: "คุณใช้รหัสผ่านที่ไม่ปลอดภัย กรุณาแก้ไขข้อมูลส่วนตัวและเปลี่ยนรหัสผ่านเมื่อเข้าสู่ระบบแล้ว ",
+                                type: "warning",
+                                showCancelButton: true,
+                                confirmButtonClass: "btn-danger",
+                                confirmButtonText: "ยกเลิก",
+                                cancelButtonText: "ตกลง",
+                                closeOnConfirm: false,
+                                closeOnCancel: true
+                            }).then(function(isConfirm){
+                            if(isConfirm){
+                                window.location= site_url+'/user/user_profile/';
+                            }else{
+                                window.location= site_url+'/user/logout/';
+                            }
+                        });
+
+                    }else{
+                        window.location= base_url;
+                    }
+
                 }
             }
         });

@@ -7,6 +7,7 @@ class Layout
     var $layout;
     var $left='layout/left';
     var $header ='layout/header';
+    var $header_cer ='layout/header_cer';
 
     function Layout($layout = "default_layout")
     {
@@ -26,12 +27,16 @@ class Layout
     function  setHeader($txt='layout/header'){
         $this->left=$txt;
     }
+    function  setHeader_cer($txt='layout/header_cer'){
+        $this->left=$txt;
+    }
     function view($view, $data=null, $return=false)
     {
         $loadedData = array();
         $loadedData['content_for_layout'] = $this->obj->load->view($view,$data,true);
         $loadedData['left_for_layout'] = $this->obj->load->view($this->left,$data,true);
         $loadedData['header_for_layout'] = $this->obj->load->view($this->header,$data,true);
+        $loadedData['header_cer_for_layout'] = $this->obj->load->view($this->header_cer,$data,true);
         $loadedData['footer_for_layout'] = $this->obj->load->view('layout/footer',$data,true);
 
         if($return)

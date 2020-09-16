@@ -228,11 +228,41 @@ app.set_runtime = function()
     $('[data-rel="tooltip"]').tooltip();
 };
 
+app.disable_form = function()
+{
+    $("input").prop('disabled', true);
+    $("select").prop('disabled', true);
+    $("textarea").prop('disabled', true);
+    $(".btn").prop('disabled', true);
+};
 app.to_string_date = function(s) {
     var d = s.split('/');
     var str = d[2] + d[1] + d[0];
     return str;
 };
+app.to_string_date_mysql = function(s) {
+    var d = s.split('/');
+    var str = (d[2]-543)+'-'+ d[1] +'-'+ d[0];
+    return str;
+};
+app.string_to_date = function(s) {
+    var parts =s.split('-');
+    var mydate = new Date(parts[0], parts[1] - 1, parts[2]);
+    return mydate;
+};
+
+app.daysInMonth = function(year) {
+    var array = year.split("-");
+    console.log(array[0]+ array[1]);
+        return new Date(array[0], array[1], 0).getDate();
+};
+app.wait=function (ms)
+{
+    var d = new Date();
+    var d2 = null;
+    do { d2 = new Date(); }
+    while(d2-d < ms);
+}
 
 $(function() {
     app.set_runtime();
