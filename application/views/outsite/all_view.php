@@ -10,7 +10,7 @@
     <div class="panel panel-info ">
         <div class="panel-heading w3-theme">
             <i class="fa fa-user fa-2x "></i> ข้อมูลการขออนุญาตไปราชการ
-            <span class="pull-right"> <a href="<?php echo site_url()?>/outsite/add_outsite_permit" class="btn btn-success"><i class="fa fa-save"></i> สร้างใบขออณุญาตไปราชการ</a>
+            <span class="pull-right"> <a href="<?php echo site_url()?>/outsite/add_outsite_permit" class="btn btn-success"><i class="fa fa-save"></i> สร้างใบขอนุญาตไปราชการ</a>
 </span>
 
         </div>
@@ -22,7 +22,7 @@
                     <th width="20%">วันที่ไปราชการ</th>
                     <th width="30%">เรื่อง</th>
                     <th width="15%">สถานที่</th>
-                    <th width="15 %">ผู้ขออณุญาติ</th>
+                    <th width="15 %">ผู้ขอนุญาต</th>
                     <th width="20%">การจัดการ</th>
 
                 </tr>

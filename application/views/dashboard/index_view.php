@@ -8,7 +8,7 @@
                     </div>
                     <div class="col-xs-9 text-right">
                         <div class="huge" id="percent_audit"><?php echo $count_outsite;?></div>
-                        <div>การขออนญาติไปราชการ</div>
+                        <div>การขออนุญาตไปราชการ</div>
                     </div>
                 </div>
             </div>

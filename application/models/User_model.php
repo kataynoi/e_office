@@ -80,7 +80,7 @@ class User_model extends CI_Model
             ->where('id',$data['id'])
             ->set('password', "PASSWORD('".$data['password']."')", false)
           //  ->set('username', $data['username'])
-            ->update('employee');
+            ->update('users');
         return $rs;
     }
     public function get_member_name($id){
