@@ -329,7 +329,7 @@
     <div class="panel-footer" style="text-align: center;">
         <button type="button" class="btn btn-primary " id="btn_save_outsite"><i class="fa fa-save "></i> บันทึก</button>
         <button type="button" class="btn btn-success" id="btn_print_pdf"><i class="fa fa-print "></i>
-            พิมพ์เอกสารขออณุญาติไปราชการ
+            พิมพ์เอกสารขออณุญาตไปราชการ
         </button>
         <a href="<?php echo site_url('/car/used_car/'.$outsite['id'])?>" class="btn btn-info" id="btn_print_car" target="_blank"><i class="fa fa-print "></i>
             พิมพใบขอใช้รถยนต์ราชการ

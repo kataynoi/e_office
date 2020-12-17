@@ -16,7 +16,7 @@ for($i =1;$i<=6;$i++){
         $pdf->SetMargins(PDF_MARGIN_LEFT,40, PDF_MARGIN_RIGHT);
         $pdf->SetAutoPageBreak(true, 20);
         $pdf->setFontSubsetting(false);
-        $pdf->SetTitle('ขออนุญาติไปราชการ_'.$out_site->date_permit);
+        $pdf->SetTitle('ขออนุญาตไปราชการ_'.$out_site->date_permit);
 
         $pdf->SetFont('thsarabun', '', 16, '', true);
     }

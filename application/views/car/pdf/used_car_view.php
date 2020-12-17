@@ -27,7 +27,7 @@ for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
     $pdf->SetMargins(20,40, PDF_MARGIN_RIGHT);
     $pdf->SetAutoPageBreak(true, 20);
     $pdf->setFontSubsetting(false);
-    $pdf->SetTitle('ขออนุญาติใช้รถยนต์ส่วนกลาง_'.$out_site->date_permit);
+    $pdf->SetTitle('ขออนุญาตใช้รถยนต์ส่วนกลาง_'.$out_site->date_permit);
 
 
 
