@@ -33,7 +33,9 @@ if (!function_exists('get_current_thai_date')) {
 if (!function_exists('version')) {
     function version()
     {
-        $version = ' E Office Mahasarakham 1.0.0 ปีงบประมาณ ' . (current_year() + 543);
+        $CI =& get_instance();
+        $n_year = $CI->session->userdata('n_year');
+        $version = ' E Office Mahasarakham 1.0.0 ปีงบประมาณ '.$n_year;
         return $version;
     }
 
@@ -582,6 +584,19 @@ if (!function_exists('DateFormatDiff')) {
             $text .= $re [$i - 1];
         }
         return $text;
+    }
+}
+
+if (!function_exists('get_n_year')) {
+    function get_n_year()
+    {
+        $n_year = '';
+        if (date('m') == '10' || date('m') == '11' || date('m') == '12') {
+            $n_year = date('Y') + 544;
+        } else {
+            $n_year = date('Y') + 543;
+        }
+        return $n_year;
     }
 }
 

@@ -74,12 +74,14 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="<?php echo base_url()?>assets/vendor/js/jquery.blockUI.js"></script>
 <script src="<?php echo base_url()?>assets/apps/js/apps.js"></script>
-<script type="text/javascript" charset="utf-8">
-    var site_url = '<?php echo site_url()?>';
-    var base_url = '<?php echo base_url()?>';
-    var csrf_token = '<?php echo $this->security->get_csrf_hash(); ?>';
-</script>
+
 <body >
+<?php
+if(!$this->session->userdata('n_year'))
+{
+    $this->session->set_userdata('n_year',get_n_year());
+}
+?>
 <?php $this->session->set_userdata('admin','admin');?>
 <div id="wrapper">
 
@@ -111,4 +113,9 @@
 </body>
 
 </html>
-
+<script type="text/javascript" charset="utf-8">
+    var site_url = '<?php echo site_url()?>';
+    var base_url = '<?php echo base_url()?>';
+    var n_year = '<?php echo $this->session->userdata('n_year')?>';
+    var csrf_token = '<?php echo $this->security->get_csrf_hash(); ?>';
+</script>

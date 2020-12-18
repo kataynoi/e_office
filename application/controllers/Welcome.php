@@ -43,4 +43,11 @@ class Welcome extends CI_Controller
 
 
     }
+    public function save_n_year(){
+        $n_year=$this->input->post('n_year');
+        $this->session->set_userdata('n_year',$n_year);
+        $json ='{"success": "true"}';
+        render_json($json);
+    }
+
 }
