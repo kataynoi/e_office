@@ -399,7 +399,7 @@ $(document).ready(function () {
         var permit_end_date = app.string_to_date(app.to_string_date_mysql(items.permit_end_date));
 
         if (!items.date_permit) {
-            swal('กรุณาระบุวันที่ขออนุญาติไปราชการ');
+            swal('กรุณาระบุวันที่ขออนุญาตไปราชการ');
             $('#date_permit').focus();
         }
         else if(items.invite==0){
