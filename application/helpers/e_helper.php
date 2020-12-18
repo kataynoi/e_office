@@ -38,13 +38,7 @@ if (!function_exists('version')) {
     }
 
 }
-if (!function_exists('sys_id')) {
-    function sys_id()
-    {
-        $sys_id = '2';
-        return $sys_id;
-    }
-}
+
 
 /**
  * Generate serial
@@ -436,18 +430,6 @@ if (!function_exists('get_address')) {
     }
 }
 
-if (!function_exists('get_diag_name')) {
-    function get_diag_name($code)
-    {
-        $ci =& get_instance();
-        $rs = $ci->db
-            ->where(array('diagcode' => $code))
-            ->get('cdisease')
-            ->row();
-        return $rs ? $rs->diseasenamethai : '-';
-    }
-
-}
 
 if (!function_exists('get_hospital_name')) {
     function get_hospital_name($code)
@@ -460,6 +442,7 @@ if (!function_exists('get_hospital_name')) {
         return $rs ? $rs->hosname : '-';
     }
 }
+
 if (!function_exists('get_group_name')) {
     function get_group_name($code)
     {
@@ -483,17 +466,7 @@ if (!function_exists('get_user_name')) {
 
     }
 }
-if (!function_exists('get_nation_nhso_name')) {
-    function get_nation_nhso_name($code)
-    {
-        $ci =& get_instance();
-        $rs = $ci->db
-            ->where(array('code' => $code))
-            ->get('ref_nhso_nation')
-            ->row();
-        return $rs ? $rs->name : '-';
-    }
-}
+
 
 if (!function_exists('check_role')) {
     function check_role($role_id, $user_id)
