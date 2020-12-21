@@ -20,8 +20,8 @@
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="<?php echo site_url('admin_computertype') ?>"><i
-                                class="fa fa-angle-double-right  "></i> ประเภทคอมพิวเตอร์ </a>
+                        <a href="<?php echo site_url('excel_import') ?>"><i
+                                class="fa fa-angle-double-right  "></i> นำเข้าข้อมูลการลงเวลา</a>
                     </li>
 
 

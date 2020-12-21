@@ -217,6 +217,25 @@ if (!function_exists('to_mysql_date_without')) {
         }
     }
 }
+
+if (!function_exists('to_mysql_date_from_finger')) {
+    function to_mysql_date_from_finger($thai_date)
+    {
+        if (strlen($thai_date) != 10) {
+            return null;
+        } else {
+            $new_date = explode('/', $thai_date);
+
+            $new_y = (int)$new_date[2];
+            $new_m = $new_date[1];
+            $new_d = $new_date[0];
+
+            $mysql_date = $new_y . $new_m . $new_d;
+
+            return $mysql_date;
+        }
+    }
+}
 if (!function_exists('to_mysql_date_dash')) {
     function to_mysql_date_dash($thai_date)
     {
