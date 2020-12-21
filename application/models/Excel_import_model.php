@@ -18,7 +18,7 @@ class Excel_import_model extends CI_Model
 			$this->db->where('user_id',$item['user_id']);
 			$this->db->where('date_work',$item['date_work']);
 			$rs = $this->db->update('sign_work',$item);
-			print_r($this->db->last_query());
+			//print_r($this->db->last_query());
 			if($rs){$n++;}
 		}
 		$this->calculate_sign_in();
