@@ -56,7 +56,7 @@
             <li>
                 <a href="#"><i class="fa fa-bus fa-fw"></i> งานบุคลากร<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="<?php echo site_url('/signin/')?>"> รายงานลงเวลาปฏิบัติราชการ</a></li>
+                    <!-- <li><a href="<?php echo site_url('/signin/')?>"> รายงานลงเวลาปฏิบัติราชการ</a></li> -->
                     <li><a href="<?php echo site_url('/employee')?>"> บุคลากร</a></li>
                 </ul>
             </li>

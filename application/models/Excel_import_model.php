@@ -21,7 +21,7 @@ class Excel_import_model extends CI_Model
 			//print_r($this->db->last_query());
 			if($rs){$n++;}
 		}
-		$this->calculate_sign_in();
+		//$this->calculate_sign_in();
 		$this->db->trans_complete();
 
 		return $n;
@@ -37,7 +37,7 @@ class Excel_import_model extends CI_Model
 	}
 	public function calculate_sign_in()
 	{
-		$query = $this->db->query("CALL update_sign_work()");
+		$query = $this->db->query("CALL update_sign_work();");
         return $query->result();
 	}
 
