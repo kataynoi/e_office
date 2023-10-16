@@ -294,6 +294,17 @@ if (!function_exists('get_sex')) {
         }
     }
 }
+if (!function_exists('get_active')) {
+    function get_active($id)
+    {
+    
+            if ($id == '0') return '<button class="btn btn-danger"><i class="fa fa-close" aria-hidden="true"></i>
+            </button>';
+            else if ($id == '1') return '<button class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i>
+            </button>';
+    }
+}
+
 if (!function_exists('to_thai_number_with_comma')) {
     function to_thai_number_with_comma($txt)
 
@@ -509,6 +520,18 @@ if (!function_exists('get_group_name_by_user')) {
             ->where('a.id', $user_id)
             ->join('co_workgroup b', 'a.group = b.id')
             ->get('employee a')
+            ->row();
+        return $rs ? $rs->name : '-';
+    }
+}
+
+if (!function_exists('get_employee_type')) {
+    function get_employee_type($id)
+    {
+        $ci =& get_instance();
+        $rs = $ci->db
+            ->where('a.id', $id)
+            ->get('employee_type a')
             ->row();
         return $rs ? $rs->name : '-';
     }

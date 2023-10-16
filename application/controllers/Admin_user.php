@@ -37,7 +37,7 @@ class Admin_user extends CI_Controller
                 $sub_array[] = $row->user_type;
                 //$sub_array[] = $row->active;
                 if($row->active=='1'){$active="checked";}else{$active="";}
-                $sub_array[] = '<label class="switch"><input type="checkbox" '.$active.'><span class="slider round"></span></label>';
+                $sub_array[] = '<label class="switch"><input type="checkbox" data-id='.$row->id.' data-btn="btn_active" data-active='.$row->active.' '.$active.'><span class="slider round"></span></label>';
                 $sub_array[] = '<div class="btn-group pull-right" role="group" >
                 <button class="btn btn-outline btn-success" data-btn="btn_view" data-id="' . $row->id . '"><i class="fa fa-eye"></i></button>
                 <button class="btn btn-outline btn-warning" data-btn="btn_edit" data-id="' . $row->id . '"><i class="fa fa-edit"></i></button>
@@ -57,6 +57,19 @@ class Admin_user extends CI_Controller
         $id = $this->input->post('id');
 
         $rs=$this->crud->del_admin_user($id);
+        if($rs){
+            $json = '{"success": true}';
+        }else{
+            $json = '{"success": false}';
+        }
+
+        render_json($json);
+    }
+
+    public function set_active(){
+        $id = $this->input->post('id');
+        $active = $this->input->post('active');
+        $rs=$this->crud->set_active($id,$active);
         if($rs){
             $json = '{"success": true}';
         }else{

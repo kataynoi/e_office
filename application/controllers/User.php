@@ -1,10 +1,10 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class User extends CI_Controller
 {
-	public  $user_id ;
-	public  $provcode ;
+	public  $user_id;
+	public  $provcode;
 	public function __construct()
 	{
 		parent::__construct();
@@ -14,7 +14,7 @@ class User extends CI_Controller
 		$this->load->model('Basic_model', 'basic');
 		//$this->layout->setLeft('layout/left_user');
 		$this->user_id = $this->session->userdata('id');
-		$this->provcode='44';
+		$this->provcode = '44';
 	}
 
 	public function index()
@@ -34,52 +34,52 @@ class User extends CI_Controller
 
 	public function login()
 	{
-		if($this->session->userdata('online'))
-		{
+		if ($this->session->userdata('online')) {
 			redirect(site_url(), 'refresh');
-		}
-		else
-		{
+		} else {
 			$this->load->view('user/login');
 		}
-
 	}
-	public function register(){
+	public function register()
+	{
 		//Register Users
 	}
 
-	public function save_edit_profile(){
-		$data=$this->input->post('items');
-		$action=$this->input->post('action');
-		if($data['action']=='insert'){
-			$rs=$this->user->save_user($data);
-		}else if($data['action']=='update'){
-			$rs=$this->user->update_user($data);
+	public function save_edit_profile()
+	{
+		$data = $this->input->post('items');
+		$action = $this->input->post('action');
+		if ($data['action'] == 'insert') {
+			$rs = $this->user->save_user($data);
+		} else if ($data['action'] == 'update') {
+			$rs = $this->user->update_user($data);
 		}
-		if($rs){
+		if ($rs) {
 			$json = '{"success": true}';
-		}else{
+		} else {
 			$json = '{"success": false}';
 		}
 
 		render_json($json);
 	}
-	public function save_edit_password(){
-		$data=$this->input->post('items');
+	public function save_edit_password()
+	{
+		$data = $this->input->post('items');
 
-			$rs=$this->user->update_password($data);
+		$rs = $this->user->update_password($data);
 
-		if($rs){
+		if ($rs) {
 			$json = '{"success": true}';
-		}else{
+		} else {
 			$json = '{"success": false}';
 		}
 
 		render_json($json);
 	}
-	public function user_profile ($id=''){
-		if($id==''){
-			$id=$this->session->userdata('id');
+	public function user_profile($id = '')
+	{
+		if ($id == '') {
+			$id = $this->session->userdata('id');
 		}
 		$rs = $this->user->get_userprofile($id);
 		$data['office'] = $this->basic->sl_hospcode($this->provcode);
@@ -88,20 +88,20 @@ class User extends CI_Controller
 		$rs['hospname'] = get_hospital_name($rs['hospcode']);
 		$rs['group_name'] = get_group_name($rs['group']);
 		$data['employee_type'] = $this->basic->sl_employee_type();
-		$data['user_profiles']= $rs;
-		$this->layout->view('user/user_profile',$data);
+		$data['user_profiles'] = $rs;
+		$this->layout->view('user/user_profile', $data);
 	}
 	public function logout()
 	{
 		$this->session->sess_destroy();
-		redirect(site_url('user/login'),'refresh');
+		redirect(site_url('user/login'), 'refresh');
 	}
 	public function do_auth()
 	{
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 		$rs = $this->user->do_auth($username, $password);
-		if ($rs['id']!="") {
+		if ($rs['id'] != "") {
 			$rs['online'] = true;
 			$rs['fullname'] = $rs['prename'] . $rs['name'];
 			$this->session->set_userdata($rs);
@@ -111,7 +111,5 @@ class User extends CI_Controller
 		}
 
 		render_json($json);
-
 	}
-
 }// ของ Class

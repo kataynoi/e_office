@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Car extends CI_Controller
 {
@@ -31,14 +31,12 @@ class Car extends CI_Controller
     {
         $data['car'] = $this->car->get_car_list();
         $this->layout->view('car/cars_view', $data);
-
     }
 
     public function drivers()
     {
         $data['driver'] = $this->car->get_driver_list();
         $this->layout->view('car/drivers_view', $data);
-
     }
 
     public function calendar()
@@ -79,7 +77,6 @@ class Car extends CI_Controller
         } else {
             $this->layout->view('errors/index.html');
         }
-
     }
 
     function fetch_used_car()
@@ -183,7 +180,7 @@ class Car extends CI_Controller
 
             $line_message = $this->get_line_message($data['id'], $data['approve']);
             if ($data['approve'] == '1') {
-                $this->notify_message($line_message,$token_driver);
+                $this->notify_message($line_message, $token_driver);
                 $this->notify_message($line_message, $token_car);
             } elseif ($data['approve'] == '2') {
                 $this->notify_message($line_message, $token_car);
@@ -201,15 +198,14 @@ class Car extends CI_Controller
 
         if ($approve == '1') {
             $rs = $this->car->get_message_approve($id);
-            $message = 'อนุมัติ -> รายการขอรถที่ ' . $id . ' ขอโดย ' . $rs['control_car'] . '[' . $rs['control_car_mobile'] . '] ไปราชการที่ ' . $rs['invit_place']//.' เพื่อ'.$rs['objective']
+            $message = 'อนุมัติ -> รายการขอรถที่ ' . $id . ' ขอโดย ' . $rs['control_car'] . '[' . $rs['control_car_mobile'] . '] ไปราชการที่ ' . $rs['invit_place'] //.' เพื่อ'.$rs['objective']
                 . ' [' . to_thai_date_short($rs['permit_start_date']) . '-' . to_thai_date_short($rs['permit_end_date'])
                 . '] ได้รับการอนุมัติ รถยนต์' . $rs['car_name'] . '[ ' . $rs['licente_plate'] . '] พนักงานขับรถ . ' . $rs['driver'] . ' Tel:' . $rs['driver_mobile'];
         } else if ($approve == '2') {
             $rs = $this->car->get_message_notapprove($id);
-            $message = 'ไม่อนุมัติ->รายการขอรถที่ ' . $id . ' ขอโดย ' . $rs['control_car'] . '[' . $rs['control_car_mobile'] . '] ไปราชการที่ ' . $rs['invit_place']//.'เพื่อ '.$rs['objective']
+            $message = 'ไม่อนุมัติ->รายการขอรถที่ ' . $id . ' ขอโดย ' . $rs['control_car'] . '[' . $rs['control_car_mobile'] . '] ไปราชการที่ ' . $rs['invit_place'] //.'เพื่อ '.$rs['objective']
                 . '[' . to_thai_date_short($rs['permit_start_date']) . '-' . to_thai_date_short($rs['permit_end_date'])
                 . '] ไม่ได้รับการอนุมัติ เนื่องจาก' . $rs['cause'];
-
         }
         return $message;
     }
@@ -218,7 +214,6 @@ class Car extends CI_Controller
     {
         $rs = $this->basic->get_line_token($id);
         return $rs;
-
     }
 
     public function notify_message($message, $token)
@@ -248,5 +243,4 @@ class Car extends CI_Controller
         //console_log($err);
         curl_close($curl);
     }
-
 }

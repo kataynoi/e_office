@@ -21,6 +21,7 @@ class Admin_user_model extends CI_Model
         if (isset($_POST["search"]["value"])) {
             $this->db->group_start();
             $this->db->like("username", $_POST["search"]["value"]);
+            //$this->db->or_like("name", $_POST["search"]["value"]);
             $this->db->group_end();
 
         }
@@ -91,16 +92,56 @@ class Admin_user_model extends CI_Model
                 return $this->db->insert_id();
 
             }
-    public function update_admin_user($data)
+public function update_admin_user($data)
             {
-                $rs = $this->db
-                    ->set("id", $data["id"])->set("username", $data["username"])->set("password", $data["password"])->set("user_type", $data["user_type"])->set("active", $data["active"])->where("id",$data["id"])
-                    ->update('users');
+                if($data["password"]!=""){
+                    $pass = strtoupper(
+                        sha1(
+                                sha1($data["password"], true)
+                            )
+                         );
+                    $pass = '*' . $pass;
+                    $rs = $this->db
+                        ->set("id", $data["id"])
+                        ->set("username", $data["username"])
+                        ->set("password", $pass)
+                        ->set("user_type", $data["user_type"])
+                        ->set("active", $data["active"])
+                        ->where("id",$data["id"])
+                        ->update('users');
+                }else{
+                    $rs = $this->db
+                        ->set("id", $data["id"])
+                        ->set("username", $data["username"])
+                        ->set("user_type", $data["user_type"])
+                        ->set("active", $data["active"])
+                        ->where("id",$data["id"])
+                        ->update('users');
+                }
+                
 
                 return $rs;
 
             }
-    public function get_admin_user($id)
+public function set_active($id,$active)
+            {
+                if($active==1){
+                    $active=0;
+                }else if($active==0){
+                    $active=1;
+                }
+                $rs = $this->db
+                    ->set("active", $active)
+                    ->where("id",$id)
+                    ->update('users');
+                $rs2 = $this->db
+                    ->set("active", $active)
+                    ->where("id",$id)
+                    ->update('employee');
+         return $rs;
+
+            }
+public function get_admin_user($id)
                 {
                     $rs = $this->db
                         ->where('id',$id)

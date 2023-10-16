@@ -13,10 +13,19 @@ class Calendar extends CI_Controller
     {
         $this->layout->view("calendar/index.php", array());
     }
-    public function outsite($month='2018-10')
+    public function outsite()
     {
 
-        $data['outsite_calendar'] = $this->calendar->get_ousite_calendar($month);
+        $rs = $this->calendar->get_ousite_calendar();
+        foreach ($rs as $r){
+            $event[] = array(
+                'id' => $r['id'],
+                'title' => $r['objective'],
+                'start' => $r['permit_start_date'],
+                'end' => $r['permit_end_date'],
+            );
+        }
+        $data['event'] = $event;
         $this->layout->view("calendar/outsite_calendar.php", $data);
     }
 

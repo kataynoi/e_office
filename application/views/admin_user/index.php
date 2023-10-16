@@ -54,7 +54,7 @@
                     <input type="text" class="form-control" id="id" placeholder="ID" value=""></div><div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" placeholder="Username" value=""></div><div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">New Password</label>
                     <input type="text" class="form-control" id="password" placeholder="Password" value=""></div><div class="form-group">
                     <label for="user_type">ประเภทผู้ใช้งาน</label>
                     <select  class="form-control" id="user_type" placeholder="ประเภทผู้ใช้งาน" value="">

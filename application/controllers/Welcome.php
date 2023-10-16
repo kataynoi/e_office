@@ -49,5 +49,11 @@ class Welcome extends CI_Controller
         $json ='{"success": "true"}';
         render_json($json);
     }
+        public function test(){
+            $sql = "SELECT a.id FROM employee a WHERE a.active=1 and a.group !=15";
+            $data['users']= $this->db->query($sql)->result();
+            $this->layout->view('test_view', $data);
+    }
+
 
 }

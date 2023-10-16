@@ -91,8 +91,24 @@ class Admin_employee_model extends CI_Model
             {
 
                 $rs = $this->db
-                    ->set("id", $data["id"])->set("prename", $data["prename"])->set("name", $data["name"])->set("cid", $data["cid"])->set("sex", $data["sex"])->set("position", $data["position"])->set("hospcode", $data["hospcode"])->set("employee_type", $data["employee_type"])->set("group", $data["group"])->set("email", $data["email"])->set("user_mobile", $data["user_mobile"])->set("date_in", $data["date_in"])->set("date_out", $data["date_out"])->set("address", $data["address"])->set("active", $data["active"])->set("driver", $data["driver"])->set("order", $data["order"])
-                    ->insert('employee');
+                    ->set("id", $data["id"])
+                    ->set("prename", $data["prename"])
+                    ->set("name", $data["name"])
+                    ->set("cid", $data["cid"])
+                    ->set("sex", $data["sex"])
+                    ->set("position", $data["position"])
+                    ->set("hospcode", $data["hospcode"])
+                    ->set("employee_type", $data["employee_type"])
+                    ->set("group", $data["group"])
+                    ->set("email", $data["email"])
+                    ->set("user_mobile", $data["user_mobile"])
+                    ->set("date_in", $data["date_in"])
+                    ->set("date_out", $data["date_out"])
+                    ->set("address", $data["address"])
+                    ->set("active", $data["active"])
+                    ->set("driver", $data["driver"])
+                    ->set("order", $data["order"])
+                    ->insert('employeex');
 
                 return $this->db->insert_id();
 

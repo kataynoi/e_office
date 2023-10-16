@@ -38,14 +38,14 @@ class Admin_employee extends CI_Controller
             //$sub_array[] = $row->sex;
             $sub_array[] = $row->position;
             //$sub_array[] = $row->hospcode;
-            $sub_array[] = $row->employee_type;
-            $sub_array[] = $row->group;
+            $sub_array[] = get_employee_type($row->employee_type);
+            $sub_array[] = get_group_name($row->group);
             //$sub_array[] = $row->email;
             //$sub_array[] = $row->user_mobile;
             $sub_array[] = $row->date_in;
             $sub_array[] = $row->date_out;
             //$sub_array[] = $row->address;
-            $sub_array[] = $row->active;
+            $sub_array[] = get_active($row->active);
             //$sub_array[] = $row->driver;
             //$sub_array[] = $row->order;
                 $sub_array[] = '<div class="btn-group pull-right" role="group" >
