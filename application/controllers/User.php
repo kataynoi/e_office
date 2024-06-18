@@ -79,19 +79,24 @@ class User extends CI_Controller
 	public function user_profile($id = '')
 
 	{
-		$this->login();
-		if ($id == '') {
-			$id = $this->session->userdata('id');
+		if (!$this->session->userdata('online')) {
+			if ($id == '') {
+				$id = $this->session->userdata('id');
+			}
+			$rs = $this->user->get_userprofile($id);
+			$data['office'] = $this->basic->sl_hospcode($this->provcode);
+			$data['group'] = $this->basic->sl_group();
+			$rs['fullname'] = $rs['prename'] . $rs['name'];
+			$rs['hospname'] = get_hospital_name($rs['hospcode']);
+			$rs['group_name'] = get_group_name($rs['group']);
+			$data['employee_type'] = $this->basic->sl_employee_type();
+			$data['user_profiles'] = $rs;
+			$this->layout->view('user/user_profile', $data);
+		}else{
+			redirect(site_url('user/login'), 'refresh');
 		}
-		$rs = $this->user->get_userprofile($id);
-		$data['office'] = $this->basic->sl_hospcode($this->provcode);
-		$data['group'] = $this->basic->sl_group();
-		$rs['fullname'] = $rs['prename'] . $rs['name'];
-		$rs['hospname'] = get_hospital_name($rs['hospcode']);
-		$rs['group_name'] = get_group_name($rs['group']);
-		$data['employee_type'] = $this->basic->sl_employee_type();
-		$data['user_profiles'] = $rs;
-		$this->layout->view('user/user_profile', $data);
+
+
 	}
 	public function logout()
 	{
