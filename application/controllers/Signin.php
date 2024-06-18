@@ -26,16 +26,13 @@ class Signin extends CI_Controller
     }
     public function get_sign(){
         $data = $this->input->post('items');
-
          $rs=$this->sign->get_sign($data);
-
         if($rs){
             $rows = json_encode($rs);
             $json = '{"success": true, "rows": ' . $rows . '}';
         }else{
             $json = '{"success": false}';
         }
-
         render_json($json);
     }
 

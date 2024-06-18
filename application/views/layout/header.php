@@ -1,5 +1,6 @@
 
 
+
 <div class="navbar-header w3-theme">
     <a class="navbar-brand w3-theme" href="<?php echo base_url()?>"><?php echo version();?>  </a>
     <a class="navbar-brand w3-theme"><?php echo $this->session->userdata('hosname')?>

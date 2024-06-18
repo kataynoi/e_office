@@ -77,7 +77,9 @@ class User extends CI_Controller
 		render_json($json);
 	}
 	public function user_profile($id = '')
+
 	{
+		$this->login();
 		if ($id == '') {
 			$id = $this->session->userdata('id');
 		}
