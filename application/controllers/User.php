@@ -79,7 +79,7 @@ class User extends CI_Controller
 	public function user_profile($id = '')
 
 	{
-		if (!$this->session->userdata('online')) {
+		if (isset($this->session->userdata('online'))) {
 			if ($id == '') {
 				$id = $this->session->userdata('id');
 			}
