@@ -115,7 +115,6 @@ class User extends CI_Controller
 		} else {
 			$json = '{"success": false, "msg": "Username หรือ Password ไม่ถูกต้อง"}';
 		}
-
 		render_json($json);
 	}
 }// ของ Class
